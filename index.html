@@ -1,0 +1,2958 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siyahi — A Poetry Collection by Saumitra S. Phatak</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+Devanagari:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #fdf8ef;
+  --paper-dark: #f5edd8;
+  --ink: #2c1a0e;
+  --accent: #8b4513;
+  --accent-light: #c4894a;
+  --divider: #d4a574;
+  --muted: #6b4c30;
+  --shadow: rgba(44,26,14,0.08);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #b8a48a;
+  font-family: 'EB Garamond', 'Noto Serif Devanagari', Georgia, serif;
+  color: var(--ink);
+  line-height: 1.9;
+  font-size: 17px;
+}
+.book {
+  max-width: 780px;
+  margin: 0 auto;
+  background: var(--paper);
+  box-shadow: 0 0 60px rgba(0,0,0,0.5);
+}
+.cover {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #0f0602 0%, #2a1005 35%, #5c2a10 70%, #7a3a18 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(ellipse at 30% 30%, rgba(196,137,74,0.12) 0%, transparent 60%),
+                    radial-gradient(ellipse at 70% 70%, rgba(196,137,74,0.08) 0%, transparent 60%);
+}
+.cover-border { position: absolute; inset: 20px; border: 1px solid rgba(196,137,74,0.2); pointer-events: none; }
+.cover-border::before { content: ''; position: absolute; inset: 6px; border: 1px solid rgba(196,137,74,0.1); }
+.cover-ink-drop { font-size: 14px; letter-spacing: 6px; color: rgba(196,137,74,0.5); margin-bottom: 55px; text-transform: uppercase; }
+.cover-title { font-family: 'Playfair Display', serif; font-size: 110px; font-weight: 700; color: #f2d49a; letter-spacing: 18px; line-height: 1; margin-bottom: 8px; text-shadow: 0 4px 30px rgba(0,0,0,0.6); }
+.cover-title-hi { font-family: 'Noto Serif Devanagari', serif; font-size: 38px; font-weight: 300; color: #c4894a; letter-spacing: 6px; margin-bottom: 50px; }
+.cover-rule { width: 100px; height: 1px; background: linear-gradient(90deg, transparent, #c4894a, transparent); margin: 0 auto 50px; }
+.cover-subtitle { font-family: 'EB Garamond', serif; font-style: italic; font-size: 19px; color: #a87848; letter-spacing: 1px; margin-bottom: 12px; line-height: 1.5; }
+.cover-author { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 400; color: #e8c890; letter-spacing: 5px; margin-top: 10px; }
+.cover-year { position: absolute; bottom: 50px; font-size: 13px; letter-spacing: 4px; color: rgba(196,137,74,0.4); text-transform: uppercase; }
+.page { padding: 90px 100px; border-bottom: 1px solid #ede0c8; }
+.page-half { padding: 60px 100px; border-bottom: 1px solid #ede0c8; }
+.center-page { padding: 120px 100px; text-align: center; border-bottom: 1px solid #ede0c8; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 60vh; }
+.epigraph-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 24px; color: var(--accent); line-height: 1.6; max-width: 480px; margin-bottom: 25px; }
+.epigraph-attr { font-size: 14px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; }
+.note-title { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--accent); margin-bottom: 30px; letter-spacing: 2px; }
+.note-text { font-size: 17px; line-height: 2; color: var(--ink); max-width: 520px; }
+.note-text p { margin-bottom: 18px; }
+.toc-title { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--accent); border-bottom: 1px solid var(--divider); padding-bottom: 18px; margin-bottom: 45px; letter-spacing: 4px; }
+.toc-section { margin-bottom: 32px; }
+.toc-section-label { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: var(--accent-light); letter-spacing: 2px; margin-bottom: 10px; padding-left: 14px; border-left: 2px solid var(--divider); }
+.toc-item { display: flex; align-items: baseline; padding: 4px 0; font-size: 15px; }
+.toc-num { color: var(--accent-light); font-size: 12px; min-width: 30px; letter-spacing: 1px; }
+.toc-name { flex: 1; }
+.toc-dots { flex: 1; border-bottom: 1px dotted #d4a574; margin: 0 12px; position: relative; bottom: 3px; max-width: 120px; }
+.chapter-header { padding: 110px 80px 90px; text-align: center; background: linear-gradient(180deg, #f0e6d0 0%, var(--paper) 100%); border-bottom: 1px solid #ede0c8; position: relative; }
+.ch-part { font-size: 12px; letter-spacing: 6px; color: var(--muted); text-transform: uppercase; margin-bottom: 22px; }
+.ch-title-en { font-family: 'Playfair Display', serif; font-size: 60px; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+.ch-title-hi { font-family: 'Noto Serif Devanagari', serif; font-size: 26px; color: var(--muted); margin-bottom: 22px; }
+.ch-rule { width: 60px; height: 1px; background: var(--divider); margin: 0 auto 22px; }
+.ch-desc { font-style: italic; font-size: 16px; color: var(--muted); max-width: 380px; margin: 0 auto; line-height: 1.7; }
+.poem-block { margin-bottom: 72px; padding-bottom: 65px; border-bottom: 1px solid #ede0c8; }
+.poem-block:last-child { border-bottom: none; margin-bottom: 0; }
+.poem-num { font-size: 11px; letter-spacing: 4px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 6px; }
+.poem-title { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--accent); margin-bottom: 4px; line-height: 1.2; }
+.poem-subtitle { font-style: italic; font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+.poem-rule { width: 45px; height: 2px; background: var(--divider); margin-bottom: 30px; }
+.poem-body { font-size: 17px; line-height: 2.1; color: var(--ink); }
+.poem-body.hi { font-family: 'Noto Serif Devanagari', serif; font-size: 16px; line-height: 2.3; }
+.poem-body.mr { font-family: 'Noto Serif Devanagari', serif; font-size: 16px; line-height: 2.3; }
+.stanza { margin-bottom: 28px; }
+.stanza:last-child { margin-bottom: 0; }
+.poem-note { font-style: italic; font-size: 13px; color: var(--muted); padding: 8px 16px; border-left: 2px solid var(--divider); margin-bottom: 22px; background: rgba(212,165,116,0.06); }
+.poem-sig { text-align: right; font-style: italic; font-size: 14px; color: var(--muted); margin-top: 28px; letter-spacing: 1px; }
+.bilingual { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0 35px; }
+.bilingual-sep { background: var(--divider); min-height: 80px; }
+.aph-title { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--accent); border-bottom: 1px solid var(--divider); padding-bottom: 14px; margin-bottom: 40px; letter-spacing: 2px; text-align: center; }
+.aph-item { padding: 20px 0; border-bottom: 1px dotted var(--divider); font-style: italic; font-size: 17px; color: var(--ink); text-align: center; line-height: 1.7; }
+.aph-item:last-child { border-bottom: none; }
+.aph-item.hi { font-family: 'Noto Serif Devanagari', serif; font-size: 16px; }
+.orn { text-align: center; color: var(--accent-light); font-size: 18px; letter-spacing: 10px; padding: 10px 0; opacity: 0.45; }
+.back-cover { min-height: 100vh; background: linear-gradient(160deg, #0f0602 0%, #2a1005 35%, #5c2a10 70%, #7a3a18 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px; position: relative; }
+.back-border { position: absolute; inset: 20px; border: 1px solid rgba(196,137,74,0.2); }
+.back-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 22px; color: #c4894a; line-height: 1.7; max-width: 480px; margin-bottom: 28px; }
+.back-sig { font-size: 15px; color: #7a5530; letter-spacing: 4px; }
+@media print {
+  body { background: white; }
+  .book { box-shadow: none; max-width: 100%; }
+  .cover, .back-cover, .chapter-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .chapter-header { page-break-before: always; }
+  .poem-block { page-break-inside: avoid; }
+  @page { size: A4; margin: 0; }
+}
+</style>
+</head>
+<body>
+<div class="book">
+<!-- ===== COVER ===== -->
+<div class="cover">
+  <div class="cover-border"></div>
+  <div class="cover-ink-drop">&#10022; &nbsp;&nbsp; saumitra s. phatak &nbsp;&nbsp; &#10022;</div>
+  <div class="cover-title">SIYAHI</div>
+  <div class="cover-title-hi">सियाही</div>
+  <div class="cover-rule"></div>
+  <div class="cover-subtitle">A Collection of Poems, Shayari &amp; Prose<br>in Hindi &middot; Marathi &middot; English</div>
+  <div class="cover-author">S S P</div>
+  <div class="cover-year">2023</div>
+</div>
+<!-- ===== EPIGRAPH ===== -->
+<div class="center-page">
+  <div class="epigraph-text">"my words will be printed on hearts not stones..."</div>
+  <div class="epigraph-attr">&mdash; ssp</div>
+</div>
+<!-- ===== AUTHOR'S NOTE ===== -->
+<div class="page-half">
+  <div class="note-title">A Note</div>
+  <div class="note-text">
+    <p>Mujhe to kitaab likhni h... Bs pehle kahani to jee lu... Phir uthaunga kalam...</p>
+    <p>Ek hi khwab hai ki kbhi khwaishein khatam na ho... Adhura khwab to aur bhi haseen hota hai, janeman.</p>
+    <p style="font-style:italic; color:var(--muted);">सियाही लेके निकला हूं... राह पर कागज मिला है...<br>
+    जिंदगी वही है बस... ये पन्ना नया है...</p>
+    <p style="text-align:right; margin-top:20px; color:var(--muted); font-style:italic;">&mdash; Saumitra</p>
+  </div>
+</div>
+<!-- ===== TABLE OF CONTENTS ===== -->
+<div class="page">
+  <div class="toc-title">INDEX</div>
+
+  <div class="toc-section">
+    <div class="toc-section-label">Part I &nbsp;&middot;&nbsp; Ishq &mdash; Love &amp; Longing</div>
+    <div class="toc-item"><span class="toc-num">01</span><span class="toc-name">नया है कुछ, अच्छा है</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">02</span><span class="toc-name">Sitara</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">03</span><span class="toc-name">Intezaar</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">04</span><span class="toc-name">Wo Khoobsurat</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">05</span><span class="toc-name">Baadal</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">06</span><span class="toc-name">Parchhayi</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">07</span><span class="toc-name">Un Se</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">08</span><span class="toc-name">Kaabu Mein Dil</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">09</span><span class="toc-name">सवाल-ए-इश्क</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">10</span><span class="toc-name">Ldki Mili</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">11</span><span class="toc-name">Agar Rakh Sako</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">12</span><span class="toc-name">Nind Mein</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">13</span><span class="toc-name">Bolna Chahta Hu</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">14</span><span class="toc-name">Wakht Khuddar</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">15</span><span class="toc-name">Dua</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">16</span><span class="toc-name">Man Behle</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">17</span><span class="toc-name">ज़िन्दगी की खुशियां</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">18</span><span class="toc-name">Kasoor</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">19</span><span class="toc-name">Raatonka Agaaz</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">20</span><span class="toc-name">Ek Pal</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">21</span><span class="toc-name">Moonlight</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">22</span><span class="toc-name">इतनी भी</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">23</span><span class="toc-name">एक सपना</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">24</span><span class="toc-name">सोचा उन रातों पे</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">25</span><span class="toc-name">Kavita Par</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">26</span><span class="toc-name">Khwab Aya</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">27</span><span class="toc-name">लोग पूछते हैं</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">28</span><span class="toc-name">Puchhna Mat</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">29</span><span class="toc-name">Tab Ki Ye Baat</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">30</span><span class="toc-name">The Dim Lights</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">31</span><span class="toc-name">Sapne Kanch Mein</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">32</span><span class="toc-name">Raat Mein Parchhai</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">33</span><span class="toc-name">Khoobsurati Aisi</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">34</span><span class="toc-name">Baat</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">35</span><span class="toc-name">एक रात थी वो ऐसी</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">36</span><span class="toc-name">For the Moment</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">37</span><span class="toc-name">Your Harmony</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">38</span><span class="toc-name">पण बहुतेक</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">39</span><span class="toc-name">Dhadkano Ka Haal Chahiye</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">40</span><span class="toc-name">Milne Ka Beshak</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">41</span><span class="toc-name">Galti Se Palke Jhuki</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">42</span><span class="toc-name">Daag Toh Mil Gye</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">43</span><span class="toc-name">Pass Rehne Ki Sifarish Nahi</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">44</span><span class="toc-name">Rang Bikhar Jaye Toh</span><span class="toc-dots"></span></div>
+  </div>
+
+  <div class="toc-section">
+    <div class="toc-section-label">Part II &nbsp;&middot;&nbsp; Dosti &mdash; Friendship</div>
+    <div class="toc-item"><span class="toc-num">45</span><span class="toc-name">Dost Hote Bde Ajeeb</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">46</span><span class="toc-name">पुराना ही था दोस्त</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">47</span><span class="toc-name">एका क्षणात</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">48</span><span class="toc-name">Hua Pyar To</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">49</span><span class="toc-name">Nikle Hai Khwabonka</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">50</span><span class="toc-name">Azmane Se</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">51</span><span class="toc-name">Jinho Ne Baat Karna</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">52</span><span class="toc-name">Hum Dekhenge</span><span class="toc-dots"></span></div>
+  </div>
+
+  <div class="toc-section">
+    <div class="toc-section-label">Part III &nbsp;&middot;&nbsp; Rishtey &mdash; Family &amp; Bonds</div>
+    <div class="toc-item"><span class="toc-num">53</span><span class="toc-name">Aai</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">54</span><span class="toc-name">Bhai</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">55</span><span class="toc-name">Jinhone Bolna Sikhaya</span><span class="toc-dots"></span></div>
+  </div>
+
+  <div class="toc-section">
+    <div class="toc-section-label">Part IV &nbsp;&middot;&nbsp; Zindagi &mdash; Life &amp; Philosophy</div>
+    <div class="toc-item"><span class="toc-num">56</span><span class="toc-name">Kalam</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">57</span><span class="toc-name">स्वप्नातील सुख</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">58</span><span class="toc-name">Udyachich Chinta</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">59</span><span class="toc-name">Kuch Kami</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">60</span><span class="toc-name">Kavita Mein Shabd</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">61</span><span class="toc-name">Sangeet</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">62</span><span class="toc-name">In Quest</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">63</span><span class="toc-name">Halat Ne Majbur</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">64</span><span class="toc-name">Agar Sab Hi Ki Ruh</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">65</span><span class="toc-name">Bekhudi</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">66</span><span class="toc-name">Laksh</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">67</span><span class="toc-name">Mar Gye</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">68</span><span class="toc-name">Wakht Nhi Badal Raha</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">69</span><span class="toc-name">Laugh Out</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">70</span><span class="toc-name">Janam Din</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">71</span><span class="toc-name">जवानी की उम्र</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">72</span><span class="toc-name">Apnepan</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">73</span><span class="toc-name">Zindagi Adhuri</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">74</span><span class="toc-name">Wakht</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">75</span><span class="toc-name">Har Hrutu Mein Alag Sawera</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">76</span><span class="toc-name">Dil Ki Laparwahi</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">77</span><span class="toc-name">Aasman Mein Udna Ho Toh</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">78</span><span class="toc-name">Badalonke Surat Mein</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">79</span><span class="toc-name">Mitti Banne Taiyyar</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">80</span><span class="toc-name">Dilkhulas Hasya Agdi</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">81</span><span class="toc-name">We Have the Least Control</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">82</span><span class="toc-name">Surya Kade Pahun</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">83</span><span class="toc-name">Kab Kya Sunte Ho</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">84</span><span class="toc-name">Nazara Wohi</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">85</span><span class="toc-name">Khud Ek Khayal</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">86</span><span class="toc-name">Time</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">87</span><span class="toc-name">Kaise?</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">88</span><span class="toc-name">Samjhne Ki Khwaish Nahin</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">89</span><span class="toc-name">Akhir Chahte Kya Ho?</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">90</span><span class="toc-name">Panchhiyon Ki Tarah</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">91</span><span class="toc-name">Koi Hawa Ke Sath Chalkar</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">92</span><span class="toc-name">Kab Aur Kaha</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">93</span><span class="toc-name">Purpose</span><span class="toc-dots"></span></div>
+  </div>
+
+  <div class="toc-section">
+    <div class="toc-section-label">Part V &nbsp;&middot;&nbsp; Samaj &mdash; Society &amp; Nation</div>
+    <div class="toc-item"><span class="toc-num">94</span><span class="toc-name">Naam Bada Karna</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">95</span><span class="toc-name">Nam Jaan Kar</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">96</span><span class="toc-name">Badonka Bachpna</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">97</span><span class="toc-name">Wyaparatil Bhav</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">98</span><span class="toc-name">Kahani Toh Adhuri</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">99</span><span class="toc-name">Meri Apni Kahani</span><span class="toc-dots"></span></div>
+  </div>
+
+  <div class="toc-section">
+    <div class="toc-section-label">Part VI &nbsp;&middot;&nbsp; English Verses</div>
+    <div class="toc-item"><span class="toc-num">100</span><span class="toc-name">The Language You Speak</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">101</span><span class="toc-name">What Defines You</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">102</span><span class="toc-name">So Easy to Forget</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">103</span><span class="toc-name">Keep Smiling on the Horizon</span><span class="toc-dots"></span></div>
+    <div class="toc-item"><span class="toc-num">104</span><span class="toc-name">There Are Just a Few Days</span><span class="toc-dots"></span></div>
+  </div>
+
+  <div class="toc-section">
+    <div class="toc-section-label">Closing &nbsp;&middot;&nbsp; Sukhanvad &mdash; Aphorisms</div>
+    <div class="toc-item"><span class="toc-num">&#9670;</span><span class="toc-name">Words That Stayed</span><span class="toc-dots"></span></div>
+  </div>
+</div>
+<!-- ===== PART I: ISHQ ===== -->
+<div class="chapter-header">
+  <div class="ch-part">Part One</div>
+  <div class="ch-title-en">Ishq</div>
+  <div class="ch-title-hi">इश्क</div>
+  <div class="ch-rule"></div>
+  <div class="ch-desc">Love &amp; Longing<br><em>poems of the heart that wouldn't stay quiet</em></div>
+</div>
+<div class="page">
+  <!-- Poem 01 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 01</div>
+    <div class="poem-title">नया है कुछ, अच्छा है</div>
+    <div class="poem-subtitle">Naya Hai Kuch, Achha Hai</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body hi">
+      <div class="stanza">
+        वक्त स�� अनुमान लगाओ,<br>
+        तो अभी भी थोड़ा कच्चा है...<br>
+        सफर वही है बस, राही नया है...<br>
+        खुमार सा है कुछ, अच्छा है ...!
+      </div>
+      <div class="stanza">
+        नजरों से अनुमान हो,<br>
+        तो अंजान सा ही रिश्ता है...<br>
+        मुस्कान वोही है बस, वजह नयी है...<br>
+        जज़्बात से है कुछ, अच्छा है ...!
+      </div>
+      <div class="stanza">
+        बातों से परखना चाहो,<br>
+        तो दोस्त काफी सच्चा है...<br>
+        लॉरेल वोही है बस, हार्डी नया है,<br>
+        नजराना सा है कुछ, अच्छा है ...!
+      </div>
+      <div class="stanza">
+        फासलो से निखारना हो,<br>
+        तो काफी कुछ बयान है...<br>
+        सफर बड़ा है, और आदत बन गया है...<br>
+        शिकायत नहीं है कुछ, अच्छा है...!
+      </div>
+      <div class="stanza">
+        सियाही लेके निकला हूं...<br>
+        राह पर कागज मिला है...<br>
+        जिंदगी वही है बस... ये पन्ना नया है...<br>
+        पलटना बिलकुल नहीं इसे, अच्छा है ...!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 02 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 02</div>
+    <div class="poem-title">Sitara</div>
+    <div class="poem-subtitle">The Star</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Darawna sa andhera thha,<br>
+        kahinse jab ek sitara khil gya...<br>
+        Cheez mamuli nhi bhai,<br>
+        sarein khushiyonka pitara thha mil gya...
+      </div>
+      <div class="stanza">
+        Guldasta khubsoorat par usne najane, mehekna kyu chhod diya...<br>
+        Khushbu ki talash mein koi usey, khareedna hi bhul gya.....
+      </div>
+      <div class="stanza">
+        Adhura thha, anjan thha, par wakif tabse ishq se bann gya...<br>
+        Yaad karke sare pal eksath, gehre nashe sa chadh gya...
+      </div>
+      <div class="stanza">
+        Yaad hai unse pehli hi mulakat se bs, sama sa thha bann gya...<br>
+        Khoj khwaishonki thhi, aur khuda hi mil gya...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 03 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 03</div>
+    <div class="poem-title">Intezaar</div>
+    <div class="poem-subtitle">Waiting</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Intzar rehta hai...<br>
+        Aapki saasonka... jab hmara naam leti ho...<br>
+        Shikayat bhari batonka... jab dil se do jam leti ho...
+      </div>
+      <div class="stanza">
+        Khuda krein aapko milein sari khushiya jo maujud ho iss duniya mein...<br>
+        Kyunki ek lazmi muskurahat se Sare jaha ko bhi khush kar deti ho...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 04 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 04</div>
+    <div class="poem-title">Wo Khoobsurat</div>
+    <div class="poem-subtitle">That Beautiful One</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Jitni wo khoobsurat hai... sachmein yakeen nhi hota...<br>
+        Uske bina zindagi jeena mtlab jaise, khane mein namak hi nhi hota...
+      </div>
+      <div class="stanza">
+        Jitna achhese wo hume smjhti hai... utna hum bhi usey jaante hai...<br>
+        Wo humsafar maanti hai shayad, par hum to ab khuda hi maante hai...
+      </div>
+      <div class="stanza">
+        Ehem hai wo, sabki laadli hai, apne masle sab usey btate hai...<br>
+        Bholi hai aur shatir bhi thodi, jisey hum din raat kaafi satate hai...
+      </div>
+      <div class="stanza">
+        Itni achhi muskan to meine kisiki nhi dekhi...<br>
+        Sirf mujhe dikhti hai kya jo duniya se pare laagti h...<br>
+        Ankhein bhi ma sha allah sabkuch bayan kar deti hai...<br>
+        Ishq jahir na karna chaho tobhi mehkash sama bandh deti hai...
+      </div>
+      <div class="stanza">
+        Zulfein to bas, ek alag mayajal hai... itnasa wakht hua jaan ke aur dekho ye haal hai...<br>
+        Ankh band karke baatein hoti hai hmari, mohabbt kaafi bemisaal hai...
+      </div>
+      <div class="stanza">
+        Meri jaan aur mera jahan hai... har tamanna har armaan hai...<br>
+        Labonpe hmare bas usika naam hai, ishq ki ye gawahi deta hu,<br>
+        Aur bhi jyada pyar hone ka anuman hai...
+      </div>
+      <div class="stanza">
+        Kya kahu yar smjh nhi ata, jitna bolta hu usse dil bhar nhi pata...<br>
+        Aap sachmein mein wo khushbu hai jo sanson mein bastein hai,<br>
+        Aapke bina ek pal bhi jeeya nhi jata!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 05 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 05</div>
+    <div class="poem-title">Baadal</div>
+    <div class="poem-subtitle">The Sky &amp; The Earth</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Baadal unchai gina nhi krte...<br>
+        Zameen gehrai napa nhi karti...
+      </div>
+      <div class="stanza">
+        Jab dilmein hi mohbbat ghul gyi ho,<br>
+        Tab koi burai kbhi dakhal, diya nhi karti...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 06 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 06</div>
+    <div class="poem-title">Parchhayi</div>
+    <div class="poem-subtitle">Shadow</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Parchhayi sath deti hai... aur gehraai darr ki ahat...<br>
+        Tanhaai barsaat deti hai... aur pyar uski ibadat...
+      </div>
+      <div class="stanza">
+        Parchhayi tum ho aur gehrai shiddat hai...<br>
+        Tanhai judaai hai... aur pyar zindagi!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 07 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 07</div>
+    <div class="poem-title">Un Se</div>
+    <div class="poem-subtitle">With Them</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Unse baat to hoti h, par waisi nhi jaisi hum chahte hai...<br>
+        Mulakaat to hoti h, par waisi nhi jaisi hum mangte hai...<br>
+        Kehti hai wo ajkal, hum bdi sakti se pesh aate hai...<br>
+        Dukh h ji hume bhi, par halaat waise batlaate hai..
+      </div>
+      <div class="stanza">
+        Muaf kardo kuch din nacheez ko, shiddat se darkhwast hai...<br>
+        Phir se lautenge jrur wo pyar k kuch pal,<br>
+        Tabtak, ye sare jakhm, mohbbt k liye bardasht hai...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 08 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 08</div>
+    <div class="poem-title">Kaabu Mein Dil</div>
+    <div class="poem-subtitle">The Heart Uncontrolled</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Kaabu mein dil rahein to wo mohbbt hi kya...<br>
+        Masjid mein bnd rahe wo khudah hi kya...<br>
+        Safar hi manzil na ho wo zindagi hi kya...<br>
+        Raaste mein aap na mile wo qabooool hi kya....
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 09 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 09</div>
+    <div class="poem-title">सवाल-ए-इश्क</div>
+    <div class="poem-subtitle">Sawal-e-Ishq</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body hi">
+      <div class="stanza">
+        सवाल ये पूछा गया था की, हर जान इश्क में क्यू फनाह है ...<br>
+        जवाब मुराद हो या मुकद्दर, आप ही से जुड़ा है...<br>
+        इश्क केह लो या इबादत, मंजूर-ए-खुदा है ...!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 10 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 10</div>
+    <div class="poem-title">Ldki Mili</div>
+    <div class="poem-subtitle">When She Came Along</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Ldki mili aur puchh liya aisa nhi hota...<br>
+        Dost mila aur bhul gye aisa nhi hota...<br>
+        Pyar kiya aur darein nhi aisa nhi hota...<br>
+        Darr laga to izhar hi na kiya aisa bhi nhi hota...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 11 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 11</div>
+    <div class="poem-title">Agar Rakh Sako</div>
+    <div class="poem-subtitle">If You Could</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Agar rakh sako to khudka khayal rakho..<br>
+        Agar dekh sako to hmara aapke liye pyar dekho...<br>
+        Agar ruk sako to hmare liye thodi der aur ruko...<br>
+        Apne ankhonse hmare dil pe apna naam likho...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 12 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 12</div>
+    <div class="poem-title">Nind Mein</div>
+    <div class="poem-subtitle">In Sleep</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Nind mein ghul jao...<br>
+        Sapne dekhna mat bhulna...<br>
+        Jaha bhi jao khush raho yar...<br>
+        Bs palatna mat bhulna!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 13 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 13</div>
+    <div class="poem-title">Bolna Chahta Hu</div>
+    <div class="poem-subtitle">I Want to Say</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Bolna chahta hu bol nhi pata...<br>
+        Milna chahta hu mil nhi pata...<br>
+        Kitne khyal ate hai dinbhar,<br>
+        Kitne log milte hai dinbhar,<br>
+        Par bs ek aapka khyal hai jo dilse nhi jata...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 14 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 14</div>
+    <div class="poem-title">Wakht Khuddar</div>
+    <div class="poem-subtitle">Time Grows Proud</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Wakht khuddar hone lga hai...<br>
+        Dikhne aur milne ke bich antar samajhne lga hai...<br>
+        Iradein aur hakikat mein ek lakeer si bann gyi hai..<br>
+        Pyarr ka ehsas pass rehkar nhi hota, ye abhi suljhne lga hai...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 15 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 15</div>
+    <div class="poem-title">Dua</div>
+    <div class="poem-subtitle">A Prayer</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Har lamha apke hothon pe ek muskan rahe,<br>
+        Har gum se aap hmesha anjaan rahen,<br>
+        Jiske sath mehek uthti hai aapki zindgi,<br>
+        Hamsha aapke pass bs wohi ek insan rahe!
+      </div>
+      <div class="stanza">
+        Dua to usey diyi jaati hai jise uski jrurat ho...<br>
+        Aap par markar roj krenge pyaar agar aapki ijajat ho!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 16 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 16</div>
+    <div class="poem-title">Man Behle</div>
+    <div class="poem-subtitle">When the Heart Wanders</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Man behle to pass ajana...<br>
+        Dil dhadke to thoda muskurana...<br>
+        Palak jhapke to chehra samne lana...<br>
+        Agle jnam mein hi sahi par, hmare ho jana.
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 17 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 17</div>
+    <div class="poem-title">ज़िन्दगी की खुशियां</div>
+    <div class="poem-subtitle">Zindagi Ki Khushiyan</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body hi">
+      <div class="stanza">
+        ज़िन्दगी की मेरी सारी खुशियां तो तेरे बहाने से है ...<br>
+        आधी तुझे सताने से है, और बाकी मनाने से है ...!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 18 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 18</div>
+    <div class="poem-title">Kasoor</div>
+    <div class="poem-subtitle">The Fault</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Kasoor na unka thha na mera... hum dono hi rishton ki rasmein nibhate rahe...<br>
+        Wo dosti ka ehsas jatate rahe... aur hum mohbbt ko dil mein chhupate rahe!
+      </div>
+      <div class="stanza">
+        Wo mere dil par sar rakhkar soyi hui thhi bekhbar...<br>
+        Humne to dhadkan hi rok diyi ki kahi uski nind na tut jayein!
+      </div>
+      <div class="stanza">
+        Wo kareeb to bohot hai, mgar dooriyon ke sath...<br>
+        Hum jee to rahe hai, mgar majburiyonke sath...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 19 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 19</div>
+    <div class="poem-title">Raatonka Agaaz</div>
+    <div class="poem-subtitle">The Beginning of Nights</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Raatonka agaaz to bahut joshila hota hai...<br>
+        Par anjaam hmesha dard de jata hai...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 20 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 20</div>
+    <div class="poem-title">Ek Pal</div>
+    <div class="poem-subtitle">That One Afternoon</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Ek pal bhi aisa nhi<br>
+        Jab wo lamhe yaad na ayein...<br>
+        Ek dopher thhi jisme laga,<br>
+        Bichmein koi aur na ayein...
+      </div>
+      <div class="stanza">
+        Itni khubsurat lag rahi thhi aap ki bs ab raha na jayein...<br>
+        Jante hai, aap ruthhi thhi thodi der,<br>
+        Taaki hum gaa kar aapko manayein!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 21 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 21</div>
+    <div class="poem-title">Moonlight</div>
+    <div class="poem-subtitle">Stuck in the Moonlight</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Stuck in the moonlight wid u....<br>
+        One of the things done right wid u...
+      </div>
+      <div class="stanza">
+        Memories are too many.... some fade away!<br>
+        Fake won't stay long.... but right one finds the way!<br>
+        People can change us... personality is like a clay!<br>
+        So be careful with your choices, life is not an easy game to play!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 22 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 22</div>
+    <div class="poem-title">इतनी भी</div>
+    <div class="poem-subtitle">Itni Bhi</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body hi">
+      <div class="stanza">
+        इतनी भी सुनने की आदत मत लगाना,<br>
+        की हम बताना भूल जाएं...<br>
+        और हमारे दिल की मोहब्बत,<br>
+        दिलमें ही रहे जाएं...!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 23 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 23</div>
+    <div class="poem-title">एक सपना</div>
+    <div class="poem-subtitle">Ek Sapna &mdash; A Dream</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body hi">
+      <div class="stanza">
+        एक सपना देखा था कभी, आप से प्यार करने का...<br>
+        पूरा किया आपने इजाजत देकर, एक मौका ईजहार करने का...<br>
+        चैन की निंद थी आज, सपना न था पर आज आपका...<br>
+        पहली बार निंद खुली और, हकीकत को मौका मिला सपने से बहार होने का....!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 24 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 24</div>
+    <div class="poem-title">सोचा उन रातों पे</div>
+    <div class="poem-subtitle">Socha Un Raaton Pe</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body hi">
+      <div class="stanza">
+        सोचा उन रातों पे शेर बनाते हैं,<br>
+        जब आपके सपने नहीं आते...<br>
+        पर उनपर लिखना तो दूर,<br>
+        ऐसी रातें हम झेल ही नहीं पाते...
+      </div>
+      <div class="stanza">
+        क्योंकि साथ बिताए लम्हें खूबसूरत थे,<br>
+        पर आपसे ज्यादा नही...<br>
+        शिकायत तो जरूर होगी आपको हमसे,<br>
+        मगर...प्यार से ज्यादा नहीं...!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 25 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 25</div>
+    <div class="poem-title">Kavita Par</div>
+    <div class="poem-subtitle">Writing a Poem on You</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Sawalo jawabon mein uljhe to kon suljhaega...<br>
+        Iss koyle ko chhu kar to dekho... heera ban jayega...
+      </div>
+      <div class="stanza">
+        Kavita kar raha thha aap pe...<br>
+        Par lafz hi na mile...<br>
+        Wobhi bole: aapne jiyi zindagi jo,<br>
+        Usey hum kya bayan kare...<br>
+        Phool pata nhi kyu aaj hi na khile...<br>
+        Bole aap aao jab zindagi mein,<br>
+        Tab bata diya kare!
+      </div>
+      <div class="stanza">
+        Isilie rehna hmesha khilte bs aap...<br>
+        Taaki dusron ko bhi aapko dekhkar,<br>
+        Muskurane ki ek to wjah mile!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 26 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 26</div>
+    <div class="poem-title">Khwab Aya</div>
+    <div class="poem-subtitle">The Dream Came</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Aj hi aapka khwab aya thha..<br>
+        Ek khoyi si muskan wapas laya thha...<br>
+        Aap dikhe thhe usmein...<br>
+        Haste khelte muskurate...<br>
+        Garmi ke mausam mein jaise dil behlane wala anokha sawan aya thha...
+      </div>
+      <div class="stanza">
+        Har baat yaad hai jabse mile hai aapse... haar gift... har topic jo dhundkar laya thha...<br>
+        Pehchan aapki thhi par ehsas hmara thha...<br>
+        Aaj hi ki baat hai... aap ka khwab aya thha...
+      </div>
+      <div class="stanza">
+        Ab bs aaj ka din kaat jayein ye khwaish thhi mann mein...<br>
+        Kyunki milte to aap ho nhi jyada aajkal dinmein...<br>
+        To aap se milne ka ek bharosemand zariya paya thha...<br>
+        Woi khwab wapas aaye kal bhi jo aaj aya thha...
+      </div>
+      <div class="stanza">
+        2 saal pehle zindagi mein ye mehman aya thha...<br>
+        Usi se kiyi thhi mohabbt aur kiya waada nibhaya thha...
+      </div>
+      <div class="stanza">
+        Pata nhi kaha le jayein ye zindagi hume, par<br>
+        Yaad jrur rahegi wo raat...<br>
+        Jab aap ka ye khwab aya thha...
+      </div>
+      <div class="stanza">
+        Kavita bann gyi baton baton mein, par sach kahu to...<br>
+        Izhar karne ka humne to ye bs ek bahana paya thha...!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 27 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 27</div>
+    <div class="poem-title">लोग पूछते हैं</div>
+    <div class="poem-subtitle">Log Poochhtey Hain</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body hi">
+      <div class="stanza">
+        लोग पूछते हैं, लफ्ज़ आपको, मिलते कहासे हैं ?<br>
+        केहता हूं, ढूंढो उस गलीमें,<br>
+        आप गुजरते जहा से हैं...
+      </div>
+      <div class="stanza">
+        लोग पूछते हैं, प्यार करना हो, तो करते कैसे हैं?<br>
+        केहता हूं, कली से कोई पूछता है भला,<br>
+        की खिलते कैसे हैं...<br>
+        खिलना उसकी आदत हैं,<br>
+        और खुशबू उसका एहसास...<br>
+        प्यार हमारी फितरत हैं,<br>
+        और किस्मत उसकी दरखास्त...
+      </div>
+      <div class="stanza">
+        पूछते तो लोग कई सवाल हैं,<br>
+        कई दीवानोके कई बवाल हैं...<br>
+        कैसे सुलझे इससे, किसे बताएं ?<br>
+        खयालों के आंगन में, बस यही सवाल हैं..!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 28 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 28</div>
+    <div class="poem-title">Puchhna Mat</div>
+    <div class="poem-subtitle">Don't Ask How I Am</div>
+    <div class="poem-rule"></div>
+    <div class="poem-note">Context: after separation, when she asks &mdash; how are you?</div>
+    <div class="poem-body">
+      <div class="stanza">
+        Puchhna mat hum kaise hai.. bta nhi paenge...<br>
+        Thoda wakht lgega shayad, jbtak hum samhal jaenge...<br>
+        Ilzam kitne lage pta nhi, par sajah to ek hi mil gyi...<br>
+        Wakht se jab lagayi shart, tab asli aukat dikh gyi...<br>
+        Manzil nhi jinhe op aise raston pe chal pade thhe...<br>
+        Ab aa gyi to shayad dusra rasta chunn nhi paenge...<br>
+        Puchhna mat hum kaise hai... bta nhi paenge...
+      </div>
+      <div class="stanza">
+        Harkatein jo lagti thhi wo niyat bann gyi..<br>
+        Dostike safar mein kyu chahat bann gyi...<br>
+        Kaha thha ishq ho gya hai ab adat na bann jana... Badal nhi paenge...<br>
+        Aapne khair mana nhi... ab smjha nhi paenge...<br>
+        Ab puchhna mat hum kaise hai.. bta nhi paenge...
+      </div>
+      <div class="stanza">
+        Khuddar thhe hum shayad jab iska alam kiya...<br>
+        Dildar thhe aap jab sath har dum diya...<br>
+        Kahani aisi bann gyi ki adhuri keh nhi paenge...<br>
+        Zid mat karna kyunki puri suna nhi paenge..<br>
+        Puchhna mat hum kaise hai.. bta nhi paenge...
+      </div>
+      <div class="stanza">
+        Pdhke ye sab aap ab bura na mann lena...<br>
+        Man hi mann kuch yaad krke dil behla lena...<br>
+        Kbhi nhi... aapko gum mein dekh nhi paenge...<br>
+        Kbhi dikhe to kahise aakar hasa de jaenge...<br>
+        Kbhi hue pehle ki tarah to ek hi bar gale mil jaenge...<br>
+        Bs puchhna mat hum kaise hai... bta nhi paenge...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 29 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 29</div>
+    <div class="poem-title">Tab Ki Ye Baat</div>
+    <div class="poem-subtitle">That Was Then</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Tab ki ye baat hai jab wo hua karti thhi...<br>
+        Dikhne mein achhi to wo thhi... mgar tarif humein mila krti thhi...<br>
+        Sath bde achhe lgte hai dono... duniya kaha krti thhi...
+      </div>
+      <div class="stanza">
+        Ab to sab asan hai... mushkilein to tab hua karti thhi...<br>
+        Uljhan ko suljhane ki bjay usme uljhneki adat hua krti thhi...<br>
+        Sukha to ab hai... baat to tab ki hai jab barish hua karti thhi...
+      </div>
+      <div class="stanza">
+        Do ke bjay ek chhata ye takad hua karti thhi....<br>
+        Baat to tab ki hai jab mudkar dekhne ki wjah hua krti thhi...
+      </div>
+      <div class="stanza">
+        Ab to khair yaadein bhi dhundla gyi aur ansu bhi sukh gye...<br>
+        Baat tab ki hai jab mohbbt zindagi hua krti thhi...
+      </div>
+      <div class="stanza">
+        Suna raha hu kissa dil mein bsi yadon ka...<br>
+        Par baat to tab ki hai jab dilmein dhadkan hua karti thhi...<br>
+        Samne wo aur chehre par muskan hua krti thhi...
+      </div>
+      <div class="stanza">
+        Ji haan... tab ki ye baat hai jab wo hua karti thhi...!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 30 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 30</div>
+    <div class="poem-title">The Dim Lights</div>
+    <div class="poem-subtitle">An English Verse</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        The lights were dim, we sat together.<br>
+        Wondering will we be with each other, forever.<br>
+        It was dark back then and it's dark now,<br>
+        We weren't afraid before but we are by now.
+      </div>
+      <div class="stanza">
+        Guess it wasn't the absence of light &mdash; loneliness was the reason.<br>
+        Scary thing was the path, the life we had chosen.<br>
+        We were holding hands, no words were spoken.<br>
+        I guess they weren't necessary for the communication to happen.
+      </div>
+      <div class="stanza">
+        A conversation began, memories were relived.<br>
+        Golden days of life surely, each heart believed.<br>
+        Our journey was a success, experience was a delight.<br>
+        Two things lie ahead now, we knew &mdash; the future and the fight.
+      </div>
+      <div class="stanza">
+        We tried to sleep, to dream the life we wished.<br>
+        Moon did the rest, slowly the dream was accomplished.<br>
+        Stars were there, to add to the mystery.<br>
+        Prolonged the night became, going deep into the history.
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 31 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 31</div>
+    <div class="poem-title">Sapne Kanch Mein</div>
+    <div class="poem-subtitle">Dreams in Glass</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Sapne thhe kanch mein band...<br>
+        Roshni chhupkese andar jhaak rahi thhi...<br>
+        Na ankhein hata paya na dhyan...<br>
+        Aapki surat jo samne sheeshe par chamakh rahi thhi...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 32 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 32</div>
+    <div class="poem-title">Raat Mein Parchhai</div>
+    <div class="poem-subtitle">Shadow at Night</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Raat mein parchhai nhi hoti...<br>
+        Sirf gehrai hoti hai...<br>
+        Bina aapke iss aasman mein,<br>
+        Bs chandni hoti hai....
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 33 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 33</div>
+    <div class="poem-title">Khoobsurati Aisi</div>
+    <div class="poem-subtitle">Such Beauty</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Khoobsurati aisi... ki sheesha bnne ka dil karein,<br>
+        Pehchan aisi... ki parchhayi bnne ka dil karein,<br>
+        Likhawat aisi... ki kagaz bnne ka dil karein,<br>
+        Aur awaj aisi... ki guzaarish banne ka dil karein,
+      </div>
+      <div class="stanza">
+        Ek chahat aisi... ki adat banane ka dil karein,<br>
+        Ek muskan aisi ki bs amanat bnne ka dil karein,<br>
+        Aur amanat aisi rahein jiski hifazat karne ka dil karein!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 34 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 34</div>
+    <div class="poem-title">Baat</div>
+    <div class="poem-subtitle">Words Are Not Enough</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Baat aapse karni hai to shabd nhi jazbaat kafi hai,<br>
+        Mohabbat ke liye sath kaha, bs ek hi mulakat kafi hai...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 35 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 35</div>
+    <div class="poem-title">एक रात थी वो ऐसी</div>
+    <div class="poem-subtitle">Ek Raat Thi Wo Aisi</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body hi">
+      <div class="stanza">
+        एक रात थी वो ऐसी, सेहमी बारिश का अनुमान था,<br>
+        सितारोंके संग बैठा एक, मामूली सा इंसान था ...!
+      </div>
+      <div class="stanza">
+        पता नही कोनसी मुश्किल, जिससे वो परेशान था,<br>
+        मंजिल भी तो थी सामने, और रास्ता भी आसान था... !
+      </div>
+      <div class="stanza">
+        चाहत थ��� उसकी जिसपर, हर कदर वो कुर्बान था,<br>
+        मगर उसके दर पर अबतक सिर्फ ये, अनजान सा मेहमान था ...!
+      </div>
+      <div class="stanza">
+        तो सोचा उसने बोल दू आखिर, पहला उसका प्यार था,<br>
+        इंकार की ना कोई गुंजाइश, जब साथ उसके संसार था...!
+      </div>
+      <div class="stanza">
+        इजहार वो आलम उसके, कोशिश का एक इनाम था,<br>
+        मगर राहत का वो सिलसिला, कमबख्त असलियत को इंकार था ...!
+      </div>
+      <div class="stanza">
+        आंख खुली तब सुलझा उसे, एक सपना था, हर बार था,<br>
+        अपने इस लाजमी चित्र का, वो खुद ही एक चित्रकार था ...!
+      </div>
+      <div class="stanza">
+        फिर भी सुबह दिल में उसके, एक खुशी का पैगाम था,<br>
+        इंसानियत के दरबार में उसपर, मोहब्बत का एक इल्जाम था... !
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 36 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 36</div>
+    <div class="poem-title">For the Moment</div>
+    <div class="poem-subtitle">An English Verse</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        For the moment it lasts,<br>
+        or forever it may begin...<br>
+        Flirting in the castle,<br>
+        which we built together...
+      </div>
+      <div class="stanza">
+        Supporting this ship,<br>
+        which left the shores long ago...<br>
+        Making love underneath,<br>
+        the sparkling evening it whispered...
+      </div>
+      <div class="stanza">
+        Where to find such smile again...<br>
+        till eternity I wondered!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 37 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 37</div>
+    <div class="poem-title">Your Harmony</div>
+    <div class="poem-subtitle">An English Verse</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Your harmony is with the moist air...<br>
+        Ocean triumphs the worries which haunt you...<br>
+        Sunrise awakens a dream that lost you...<br>
+        Be the light and guide me through this journey...
+      </div>
+      <div class="stanza">
+        Be my beloved and fly for the moon...<br>
+        The place where you will land,<br>
+        Let's meet there soon!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 38 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 38</div>
+    <div class="poem-title">पण बहुतेक</div>
+    <div class="poem-subtitle">Pan Bahuteka &mdash; (Marathi)</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body mr">
+      <div class="stanza">
+        पण बहुतेक फक्त मीच होतो, ज्याने नेमकं प्रेम मागितलेलं !<br>
+        नकार तो स्पष्ट होता, चेहऱ्यावर दुःख लपलेलं<br>
+        उगाच फसल्या भावनेच्या भरात, स्वतःचंच माकड करून घेतलेलं !
+      </div>
+      <div class="stanza">
+        जास्त नाही पण थोडं तरी, वाईट मात्र वाटून गेलं<br>
+        अश्रूही आले भेटीला, मन हळवं गहिवरलेलं !
+      </div>
+      <div class="stanza">
+        प्रेमाच्या त्या मूर्ख नादात, मैत्रीचं नातं ही संपून गेलं<br>
+        मोहक अश्या अळवावरच्या थेंबाने जणू<br>
+        जिवनातलं जगणं पळवून नेलं !
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 39 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 39</div>
+    <div class="poem-title">Dhadkano Ka Haal Chahiye</div>
+    <div class="poem-subtitle">The Heart Wants More Than Rules</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Dhadkano ka haal chahiye,<br>
+        Faasion ki khabar nahi...<br>
+        Kitabon ke sheher chahiye,<br>
+        Riwazonki fikar nahi...
+      </div>
+      <div class="stanza">
+        Armaano ka mehel ho ek jarur,<br>
+        Khamoshi ka hunar nahi!<br>
+        Rastonpar dost ka ehsaas bas,<br>
+        Manzilon ki kadar nahi!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 40 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 40</div>
+    <div class="poem-title">Milne Ka Beshak</div>
+    <div class="poem-subtitle">Meeting Was the Excuse</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Milne ka beshak, bahana hi thha...<br>
+        Mauka e vardaat, zamana hi thha...<br>
+        Humne toh bas, ek mannat mangi thhi,<br>
+        Puri karne aapko akhir, ana hi thha....
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 41 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 41</div>
+    <div class="poem-title">Galti Se Palke Jhuki</div>
+    <div class="poem-subtitle">A Deep Sleep</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Galti se palke jhuki, toh asani se jaati nahi...<br>
+        Ek bar ruth gayi, toh koi jaam se aati nahi...<br>
+        Ameeron se dushmani jiski,<br>
+        gareeb ko satati nahi...
+      </div>
+      <div class="stanza">
+        Ye gehri nind hai janab,<br>
+        Har kisiko aazmaati nahi!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 42 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 42</div>
+    <div class="poem-title">Daag Toh Mil Gye</div>
+    <div class="poem-subtitle">Found the Spots, Now Searching for the Moon</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Daag toh mil gye, ab chand dhund raha hu....<br>
+        Lamhon ke guzarne ki, raftaar dhund raha hu!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 43 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 43</div>
+    <div class="poem-title">Pass Rehne Ki Sifarish Nahi</div>
+    <div class="poem-subtitle">No Request to Stay Close</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Pass rehne ki sifarish nahi,<br>
+        bas chand dekhne ki guzaarish hai...<br>
+        Ghar kahin bhi basa lo janab,<br>
+        Bas gali se guzarna mat bhulna!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 44 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 44</div>
+    <div class="poem-title">Rang Bikhar Jaye Toh</div>
+    <div class="poem-subtitle">When Colours Scatter</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Rang bikhar jaye toh,<br>
+        Dil sawar jayenge...<br>
+        Parindo ke lihaj se,<br>
+        Par sawar jayenge...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+</div><!-- end page Part I -->
+<!-- ===== PART II: DOSTI ===== -->
+<div class="chapter-header">
+  <div class="ch-part">Part Two</div>
+  <div class="ch-title-en">Dosti</div>
+  <div class="ch-title-hi">दोस्ती</div>
+  <div class="ch-rule"></div>
+  <div class="ch-desc">Friendship<br><em>for those who stayed, and those who couldn't</em></div>
+</div>
+<div class="page">
+
+  <!-- Poem 45 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 45</div>
+    <div class="poem-title">Dost Hote Bde Ajeeb</div>
+    <div class="poem-subtitle">Friends Are Strange</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Kuch baat hai jo kbhi byan hui nhi...<br>
+        Aj padhkar sunaunga...<br>
+        Dosti ka matlab thoda khulkar btaunga..!
+      </div>
+      <div class="stanza">
+        Dost hote bde ajeeb hai....<br>
+        Awsar khushi ka ho ya gum ka...<br>
+        Ye to milkar hi maante hai...<br>
+        Janam din ho ya koi aur tyohar,<br>
+        Jashn saath hi mnana jante hai!
+      </div>
+      <div class="stanza">
+        Angaron ki asli aag to bs faqeer hi jaante hai...<br>
+        Apno se badhkar koi lage to unhe hum dost maante hai!<br>
+        Apas mein rota to koi nhi par hasana sab jaante hai...<br>
+        Mushkil se milte hai bhai dost aise... hum bhi jaante hai!
+      </div>
+      <div class="stanza">
+        Wapas mulaqat kbhi na ho payi unse to dua yehi karte hai...<br>
+        Janaze se pehle gale milne ki thodi fursat mangte hai!
+      </div>
+      <div class="stanza">
+        Kuch aise hai humare dost, kbhi jrur milaunga...<br>
+        Dosti ka matlab aur khulkar btaunga!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 46 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 46</div>
+    <div class="poem-title">पुराना ही था दोस्त</div>
+    <div class="poem-subtitle">Purana Hi Tha Dost</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body hi">
+      <div class="stanza">
+        पुराना ही था दोस्त जिससे, नयी एक मुलाकात हुई है ...<br>
+        सच है ये की बाद उसके, हर तनहाई में भी बात हुई है !
+      </div>
+      <div class="stanza">
+        शब्द खुद लिखते हैं हम, और धुन आपकी होती है ...<br>
+        मिलते ज्यादा हो नही, ये शिकायत हमारी होती है !
+      </div>
+      <div class="stanza">
+        मानता हूं यार मैं, दोस्त है वो प्यार नही ...<br>
+        दोस्ती इतनी अच्छी हो तो, इससे बेहतर संसार नही!
+      </div>
+      <div class="stanza">
+        तारीफ नही करूंगा ज्यादा, इंसान हो भगवान नही ...<br>
+        इतना जरूर केह देता हूंकी, अपने हो, मेहमान नही !
+      </div>
+      <div class="stanza">
+        बोल तो दिया सब, अब सिर्फ ये केहता हूं...<br>
+        हमेशा मिलते रहो तब, मुश्किल में जब रहता हूं!
+      </div>
+      <div class="stanza">
+        खूबसूरत तो आप हो ही, हमेशा बस खुशहाल रहो ...<br>
+        खिल उठें आप साथ जिसके, पास आपके, हमेशा वो इनसान रहो...<br>
+        खुशिया होंगी गम भी होंगे, बिलकूल ना परेशान रहो,<br>
+        हर लमहा एक छोटी ही सही पर चेहरे पर मुस्कान रहे!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 47 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 47</div>
+    <div class="poem-title">एका क्षणात</div>
+    <div class="poem-subtitle">Eka Kshnat &mdash; In One Moment (Marathi)</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body mr">
+      <div class="stanza">
+        एका क्षणात सगळ्या आठवणी, डोळ्यासमोर दर्शन देतात...<br>
+        पक्षी चाललेत उडून म्हंटल्यावर, अंगावरती शहारे येतात ...
+      </div>
+      <div class="stanza">
+        कठीण काळात मदत करून जे आपल्या झोळीत पुण्य घेतात...<br>
+        जीवन काय, जगतात सगळे, अर्थ त्याला मित्र देतात...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 48 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 48</div>
+    <div class="poem-title">Hua Pyar To</div>
+    <div class="poem-subtitle">If There Was Love</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Hua pyar to jata denge, kuch tafleefein bata denge...<br>
+        Kuch aap kro gustakhi, thoda hum bhi sata denge...
+      </div>
+      <div class="stanza">
+        Dosti ki yehi to tasveer hai...<br>
+        Kagaj aap le aao bs, rangon se hum saja denge!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 49 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 49</div>
+    <div class="poem-title">Nikle Hai Khwabonka</div>
+    <div class="poem-subtitle">Setting Out with Dreams</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Nikle hai khwabonka baqsa lekar, jald hi ankhe khulengi...<br>
+        Guzre in dino se behtar, kash hi zindagi milegi...
+      </div>
+      <div class="stanza">
+        Koshish krenge aage badhkar pichhe mudna na bhulein,<br>
+        Kisi ko kbhi jarurat pde to mumkin har darwazein kholein...
+      </div>
+      <div class="stanza">
+        Apas mein anbann ho kbhi to wo darar na ban paye...<br>
+        Raste mein bhale doori rahein par kbhi anjann na bann jayein...
+      </div>
+      <div class="stanza">
+        Yehi mannat khuda se mangkar aage badh jate hai...<br>
+        Matlabi duniya ki kashmakash mein thoda apnapan laate hai!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 50 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 50</div>
+    <div class="poem-title">Azmane Se</div>
+    <div class="poem-subtitle">On Testing Bonds</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Azmane se khul jati hai rishte ki buniyaad, itrane se nhi...<br>
+        Khokar bhi rehta hai har pal koi yaad, mit jaane se nhi...
+      </div>
+      <div class="stanza">
+        Shayad kuch bhi nhi thha humare beech...<br>
+        Par bina palak jhapke bheed mei bhi neeji batein hoti thhi...<br>
+        Wo ankhein yaad hai... batein yaad hai...
+      </div>
+      <div class="stanza">
+        Rishte ko naam nhi thha shayad par ehmiyat jrur thhi...<br>
+        Badahpan nhi, masumiyat jrur thhi...<br>
+        Na humne kbhi btaya na kisine puchha...
+      </div>
+      <div class="stanza">
+        Sukhi mitti ko sajane wali wo barish ki bund thhi...<br>
+        Hath tham kar baithta thha... duniya hi alag lagti thhi...<br>
+        Pta hai wo duniya meri nhi thhi par kasamse kafi khoob thhi...
+      </div>
+      <div class="stanza">
+        Rona bilkul nhi chahunga kbhi, par ant tak har kvita rula deti hai...<br>
+        Wo yaad, wo nazdiki, har gum bhula deti hai...<br>
+        Pichhe mudkar ab sab sapna lgta hai...<br>
+        Najane ab wapas kab nind ayein...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 51 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 51</div>
+    <div class="poem-title">Jinho Ne Baat Karna</div>
+    <div class="poem-subtitle">Choose Your Circle Carefully</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Jinho ne baat karna bhi nahi seekha,<br>
+        Unse thhodi mulakat rakhenge...<br>
+        Na jinho ne mushkil wakht dekha,<br>
+        Unse thhodi jazbaat sikhenge...
+      </div>
+      <div class="stanza">
+        Ye badi ehem soochi hai yaron,<br>
+        Jara dhyan se chunna...<br>
+        Socho, sath jinke jeekar kabil bane hai hum,<br>
+        Unhe thhodi khudse durr rakhenge!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 52 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 52</div>
+    <div class="poem-title">Hum Dekhenge</div>
+    <div class="poem-subtitle">We Shall See</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Hum dekhenge!<br>
+        Bachhe nahi hai, jo bas aagey dekhenge...<br>
+        Budhe thodi hue, ki bas pichhe dekhenge...<br>
+        Beech kahin lakir kheechlo,<br>
+        bas wahin ke jawan hai hum...
+      </div>
+      <div class="stanza">
+        Rishte aur kam ka santulan,<br>
+        pata nahin hum kahase seekhenge!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+</div><!-- end page Part II -->
+
+<!-- ===== PART III: RISHTEY ===== -->
+<div class="chapter-header">
+  <div class="ch-part">Part Three</div>
+  <div class="ch-title-en">Rishtey</div>
+  <div class="ch-title-hi">रिश्ते</div>
+  <div class="ch-rule"></div>
+  <div class="ch-desc">Family &amp; Bonds<br><em>for those who came before, and will remain after</em></div>
+</div>
+<div class="page">
+
+  <!-- Poem 53 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 53</div>
+    <div class="poem-title">Aai</div>
+    <div class="poem-subtitle">For My Mother &mdash; (Marathi)</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body mr">
+      <div class="stanza">
+        जन्मापासून जीव लावला जिने,<br>
+        लहानाचं मोठं केलं ...<br>
+        प्रयत्नांची पराकाष्ठा करत,<br>
+        यशाच्या पायथ्याशी नेलं...
+      </div>
+      <div class="stanza">
+        स्वतःहून जास्त माया जिच्यावर,<br>
+        अशी ती एक...आई आहे...<br>
+        निश्शंक जिच्यात देव पाहतो,<br>
+        अशी विठ्ठल रखुमाई आहे...
+      </div>
+      <div class="stanza">
+        आजवरच्या कष्टांचं मोल,<br>
+        मी तरी तिला काय देणार...<br>
+        5-स्टार च्या जेवणाला तरी,<br>
+        तिच्या हातची चव काय येणार...
+      </div>
+      <div class="stanza">
+        मोठं ही तिनेच केलं,<br>
+        तरी लहानही तीच समजते...<br>
+        अंतरमनात चालू असलेली लगबग,<br>
+        फक्त तिलाच उमजते...
+      </div>
+      <div class="stanza">
+        मजा मस्तीत पण शिस्त हवी,<br>
+        हाच तिचा उपदेश...<br>
+        बाबांना बिनशर्त साथ दिली,<br>
+        इतके वर्ष हे मात्र विशेष...
+      </div>
+      <div class="stanza">
+        थोडेही कुठे दुखावले तिला,<br>
+        तरी दिवसभर मनास लागते...<br>
+        कौतुकाची थाप जर मिळाली,<br>
+        तर आभाळ सुद्धा ठेंगणे वाटते...
+      </div>
+      <div class="stanza">
+        एवढेही शब्द पुरे आहेत,<br>
+        डोळ्यात तिच्या पाणी यायला...<br>
+        मोठा कितीही झालो तरी,<br>
+        लहान होईन कुशीत शिरायला...
+      </div>
+      <div class="stanza">
+        पन्नास पूर्ण झाली तशी,<br>
+        किमान शंभरी होऊन जाऊदे...<br>
+        स्वप्न असो वा झुंज सत्याशी,<br>
+        डोक्यावर फक्त तुझा हात राहूदे...!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp &nbsp;&middot;&nbsp; (for Aai)</div>
+  </div>
+
+  <!-- Poem 54 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 54</div>
+    <div class="poem-title">Bhai</div>
+    <div class="poem-subtitle">For My Brother &mdash; (Three Languages)</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza" style="font-style:italic; color:var(--muted); font-size:15px;">
+        Aasan nahi hai bhai ke rishte ko, ek hi bhasha mein samjhana,<br>
+        Isliye teen mein koshish karunga, kuch anuman lage to batana!
+      </div>
+    </div>
+    <div class="poem-body">
+      <div class="stanza">
+        <em>in english &mdash;</em><br>
+        Who was my first friend? Whom did I tell the stories to?<br>
+        It's good that just one guy<br>
+        Is answer to all the questions, phew!
+      </div>
+      <div class="stanza">
+        He saw me grow up, those memories will never be torn,<br>
+        He's the best thing ever happened to me, even before I was born!
+      </div>
+    </div>
+    <div class="poem-body mr" style="margin-top:20px;">
+      <div class="stanza">
+        <em style="font-style:italic; color:var(--muted);">खरंतर &mdash;</em><br>
+        मजा मस्ती वगैरे अगदी, सगळं त्यानेच शिकवलं<br>
+        काय करावं नि काय करू नये, हे नेहमी त्यानेच दाखवलं !
+      </div>
+      <div class="stanza">
+        माझ्या कपाटात माझे स्वतःचे कमी, त्याचेच कपडे जास्त आहेत,<br>
+        इतर कोणा पेक्षाही घरात, याचेच नखरे जास्त आहेत!
+      </div>
+    </div>
+    <div class="poem-body" style="margin-top:20px;">
+      <div class="stanza">
+        <em style="color:var(--muted);">bas &mdash;</em><br>
+        Kya batau aur jyada, janamdin ki badhai ho!<br>
+        Har pal jiyenge zindagi ka jismein, aapki khushi samayi ho!<br>
+        Keh to diya sab, ab sirf akhir mein ye kahunga,<br>
+        Kitna bhi bada ho jau hmesha, tumhara chhota bhai hi rahunga...!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; सौ.</div>
+  </div>
+
+  <!-- Poem 55 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 55</div>
+    <div class="poem-title">Jinhone Bolna Sikhaya</div>
+    <div class="poem-subtitle">Those Who Taught Me to Speak</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body hi">
+      <div class="stanza">
+        जिन्होंने बोलना सिखाया,<br>
+        उनसे बात नहीं होती...<br>
+        जो कभी हसने की वजह थे,<br>
+        उनसे मुलाकात नहीं होती...
+      </div>
+      <div class="stanza">
+        जीना है तो जी भी देंगे,<br>
+        इतने कमजोर थोडी है मगर...<br>
+        बड़े होकर भी ऐसा नहीं है की,<br>
+        मां बाप के प्यार की दरख्वास्त नहीं होती...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+</div><!-- end page Part III -->
+
+<!-- ===== PART IV: ZINDAGI ===== -->
+<div class="chapter-header">
+  <div class="ch-part">Part Four</div>
+  <div class="ch-title-en">Zindagi</div>
+  <div class="ch-title-hi">जिंदगी</div>
+  <div class="ch-rule"></div>
+  <div class="ch-desc">Life &amp; Philosophy<br><em>the ink that keeps spilling, the life that keeps living</em></div>
+</div>
+<div class="page">
+
+  <!-- Poem 56 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 56</div>
+    <div class="poem-title">Kalam</div>
+    <div class="poem-subtitle">The Pen</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body hi">
+      <div class="stanza">
+        कलम लिखती गयी, और हम जीते गये...<br>
+        कुछ हाथोंने लिखना सिखा दिया, कुछ ने जीना... !
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 57 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 57</div>
+    <div class="poem-title">स्वप्नातील सुख</div>
+    <div class="poem-subtitle">Swapnatil Sukh &mdash; (Marathi)</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body mr">
+      <div class="stanza">
+        स्वप्नातील सुख आणि नात्यांतील सहवास तो शोधतोय...<br>
+        अनेक दिवसांनी आज मनातलं, मोजकं काही बोलतोय...
+      </div>
+      <div class="stanza">
+        त्यास भविष्याचं भूत आणि वर्तमानाचा विचार कायम सलतोय...<br>
+        अपेक्षांच्या ओझ्यापायी प्रत्येक पायरी तो जरा जपूनच चढतोय...
+      </div>
+      <div class="stanza">
+        वाटचालीत धडपडतोय, मधेच वाट सुद्धा हरवतोय...<br>
+        अपयश आणि अनुभवांतून मात्र कदाचित, एक यशस्वी व्यक्तिमत्व उलगडतंय...
+      </div>
+      <div class="stanza">
+        गोष्ट त्या मुलाची आहे, जो career साठी झगडतोय...<br>
+        उद्याच्या आयुष्यासाठी जरासा, आज जगायला विसरतोय...
+      </div>
+      <div class="stanza">
+        कोऱ्या कागदाचा वैमानिक, थेट क्षितिजा पलीकडे उडू पाहतोय...<br>
+        नव्या रंगानिशी बाहेर पडलेला, हा चित्रकारच बदलतोय...!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 58 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 58</div>
+    <div class="poem-title">Udyachich Chinta</div>
+    <div class="poem-subtitle">Tomorrow's Worry &mdash; (Marathi)</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body mr">
+      <div class="stanza">
+        Udyachich chinta, kay re bhagwanta...<br>
+        Ajche hi diwas kalchya athwanit ch jawe?<br>
+        Kay hi dasha, Ann kuthli ti disha,<br>
+        Sang tuch ya bhiti poti kse me nijawe?
+      </div>
+      <div class="stanza">
+        Hach sarwancha wichar, rog ituka kay upchar,<br>
+        Kuthlya ashewar ata ekhade swapn tri bghawe?
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 59 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 59</div>
+    <div class="poem-title">Kuch Kami</div>
+    <div class="poem-subtitle">The Art of Living with Less</div>
+    <div class="poem-rule"></div>
+    <div class="bilingual">
+      <div class="poem-body">
+        <div class="stanza">
+          Kuch kami k sath jeena ek hunar hai...<br>
+          Kuch nami k sath hasna ek ada hai...<br>
+          Khwaishonki kaifiyat puchhna... achha hai...<br>
+          Par bin bataye usey janna ek kala hai...
+        </div>
+      </div>
+      <div class="bilingual-sep"></div>
+      <div class="poem-body hi">
+        <div class="stanza">
+          कुछ कमी के साथ जीना, एक हुनर है...<br>
+          कुछ नमी के साथ हसना, एक अदा है...<br>
+          ख्वाइशों की कैफियत पूछना, तो अच्छा है,<br>
+          पर बिन बताएं उन्हे जानना भी, एक कला है...!
+        </div>
+      </div>
+    </div>
+    <div class="poem-sig" style="margin-top:28px;">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 60 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 60</div>
+    <div class="poem-title">Kavita Mein Shabd</div>
+    <div class="poem-subtitle">Words in a Poem</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body hi">
+      <div class="stanza">
+        कविता में, "शब्द" ये एक ही पहलू है...<br>
+        कभी कभी अधुरा पड जाता है...
+      </div>
+      <div class="stanza">
+        पर जब धुन उसे मिलती है,<br>
+        तब सूर से जज़्बात जुड़ते है...<br>
+        छुपे हो कहीं एहसेस अलग से,<br>
+        तो ढूंढने थोडी पड़ते है ...
+      </div>
+      <div class="stanza">
+        याद जुड़ी हो किसी ऐसेही गानेसे,<br>
+        तो भूलना बड़ा मुश्किल ...
+      </div>
+      <div class="stanza">
+        अक्सर कोई चलता है, तब गुजरा लम्हा याद आ जाता है ...<br>
+        बस कुछ पल बिताएं जिनपर, उन्हे फिरसे सामने लाता है ...
+      </div>
+      <div class="stanza">
+        शब्द वही, धुन भी समान...<br>
+        बस हालात बदलें होते हैं...<br>
+        कोई फूट के रोता है, तो कोई दूजा शुकर मनाता है...<br>
+        सोचकर बिताना नहीं इसे...<br>
+        खुलकर जीना होता है ...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 61 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 61</div>
+    <div class="poem-title">Sangeet</div>
+    <div class="poem-subtitle">Music &amp; Memory</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Aksar jab koi chalata hai,<br>
+        Wo guzra lamha yaad aa jata hai...<br>
+        Bas ek hi din bitaya jispar,<br>
+        Usey phirse samne lata hai...
+      </div>
+      <div class="stanza">
+        Sangeet wohi, dhun bhi saman,<br>
+        Bas halaat badal jatein hai...<br>
+        Koi fut ke rota hai, to koi duja shukar manata hai...<br>
+        Sochkar beetana nhi, isey to khulkar jeena hota hai...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 62 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 62</div>
+    <div class="poem-title">In Quest</div>
+    <div class="poem-subtitle">On Identity &mdash; A Prose Reflection</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        In quest of trying to be like somebody, we always forget that eventually we were made unique. This quest takes us away from our own identity. When we completely transform and reach our destination in that quest, become somebody significant &mdash; congratulations, your own self isn't left much now.
+      </div>
+      <div class="stanza">
+        So try to grow as a unique identity,<br>
+        not to mold into an already developed stature.
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 63 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 63</div>
+    <div class="poem-title">Halat Ne Majbur</div>
+    <div class="poem-subtitle">Life Made Me a Craftsman</div>
+    <div class="poem-rule"></div>
+    <div class="bilingual">
+      <div class="poem-body">
+        <div class="stanza">
+          Halat ne majbur bana diya,<br>
+          Aur zindagi ne majdur...<br>
+          Karagiri hum aise hi nhi sikhe janab...
+        </div>
+      </div>
+      <div class="bilingual-sep"></div>
+      <div class="poem-body hi">
+        <div class="stanza">
+          हालात ने मजबूर बना दिया,<br>
+          और जिंदगी ने मजदूर...<br>
+          कारागिरी हम ऐसेही नही सीखे जनाब...!
+        </div>
+      </div>
+    </div>
+    <div class="poem-sig" style="margin-top:28px;">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 64 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 64</div>
+    <div class="poem-title">Agar Sab Hi Ki Ruh</div>
+    <div class="poem-subtitle">If All Souls Are One</div>
+    <div class="poem-rule"></div>
+    <div class="bilingual">
+      <div class="poem-body">
+        <div class="stanza">
+          Agar sab hi ki ruh ek sath judi hai...<br>
+          To kyun hmare samne alag zindagi padi hai?
+        </div>
+      </div>
+      <div class="bilingual-sep"></div>
+      <div class="poem-body hi">
+        <div class="stanza">
+          अगर सब ही की रूह एक साथ जुड़ी है...<br>
+          तो क्यू हमारे सामने अलग अलग जिंदगी पड़ी है?
+        </div>
+      </div>
+    </div>
+    <div class="poem-sig" style="margin-top:28px;">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 65 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 65</div>
+    <div class="poem-title">Bekhudi</div>
+    <div class="poem-subtitle">On Purpose</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Bekhudi se wakif ho,<br>
+        To kiske liye jiyein jaa rahein ho...<br>
+        Jawab asan to hai nahin,<br>
+        Maqsaad janne puri kaynaat khadi hai...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 66 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 66</div>
+    <div class="poem-title">Laksh</div>
+    <div class="poem-subtitle">After Success, What?</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Laksh paane ke liye mehnat karo!<br>
+        Ye to bada asan jawab hai...<br>
+        Asal mein safalta ke baad kya?<br>
+        Ye bada umda sawal hai...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 67 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 67</div>
+    <div class="poem-title">Mar Gye</div>
+    <div class="poem-subtitle">On Death &amp; Blame</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Mar gye usey nhi... reh gye unhe taqleef hai...<br>
+        Zindagi ko kosiye janab... maut to badi nirdosh hai....
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 68 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 68</div>
+    <div class="poem-title">Wakht Nhi Badal Raha</div>
+    <div class="poem-subtitle">Change Everything</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Wakht nhi badal raha to aap badal do...<br>
+        Pehchan nhi badal rahi to naam badal lo...
+      </div>
+      <div class="stanza">
+        Din nahin katt raha to kaam badal do...<br>
+        Raat nahin guzar rahi to jaam badal lo...
+      </div>
+      <div class="stanza">
+        Manzil nahin mil rahi to inaam badal do...<br>
+        Mannatein hi puri na ho to bhagwan badal lo...
+      </div>
+      <div class="stanza">
+        Khudko badalna hai to apni duniya badal do...<br>
+        Duniya ko badalna hai to pehle khudko badal lo...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 69 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 69</div>
+    <div class="poem-title">Laugh Out</div>
+    <div class="poem-subtitle">On Strength</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Laugh out with ppl, but do cry alone...<br>
+        People will admire, the strong will you have shown...<br>
+        Don't pick the small things, the pitty looks people have thrown...<br>
+        Just focus on the positives, surely their minds will be blown...
+      </div>
+      <div class="stanza">
+        Continue with this process, maintain a polite tone...<br>
+        And one day my friend,<br>
+        For a good reason you will be known!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 70 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 70</div>
+    <div class="poem-title">Janam Din</div>
+    <div class="poem-subtitle">The Dream of Living</div>
+    <div class="poem-rule"></div>
+    <div class="bilingual">
+      <div class="poem-body">
+        <div class="stanza">
+          Janam din, tyohar jaisa, aaj kuch sama thha...<br>
+          Dosti ka khumar aj thoda, hadd se aagey badha thha...
+        </div>
+        <div class="stanza">
+          Haseen sabse khwab jiska, jeeneke baad ehsas ho...<br>
+          Nind ayein khoob gehri, kal jab apne pass ho...
+        </div>
+      </div>
+      <div class="bilingual-sep"></div>
+      <div class="poem-body hi">
+        <div class="stanza">
+          हसीन सबसे, ख्वाब जिसका,<br>
+          जीनेके बाद एहसास हो...<br>
+          नींद आएं खूब गेहरी,<br>
+          कल जब अपने पास हो ...!
+        </div>
+      </div>
+    </div>
+    <div class="poem-sig" style="margin-top:28px;">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 71 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 71</div>
+    <div class="poem-title">जवानी की उम्र</div>
+    <div class="poem-subtitle">Jawani Ki Umar &mdash; The Age of Youth</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body hi">
+      <div class="stanza">
+        दर बदर की कश्मकश में,<br>
+        बेतुकी सी आशिकी है ...
+      </div>
+      <div class="stanza">
+        हर हुनर के एक सफर में,<br>
+        एक छुपी सी सादगी है ...
+      </div>
+      <div class="stanza">
+        उम्र का लिहाज करते ही,<br>
+        फैसले की बुनियाद बदलती है ...
+      </div>
+      <div class="stanza">
+        और एहमियत को जाननेसे ही,<br>
+        रिश्ते की फर्याद समहलती है ...!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 72 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 72</div>
+    <div class="poem-title">Apnepan</div>
+    <div class="poem-subtitle">On Belonging</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Apnepan ka paimana mushkil...<br>
+        Pareshan pitaji ki kaifiyat namumkin...
+      </div>
+      <div class="stanza">
+        Na manzil mumkin hai,<br>
+        Na rasta asan...<br>
+        Bawjood nikal pada hai tey karne,<br>
+        Ye khudgarz insan...
+      </div>
+      <div class="stanza">
+        Kuch saal jo dharti par,<br>
+        Hai sirf ek mamuli mehman...<br>
+        Kya pta kyu dhund raha hai,<br>
+        Anjan duniya mein ek khudki pehchan...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 73 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 73</div>
+    <div class="poem-title">Zindagi Adhuri</div>
+    <div class="poem-subtitle">Life Is Incomplete</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Zindagi adhuri hai dost, pyar nhi...<br>
+        Ishq to har ek mukammal hai, magar ye sansar nhi!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 74 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 74</div>
+    <div class="poem-title">Wakht</div>
+    <div class="poem-subtitle">Time</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Insan kayin, bas dikkat yahin hai,<br>
+        Ki wakht kisike pass nahin hai...<br>
+        Sochte sab, khwaishein nayin hai,<br>
+        Bin badal kisi ne barsaat sahi hai...
+      </div>
+      <div class="stanza">
+        Sab bolte jarur, par sirf sunta to koi nahi hai,<br>
+        Wakht jo kisike, pass nahin hai...<br>
+        Ganomein dhun badli jarur,<br>
+        Par kavita ke alfaz wohi hai...<br>
+        Rachanatmak kalakar jarur, jaankar aj shrota nahi hai,<br>
+        Wakht jo kisike, pass nahin hai...
+      </div>
+      <div class="stanza">
+        Rishton mein narmai jarur,<br>
+        Par faasion ki gehrai rahi hai...<br>
+        Ehmiyaat ka sheesha saamne rakhe bina,<br>
+        Fursat ki gunjaish nahi hai...
+      </div>
+      <div class="stanza">
+        Sabko saman hai, Khali makan hai,<br>
+        Apne bhi naseeb mein kambakht wahi aasman hai...<br>
+        Mitti ki bas pehchan nahi hai, Hogi bhi to kaise bhala,<br>
+        Wakht jo hamare pass nahi hai...
+      </div>
+      <div class="stanza">
+        Agey badhna ka jazba to hai, par pichhe dekhne ki himmat kaha,<br>
+        Kaamyaabi ki kashmakash mein, krutagyata ki parchhai nahi hai...<br>
+        Kuchh to badal denge jarur, apni takdeer khud likhenge,<br>
+        Abhi nahin par baadmein kabhi, kyunki...<br>
+        Wakht kisike pass nahin hai!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 75 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 75</div>
+    <div class="poem-title">Har Hrutu Mein Alag Sawera</div>
+    <div class="poem-subtitle">Every Season, a New Dawn</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Har hrutu mein alag sawera,<br>
+        Har barish mein alag guzara.<br>
+        Jis disha bhi chalein jahan mein,<br>
+        Har ankhon mein alag nazara!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 76 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 76</div>
+    <div class="poem-title">Dil Ki Laparwahi</div>
+    <div class="poem-subtitle">The Heart's Carelessness</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Dil ki laparwahi aisi...<br>
+        Ki haal puchhna hi bhul gaye,<br>
+        Unki ek tanhayee aisi,<br>
+        Ki sath chalna hi bhul gaye!
+      </div>
+      <div class="stanza">
+        Phir kiski majal chalein,<br>
+        Inn halaton ke saamne...<br>
+        Wakht ke imtehan mein dekho,<br>
+        Hum guzrna hi bhul gaye!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 77 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 77</div>
+    <div class="poem-title">Aasman Mein Udna Ho Toh</div>
+    <div class="poem-subtitle">If You Wish to Fly</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Aasman mein udna ho toh,<br>
+        Kyu dharti se nazar milayein...<br>
+        Har disha mein mudna ho toh,<br>
+        Kaise har ek ka wachan nibhayein...
+      </div>
+      <div class="stanza">
+        Chand sametne ki ichha jab mann mein,<br>
+        Kyu sitaronka jashn manayein...<br>
+        Khushhal Zindagi ko badi banane,<br>
+        Kyu har koi har roj jutt jayein...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 78 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 78</div>
+    <div class="poem-title">Badalonke Surat Mein</div>
+    <div class="poem-subtitle">In the Shape of Clouds</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Badalonke surat mein, ye chanda ki kahani hai...<br>
+        Ek deewane musafir ki, ye ankahi jubani hai...<br>
+        Chal pada hai woh uss, manzil ko talashte hue,<br>
+        Jis mukaam ki na usko, na khuda ko koi nishani hai...
+      </div>
+      <div class="stanza">
+        Konsa raaz hai phir aisa, jo usko takad deta ho,<br>
+        Jara khudse puchhke dekho janab,<br>
+        Ye aapki aur meri nahi,<br>
+        Har ek ki kahani hai!
+      </div>
+      <div class="stanza">
+        Iss safar mein hume bhaagna hai, hume hi gir ke sawarna hai...<br>
+        Kyunki aur kisi ki ho na ho,<br>
+        Yahan chalti bas apni manmani hai!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 79 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 79</div>
+    <div class="poem-title">Mitti Banne Taiyyar</div>
+    <div class="poem-subtitle">Ready to Become Earth</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Mitti banne taiyyar baithe hai,<br>
+        Bas baarish banne ka wada karo...<br>
+        Ittar chhupaye mehmaan baithe hai,<br>
+        Ek guzarish banne ka wada karo....
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 80 — NEW (Marathi) -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 80</div>
+    <div class="poem-title">Dilkhulas Hasya Agdi</div>
+    <div class="poem-subtitle">Wholehearted Joy &mdash; (Marathi)</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body mr">
+      <div class="stanza">
+        Dilkhulas hasya agdi, manmurad lutawe...<br>
+        Lagech te anubhavnaryas,<br>
+        Akash thengne watawe!
+      </div>
+      <div class="stanza">
+        Itka sopa chhand, ya samajane jopasawa...<br>
+        Nakshatranche dene lagun,<br>
+        Manuski che shikhar gathave!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 81 — NEW (prose) -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 81</div>
+    <div class="poem-title">We Have the Least Control</div>
+    <div class="poem-subtitle">A Prose Reflection</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        We have the least control over our lives and the world around us before our birth and after our death. That part is obvious.
+      </div>
+      <div class="stanza">
+        What's not so obvious is that even within life, this pattern repeats. When we are born, we have almost no control. As we grow up, our control over our choices and surroundings gradually increases, reaching a kind of peak somewhere in mid-life. Then, as we age, that control slowly fades again.
+      </div>
+      <div class="stanza">
+        It's like a curve that rises from helplessness, peaks in self-determination, and then gently returns to surrender.
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 82 — NEW (Marathi) -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 82</div>
+    <div class="poem-title">Surya Kade Pahun</div>
+    <div class="poem-subtitle">Looking at the Sun &mdash; (Marathi)</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body mr">
+      <div class="stanza">
+        Surya kade pahun nawal watte,<br>
+        Chandra peksha itka motha kasa?<br>
+        Chandra kade pahun nawal watte,<br>
+        Samudrat bhar toh ghalto kasa?
+      </div>
+      <div class="stanza">
+        Samudra kade pahun nawal watte,<br>
+        Rastyatil pratyek nadi bharto kasa?<br>
+        Nadikade pahun nawal watte,<br>
+        Osad srushtit jeev ante kashi?
+      </div>
+      <div class="stanza">
+        Yatil kahi jeevankade pahun nawal watte,<br>
+        Ya sarvanchi den wisarto kasa?
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 83 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 83</div>
+    <div class="poem-title">Kab Kya Sunte Ho</div>
+    <div class="poem-subtitle">When You Listen Matters</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Kab kya sunte ho,<br>
+        ye maayne rakhta hai...<br>
+        Kab kya bolte ho,<br>
+        ye maayne rakhta hai...
+      </div>
+      <div class="stanza">
+        Achha bura to kuch nahi,<br>
+        sab uchit pal ka khel hai sarkar,<br>
+        Ab ye yaad rakhte ho ya nahi,<br>
+        Bas ye maayne rakhta hai!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 84 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 84</div>
+    <div class="poem-title">Nazara Wohi</div>
+    <div class="poem-subtitle">Same View, Different Worlds</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Nazara wohi par kaaynat alag thhi,<br>
+        Hal donoke pass thha, bas musibatein alag thhi!<br>
+        Har manzil kaamyabi jarur likhi thhi,<br>
+        Bas inki apni apni, koshish hi alag thhi!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 85 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 85</div>
+    <div class="poem-title">Khud Ek Khayal</div>
+    <div class="poem-subtitle">How to Speak When You Are a Thought</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Khud ek khayal ho jo kisika,<br>
+        Usko koi kaise aazmayein...<br>
+        Khud jo koi kaat raha ho zindagi,<br>
+        Wo kisiko sajah kaise sunayein...
+      </div>
+      <div class="stanza">
+        Har koshish ki rukawton mein,<br>
+        Jinhone hume jeena sikhaya...<br>
+        Unn kamyab logoki mehfil mein,<br>
+        Hum apna arz kaise farmayein..!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 86 — NEW (prose) -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 86</div>
+    <div class="poem-title">Time</div>
+    <div class="poem-subtitle">A Prose Reflection</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        The amount we are happy or sad about something, is all decided by time!
+      </div>
+      <div class="stanza">
+        What a fucking insane power for a stupid construction that just knows one way to go, literally doesn't even know how to stop.
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 87 — NEW (combined p133+138) -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 87</div>
+    <div class="poem-title">Kaise?</div>
+    <div class="poem-subtitle">How?</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Suraj ugte hi kaam par jate,<br>
+        Har manzar se dil behlate,<br>
+        Laksh se behtar rastah na lagein,<br>
+        Safalta haasil hogi kaise?
+      </div>
+      <div class="stanza">
+        Pehli nazar mein jaanna chahte,<br>
+        Ek mulakat mein sab batlate,<br>
+        Samjh se pehle aagey badh gaye janab,<br>
+        Parakh aakhir hogi kaise?
+      </div>
+      <div class="stanza">
+        Beetein din ki takleef yaad kar,<br>
+        Mushkil kal ka anuman lagate,<br>
+        Har chinta dhyan rakhkar<br>
+        hum jo Sone chale jate,<br>
+        Nind puri hogi kaise?
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 88 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 88</div>
+    <div class="poem-title">Samjhne Ki Khwaish Nahin</div>
+    <div class="poem-subtitle">I Don't Want to Be Understood &mdash; I Want Restraint</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Samjhne ki khwaish nahin,<br>
+        Bas samjhane ka sanyam chahta hu...<br>
+        Jhoot kehne ki saajish nahin,<br>
+        Bas sach likhne ki jurrat chahta hu...
+      </div>
+      <div class="stanza">
+        Riwazonka ant nahin,<br>
+        Bas kuch mein badlav chahta hu...<br>
+        Pathhar mein bhagwaan nahin,<br>
+        Bas dil mein insaan chahta hu...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 89 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 89</div>
+    <div class="poem-title">Akhir Chahte Kya Ho?</div>
+    <div class="poem-subtitle">What Do You Actually Want?</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Akhir chahte kya ho?<br>
+        Samhalneki adat nahin,<br>
+        Bas fisalneki ijajat chahta hu...<br>
+        Kisi tarah ki ibadat nahin,<br>
+        Bas do paal ki inayat chahta hu...
+      </div>
+      <div class="stanza">
+        Ek duje par ehsaan nahin,<br>
+        Bas dosti ka anumaan chahta hu...<br>
+        Mohlle mein zikar nahin,<br>
+        Bas khud ki pehchan chahta hu...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 90 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 90</div>
+    <div class="poem-title">Panchhiyon Ki Tarah</div>
+    <div class="poem-subtitle">Like Birds</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Panchhiyon ki tarah koi,<br>
+        Yun hi ghar badalta hoga...<br>
+        Nadiyon sa bhavuk koi aur,<br>
+        Behna jarur azmata hoga...
+      </div>
+      <div class="stanza">
+        Uss bahav mein mausam unhe,<br>
+        Badalna sikhata hoga,<br>
+        Kahin ant mein sagar unhe,<br>
+        Theherna samjhata hoga!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 91 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 91</div>
+    <div class="poem-title">Koi Hawa Ke Sath Chalkar</div>
+    <div class="poem-subtitle">Walk with the Wind</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Koi hawa ke sath chalkar,<br>
+        Badalon se jhagad lega!<br>
+        Koi angdai sath kehkar,<br>
+        Bas dharti se lipat lega!
+      </div>
+      <div class="stanza">
+        Patte bikharna sikha denge,<br>
+        Wakht guzarna sikha dega!<br>
+        Ek bar aspass dekh loge agar,<br>
+        Zindagi samhalna sikha degi!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 92 — NEW (combined p143+144) -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 92</div>
+    <div class="poem-title">Kab Aur Kaha</div>
+    <div class="poem-subtitle">Right Time, Right Place</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Kab aur kaha, ye khel bas isi ka hai...<br>
+        Sahi wakht aur sahi jagah,<br>
+        ye duniya bas uss hi ki hai.<br>
+        Barsaat agar dhoop se mil jaye,<br>
+        Toh saat rang jarur khilenge.<br>
+        Chand agar dharti se judd jaye,<br>
+        Toh khud mahasagar bhi hilenge.
+      </div>
+      <div class="stanza">
+        Mitti suraj ka milap jo,<br>
+        Toh jungle pura khil uthta hai.<br>
+        Nadi parvaat jutt jaye,<br>
+        Toh srushti ka sangam dikhta hai.
+      </div>
+      <div class="stanza">
+        Wakht aur apni pehchan rakho bas,<br>
+        Toh kahinse jarur madat milegi...<br>
+        Dhoop mitti chand taron jaisi phir,<br>
+        Apki bhi dastaan banegi!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 93 — NEW (prose) -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 93</div>
+    <div class="poem-title">Purpose</div>
+    <div class="poem-subtitle">A Prose Reflection</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Is it purpose that turns discomfort into meaningful sacrifice?
+      </div>
+      <div class="stanza">
+        We often sacrifice for our loved ones, our country, or our career. The process can be uncomfortable, but it still feels fulfilling because it serves a higher purpose. When that purpose becomes unclear or disappears, the same discomfort no longer feels like sacrifice. It feels like regret.
+      </div>
+      <div class="stanza">
+        So perhaps the real task is to hold on to our purpose before the discomfort takes over.
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+</div><!-- end page Part IV -->
+
+<!-- ===== PART V: SAMAJ ===== -->
+<div class="chapter-header">
+  <div class="ch-part">Part Five</div>
+  <div class="ch-title-en">Samaj</div>
+  <div class="ch-title-hi">समाज</div>
+  <div class="ch-rule"></div>
+  <div class="ch-desc">Society &amp; Nation<br><em>what the world owes us, and what we owe it back</em></div>
+</div>
+<div class="page">
+
+  <!-- Poem 94 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 94</div>
+    <div class="poem-title">Naam Bada Karna</div>
+    <div class="poem-subtitle">Make a Name</div>
+    <div class="poem-rule"></div>
+    <div class="bilingual">
+      <div class="poem-body">
+        <div class="stanza">
+          Naam bada karna pdega,<br>
+          Surat se pehchan btayi nhi jaati...<br>
+          Durr unhe karna pdega,<br>
+          Kaamyabi jinse dekhi nhi jaati...
+        </div>
+        <div class="stanza">
+          Insaniyat ko kareeb rkhna pdega,<br>
+          Janazonse dosti seekhi nhi jaati...<br>
+          Khayal sabka karna pdega,<br>
+          Khushhali desh mein aisehi nhi aati...
+        </div>
+        <div class="stanza">
+          Wafadar watan se rehna pdega,<br>
+          Jaan jawanoki aisehi nhi jaati...<br>
+          Thoda kaam khud hi ko krna pdega,<br>
+          Sarkar har bar apni nhi aati!
+        </div>
+      </div>
+      <div class="bilingual-sep"></div>
+      <div class="poem-body hi">
+        <div class="stanza">
+          नाम बड़ा करना पड़ेगा,<br>
+          सूरत से पहचान बताई नहीं जाती...<br>
+          दूर उन्हे करना पड़ेगा,<br>
+          कामियबी जिनसे देखी नहीं जाती...
+        </div>
+        <div class="stanza">
+          इंसानियत को करीब रखना पड़ेगा,<br>
+          जनाजोसे दोस्ती किनी नहीं जाती...<br>
+          खयाल सबका करना पड़ेगा,<br>
+          खुशहाली देश में ऐसेही नहीं आती...
+        </div>
+        <div class="stanza">
+          वफादार वतन से रहना पड़ेगा,<br>
+          जान जवानोकी ऐसीही नहीं जाती...<br>
+          थोड़ा काम हम ही को करना पड़ेगा दोस्त,<br>
+          सरकार हर बार अपनी नहीं आती...
+        </div>
+      </div>
+    </div>
+    <div class="poem-sig" style="margin-top:28px;">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 95 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 95</div>
+    <div class="poem-title">Nam Jaan Kar</div>
+    <div class="poem-subtitle">What Will Knowing My Name Achieve?</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Nam jaan kar kya kroge?<br>
+        Hazil ho kuch to bol deta hu...<br>
+        Mazhab se kitna kya smjhoge?<br>
+        Sare bhagwan to pooj deta hu...
+      </div>
+      <div class="stanza">
+        Janke kuch achha hua to hai nhi,<br>
+        Yakin na ho to bol deta hu...<br>
+        Sachhai janne ki takad ho to,<br>
+        Itihas ke panne khol deta hu...
+      </div>
+      <div class="stanza">
+        Chand - suraj se nhi apni mehnat se achhe din jaan leta hu,<br>
+        Khuda jaankar pehchan nhi krta, apna kehkar dost maan leta hu...
+      </div>
+      <div class="stanza">
+        Koshish karo sath chalneki, har manzil ek inam deta hu...<br>
+        Naam jaankar kya kroge? Hasil ho kuch, to bol deta hu...!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 96 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 96</div>
+    <div class="poem-title">Badonka Bachpna</div>
+    <div class="poem-subtitle">Adults Are Becoming Children</div>
+    <div class="poem-rule"></div>
+    <div class="bilingual">
+      <div class="poem-body">
+        <div class="stanza">
+          Badonka bachpna badh raha hai,<br>
+          Aur bchhon ki masumiyat ghat rahi hai...<br>
+          Ajkal ki iss behat wyast duniya mein,<br>
+          Chain ki nind kahi dum ghut rahi hai...
+        </div>
+      </div>
+      <div class="bilingual-sep"></div>
+      <div class="poem-body hi">
+        <div class="stanza">
+          बडोंका बचपना बढ़ रहा है,<br>
+          और बच्चोंकी मासूमियत घट रही है ...<br>
+          आजकल की इस बेहत व्यस्त दुनिया में शायद,<br>
+          चैन की नींद कही दम घुट रही है ...!
+        </div>
+      </div>
+    </div>
+    <div class="poem-sig" style="margin-top:28px;">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 97 -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 97</div>
+    <div class="poem-title">Wyaparatil Bhav</div>
+    <div class="poem-subtitle">Values Lost in Trade</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Wyaparatil bhav wadhtoy ani samajatil bhav kmi hotoy...
+      </div>
+      <div class="stanza">
+        Roj roj ka tandav dekhe, jwala ek khayal hai...<br>
+        Rang saman aur khoon laal phir bhi...<br>
+        Batkar desh halaal hai...
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 98 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 98</div>
+    <div class="poem-title">Kahani Toh Adhuri</div>
+    <div class="poem-subtitle">At Least Finish the Poem</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Kahani toh adhuri hi hai aapki,<br>
+        Kamaskam shayari toh puri kar lo janab!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 99 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 99</div>
+    <div class="poem-title">Meri Apni Kahani</div>
+    <div class="poem-subtitle">My Own Story</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Meri apni kahani mein abtak,<br>
+        Bakiyonke hi kisse jyada hai...<br>
+        Ehsaano ki jaaydaad mein abhi bhi,<br>
+        Ma baap ke hi hisse jyada hai!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+</div><!-- end page Part V -->
+
+<!-- ===== PART VI: ENGLISH VERSES ===== -->
+<div class="chapter-header">
+  <div class="ch-part">Part Six</div>
+  <div class="ch-title-en">English</div>
+  <div class="ch-title-hi">अंग्रेजी में</div>
+  <div class="ch-rule"></div>
+  <div class="ch-desc">English Verses<br><em>thoughts that chose their own language</em></div>
+</div>
+<div class="page">
+
+  <!-- Poem 100 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 100</div>
+    <div class="poem-title">The Language You Speak</div>
+    <div class="poem-subtitle">An Inquiry into Identity</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        The language you speak? I don't understand!<br>
+        The voices you hear? Make it more clear!<br>
+        It's just the gene bruh? But I'm wearing shorts!<br>
+        How true one is? Oh I lie a lot!
+      </div>
+      <div class="stanza">
+        Well then the interaction? Ah that might be it...<br>
+        Oh the present emotion? That actually sounds lit...<br>
+        Hey, the current moment? It's passing so quickly...<br>
+        You're just an abstraction! That explains it pretty neatly!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 101 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 101</div>
+    <div class="poem-title">What Defines You</div>
+    <div class="poem-subtitle">An Unanswered Question</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        What defines "you" exactly?<br>
+        Is it your body? But it ages everyday...<br>
+        Is it your brain? But it develops everyday....<br>
+        Is it your mood? Oh varies by minutes...<br>
+        Is it the heartbeat? Oh rises in seconds...
+      </div>
+      <div class="stanza">
+        People around you? How's that possible...<br>
+        Place where you are? Come on, impossible...<br>
+        What about your dreams? Those aren't real though...<br>
+        And your past? Well that's dead no!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 102 — NEW (combined p139+140) -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 102</div>
+    <div class="poem-title">So Easy to Forget</div>
+    <div class="poem-subtitle">The Paradox of Being Human</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        So easy to forget, but difficult to remember.<br>
+        So easy to let go, but difficult to hold on.<br>
+        Why are humans like that?<br>
+        It's so easy to ask,<br>
+        But difficult to answer!
+      </div>
+      <div class="stanza">
+        So easy to speak, but difficult to listen.<br>
+        So easy to interpret, but difficult to understand.<br>
+        So easy to enact, but difficult to behave.<br>
+        So easy to follow, but difficult to lead.<br>
+        So easy to make a mistake, but difficult to forgive.<br>
+        So easy to justify, but difficult to accept.
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 103 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 103</div>
+    <div class="poem-title">Keep Smiling on the Horizon</div>
+    <div class="poem-subtitle">An English Verse</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        Keep smiling on the horizon,<br>
+        Swim the ocean and meet me...<br>
+        Next time we meet alone,<br>
+        Don't forget to greet me!
+      </div>
+      <div class="stanza">
+        Stay there in the thoughts,<br>
+        Here by the side...<br>
+        We are here for very long,<br>
+        Let's enjoy the ride!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+  <!-- Poem 104 — NEW -->
+  <div class="poem-block">
+    <div class="poem-num">Poem 104</div>
+    <div class="poem-title">There Are Just a Few Days</div>
+    <div class="poem-subtitle">An English Verse</div>
+    <div class="poem-rule"></div>
+    <div class="poem-body">
+      <div class="stanza">
+        There are just a few days,<br>
+        When your night is mine...<br>
+        The day rises for both,<br>
+        At the same time!
+      </div>
+      <div class="stanza">
+        I know life's in other days too,<br>
+        But we miss those few...<br>
+        When the moments are short,<br>
+        And many hugs are due!
+      </div>
+      <div class="stanza">
+        Anyway come join me,<br>
+        In the promise of little things...<br>
+        Those that we aspire,<br>
+        And those which bring joy within!
+      </div>
+    </div>
+    <div class="poem-sig">&mdash; ssp</div>
+  </div>
+
+</div><!-- end page Part VI -->
+
+<!-- ===== SUKHANVAD ===== -->
+<div class="chapter-header">
+  <div class="ch-part">Closing</div>
+  <div class="ch-title-en">Sukhanvad</div>
+  <div class="ch-title-hi">सुखनवाद</div>
+  <div class="ch-rule"></div>
+  <div class="ch-desc">Aphorisms &amp; One-liners<br><em>the small thoughts that carry the most weight</em></div>
+</div>
+<div class="page-half">
+  <div class="aph-title">Words That Stayed</div>
+  <div class="aph-item">my words will be printed on hearts not stones...</div>
+  <div class="aph-item">Key to a long conversation is the right person.</div>
+  <div class="aph-item">You were talking to your world, I was talking to mine!</div>
+  <div class="aph-item">Her smile was the same, maybe my eyes started pursuing it differently...<br>Her presence was the same, maybe my heart started beating differently...</div>
+  <div class="aph-item">99% of who you are is invisible or untouchable &mdash; dark matter/energy resembles.</div>
+  <div class="aph-item">A poem is a fantasy of a paragraph!</div>
+  <div class="aph-item">Some just collect stones... not all perfect crystals. Some amorphous, some imperfect shapes. But they love to collect. They value their collection... Others, they collect people.</div>
+  <div class="aph-item">Night is vulnerable... No matter how bright a day passes by, it's always vulnerable.</div>
+  <div class="aph-item">Give me an empty canvas and I will be able to paint a picture myself! But it's not easy to find a completely empty canvas these days... coz everyone comes with a baggage.</div>
+  <div class="aph-item">U cant break a man who's already broken... and can't steal a heart which is already taken!</div>
+  <div class="aph-item">Let your laughter be cheap... not your tears...</div>
+  <div class="aph-item">Keep your houses clean, then you won't worry about the guests...!</div>
+  <div class="aph-item">Don't lose the child in you... even if one isn't pregnant!</div>
+  <div class="aph-item">You can't be in someone's shoes... but you can help them try new ones!</div>
+  <div class="aph-item">Someone's experiences can be shared... but can't be experienced!</div>
+  <div class="aph-item">Ur life doesn't need to be miserable for you to be a philosopher!</div>
+  <div class="aph-item">Most important ingredient of a delicious dish is the hunger.</div>
+  <div class="aph-item">Best thing about being in a good mood is not knowing exactly why you are in that mood...</div>
+  <div class="aph-item">Our own experience is the only unique thing we all have in common!</div>
+  <div class="aph-item">We often tell many things which don't matter much only to those who matter the most.</div>
+  <div class="aph-item">Work after relaxation is as necessary as relaxation after work.</div>
+  <div class="aph-item">To be a scientist is to be naive. Truth doesn't care about us. We should care about it.</div>
+  <div class="aph-item">Since childhood, we were always keen on going out.<br>Now that it's adulthood, we are always looking forward to coming back home.</div>
+  <div class="aph-item">Applause is optional.... Response is necessary!</div>
+  <div class="aph-item">If words would have been sufficient to describe everything... what's the use of those eyes!</div>
+  <div class="aph-item">Talk until the silence isn't awkward anymore!</div>
+  <div class="aph-item">Find the purpose &mdash; the means will follow.</div>
+  <div class="aph-item">We are on same page, but with different expressions.</div>
+  <div class="aph-item">Lost opportunities are gained lessons!</div>
+  <div class="aph-item">Go with the flow and one ends up in the sink!</div>
+  <div class="aph-item">When you know that journey is life... make someone a part of it... life will be beautiful.</div>
+  <div class="aph-item">Nothing will be left except satisfaction.</div>
+  <div class="aph-item">Die with fame than live with shame.</div>
+  <div class="orn" style="margin-top:40px;">&#10022; &nbsp;&nbsp;&nbsp; &#10022; &nbsp;&nbsp;&nbsp; &#10022;</div>
+  <div style="text-align:center; margin-top:30px; font-style:italic; color:var(--muted); font-size:15px;">
+    Mujhe to kitaab likhni h...<br>Bs pehle kahani to jee lu...<br>Phir uthaunga kalam...
+  </div>
+</div>
+
+<!-- ===== BACK COVER ===== -->
+<div class="back-cover">
+  <div class="back-border"></div>
+  <div class="back-quote">
+    "सियाही लेके निकला हूं...<br>
+    राह पर कागज मिला है...<br>
+    जिंदगी वही है बस...<br>
+    ये पन्ना नया है..."
+  </div>
+  <div class="back-sig">&mdash; ssp</div>
+</div>
+
+</div><!-- end .book -->
+</body>
+</html>
