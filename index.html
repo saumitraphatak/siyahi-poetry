@@ -64,6 +64,7 @@ body {
   margin: 0 auto;
   background: var(--paper);
   box-shadow: 0 0 60px rgba(0,0,0,0.5);
+  counter-reset: page-num;
 }
 .cover {
   min-height: 100vh;
@@ -92,8 +93,20 @@ body {
 .cover-subtitle { font-family: 'EB Garamond', serif; font-style: italic; font-size: 19px; color: #a87848; letter-spacing: 1px; margin-bottom: 12px; line-height: 1.5; }
 .cover-author { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 400; color: #e8c890; letter-spacing: 5px; margin-top: 10px; }
 .cover-year { position: absolute; bottom: 50px; font-size: 13px; letter-spacing: 4px; color: rgba(196,137,74,0.4); text-transform: uppercase; }
-.page { padding: 90px 100px; border-bottom: 1px solid #ede0c8; }
-.page-half { padding: 60px 100px; border-bottom: 1px solid #ede0c8; }
+.page { padding: 90px 100px 110px; border-bottom: 1px solid #ede0c8; position: relative; counter-increment: page-num; }
+.page-half { padding: 60px 100px 90px; border-bottom: 1px solid #ede0c8; position: relative; counter-increment: page-num; }
+.page::after, .page-half::after {
+  content: counter(page-num);
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'EB Garamond', serif;
+  font-size: 13px;
+  color: var(--accent-light);
+  letter-spacing: 3px;
+  opacity: 0.65;
+}
 .center-page { padding: 120px 100px; text-align: center; border-bottom: 1px solid #ede0c8; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 60vh; }
 .epigraph-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 24px; color: var(--accent); line-height: 1.6; max-width: 480px; margin-bottom: 25px; }
 .epigraph-attr { font-size: 14px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; }
@@ -107,7 +120,19 @@ body {
 .toc-num { color: var(--accent-light); font-size: 12px; min-width: 30px; letter-spacing: 1px; }
 .toc-name { flex: 1; }
 .toc-dots { flex: 1; border-bottom: 1px dotted #d4a574; margin: 0 12px; position: relative; bottom: 3px; max-width: 120px; }
-.chapter-header { padding: 110px 80px 90px; text-align: center; background: linear-gradient(180deg, #f0e6d0 0%, var(--paper) 100%); border-bottom: 1px solid #ede0c8; position: relative; }
+.chapter-header { padding: 110px 80px 90px; text-align: center; background: linear-gradient(180deg, #f0e6d0 0%, var(--paper) 100%); border-bottom: 1px solid #ede0c8; position: relative; counter-increment: page-num; }
+.chapter-header::after {
+  content: counter(page-num);
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'EB Garamond', serif;
+  font-size: 13px;
+  color: var(--accent-light);
+  letter-spacing: 3px;
+  opacity: 0.65;
+}
 .ch-part { font-size: 12px; letter-spacing: 6px; color: var(--muted); text-transform: uppercase; margin-bottom: 22px; }
 .ch-title-en { font-family: 'Playfair Display', serif; font-size: 60px; color: var(--accent); line-height: 1; margin-bottom: 6px; }
 .ch-title-hi { font-family: 'Noto Serif Devanagari', serif; font-size: 26px; color: var(--muted); margin-bottom: 22px; }
@@ -186,7 +211,7 @@ body {
   <div class="note-title">A Note</div>
   <div class="note-text">
     <p>Mujhe to kitaab likhni h... Bs pehle kahani to jee lu... Phir uthaunga kalam...</p>
-    <p>Ek hi khwab hai ki kbhi khwaishein khatam na ho... Adhura khwab to aur bhi haseen hota hai, janeman.</p>
+    <p>Ek hi khwab hai ki kbhi khwaishein khatam na ho...</p>
     <p style="font-style:italic; color:var(--muted);">सियाही लेके निकला हूं... राह पर कागज मिला है...<br>
     जिंदगी वही है बस... ये पन्ना नया है...</p>
     <p style="text-align:right; margin-top:20px; color:var(--muted); font-style:italic;">&mdash; Saumitra</p>
@@ -346,7 +371,7 @@ body {
     <div class="poem-rule"></div>
     <div class="poem-body hi">
       <div class="stanza">
-        वक्त स�� अनुमान लगाओ,<br>
+        वक्त से अनुमान लगाओ,<br>
         तो अभी भी थोड़ा कच्चा है...<br>
         सफर वही है बस, राही नया है...<br>
         खुमार सा है कुछ, अच्छा है ...!
@@ -377,7 +402,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Joy in newness — a new companion, a new chapter. The same journey, a new traveller. The same life, but a fresh page.</div>
+    <div class="poem-meaning">Joy in newness — a new companion, a new chapter. The same journey, a new traveller. The same life, but a fresh page.</div>
   </div>
 
   <!-- Poem 02 -->
@@ -407,7 +432,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A star appeared in darkness and filled life with joy, like love found unexpectedly. The flower stopped blooming, went unnoticed — but the memory of that encounter became a deep, intoxicating love.</div>
+    <div class="poem-meaning">A star appeared in darkness and filled life with joy, like love found unexpectedly. The flower stopped blooming, went unnoticed — but the memory of that encounter became a deep, intoxicating love.</div>
   </div>
 
   <!-- Poem 03 -->
@@ -428,7 +453,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A longing for the beloved's voice and her warmth — even her complaints. A simple prayer: may you find every happiness, because one smile from you lights up the entire world.</div>
+    <div class="poem-meaning">A longing for the beloved's voice and her warmth — even her complaints. A simple prayer: may you find every happiness, because one smile from you lights up the entire world.</div>
   </div>
 
   <!-- Poem 04 -->
@@ -472,7 +497,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>An overflowing tribute to someone deeply loved — her beauty, her understanding, her eyes and laughter feel like life itself. The poet admits: no words are ever enough for her.</div>
+    <div class="poem-meaning">An overflowing tribute to someone deeply loved — her beauty, her understanding, her eyes and laughter feel like life itself. The poet admits: no words are ever enough for her.</div>
   </div>
 
   <!-- Poem 05 -->
@@ -492,7 +517,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Clouds don't measure height, and the earth doesn't measure depth. When love has truly dissolved inside the heart, no flaw or bitterness can find entry.</div>
+    <div class="poem-meaning">Clouds don't measure height, and the earth doesn't measure depth. When love has truly dissolved inside the heart, no flaw or bitterness can find entry.</div>
   </div>
 
   <!-- Poem 06 -->
@@ -512,7 +537,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A shadow walks beside you; loneliness brings rain; love is a form of prayer. The beloved is the shadow, the depth, and life itself — compressed into four quiet lines.</div>
+    <div class="poem-meaning">A shadow walks beside you; loneliness brings rain; love is a form of prayer. The beloved is the shadow, the depth, and life itself — compressed into four quiet lines.</div>
   </div>
 
   <!-- Poem 07 -->
@@ -535,7 +560,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Despite distance and misunderstanding, love holds firm. The poet asks for patience, promising that the warmth between them will find its way back.</div>
+    <div class="poem-meaning">Despite distance and misunderstanding, love holds firm. The poet asks for patience, promising that the warmth between them will find its way back.</div>
   </div>
 
   <!-- Poem 08 -->
@@ -553,7 +578,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Real love cannot be controlled — a God who stays locked in a mosque is no real God. The journey is only life when the beloved meets you on the road.</div>
+    <div class="poem-meaning">Real love cannot be controlled — a God who stays locked in a mosque is no real God. The journey is only life when the beloved meets you on the road.</div>
   </div>
 
   <!-- Poem 09 -->
@@ -570,7 +595,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Why does love consume every soul? Because whether it's fate or luck, everything leads back to the beloved. Love and devotion are one — accepted by God.</div>
+    <div class="poem-meaning">Why does love consume every soul? Because whether it's fate or luck, everything leads back to the beloved. Love and devotion are one — accepted by God.</div>
   </div>
 
   <!-- Poem 10 -->
@@ -588,7 +613,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Meeting someone doesn't mean you'll ask. Friendship doesn't mean you'll remember. Love doesn't mean fearlessness. And fear doesn't mean silence. Life never follows simple rules.</div>
+    <div class="poem-meaning">Meeting someone doesn't mean you'll ask. Friendship doesn't mean you'll remember. Love doesn't mean fearlessness. And fear doesn't mean silence. Life never follows simple rules.</div>
   </div>
 
   <!-- Poem 11 -->
@@ -606,7 +631,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A tender plea — take care of yourself, see how much I love you, stay a little longer, and with your eyes, write your name on my heart.</div>
+    <div class="poem-meaning">A tender plea — take care of yourself, see how much I love you, stay a little longer, and with your eyes, write your name on my heart.</div>
   </div>
 
   <!-- Poem 12 -->
@@ -624,7 +649,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A gentle goodbye to a beloved — lose yourself in dreams, be happy wherever you go, but don't forget to come back.</div>
+    <div class="poem-meaning">A gentle goodbye to a beloved — lose yourself in dreams, be happy wherever you go, but don't forget to come back.</div>
   </div>
 
   <!-- Poem 13 -->
@@ -643,7 +668,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A whole day full of thoughts and people — yet only one person's memory refuses to leave the heart.</div>
+    <div class="poem-meaning">A whole day full of thoughts and people — yet only one person's memory refuses to leave the heart.</div>
   </div>
 
   <!-- Poem 14 -->
@@ -661,7 +686,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Time has grown proud, widening the gap between seeing and meeting. Love cannot be felt at this close distance anymore — a quiet realization of growing apart.</div>
+    <div class="poem-meaning">Time has grown proud, widening the gap between seeing and meeting. Love cannot be felt at this close distance anymore — a quiet realization of growing apart.</div>
   </div>
 
   <!-- Poem 15 -->
@@ -683,7 +708,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A prayer for the beloved's happiness — may she always smile, never know sorrow, and always have beside her the one who makes her life bloom.</div>
+    <div class="poem-meaning">A prayer for the beloved's happiness — may she always smile, never know sorrow, and always have beside her the one who makes her life bloom.</div>
   </div>
 
   <!-- Poem 16 -->
@@ -701,7 +726,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Come when the heart wanders, smile when it races, appear when the eyes close — and in the next life, simply be mine.</div>
+    <div class="poem-meaning">Come when the heart wanders, smile when it races, appear when the eyes close — and in the next life, simply be mine.</div>
   </div>
 
   <!-- Poem 17 -->
@@ -717,7 +742,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>All my joys exist because of you — half from teasing you, and the other half from making up with you.</div>
+    <div class="poem-meaning">All my joys exist because of you — half from teasing you, and the other half from making up with you.</div>
   </div>
 
   <!-- Poem 18 -->
@@ -741,7 +766,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Neither was at fault — one played the friend, the other hid the love. She slept on his chest, completely unaware; he even stilled his own heartbeat so her sleep would not break.</div>
+    <div class="poem-meaning">Neither was at fault — one played the friend, the other hid the love. She slept on his chest, completely unaware; he even stilled his own heartbeat so her sleep would not break.</div>
   </div>
 
   <!-- Poem 19 -->
@@ -757,7 +782,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Nights begin with great energy and heat, but they always, without fail, end in pain.</div>
+    <div class="poem-meaning">Nights begin with great energy and heat, but they always, without fail, end in pain.</div>
   </div>
 
   <!-- Poem 20 -->
@@ -780,7 +805,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Not a single moment passes without remembering that afternoon — when she was so beautiful he couldn't look away, and she pretended to sulk just so he'd sing her back.</div>
+    <div class="poem-meaning">Not a single moment passes without remembering that afternoon — when she was so beautiful he couldn't look away, and she pretended to sulk just so he'd sing her back.</div>
   </div>
 
   <!-- Poem 21 -->
@@ -802,7 +827,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Stuck in moonlight with you was one of the things done right. Memories fade, people change you — so choose your company carefully. Life is not a simple game.</div>
+    <div class="poem-meaning">Stuck in moonlight with you was one of the things done right. Memories fade, people change you — so choose your company carefully. Life is not a simple game.</div>
   </div>
 
   <!-- Poem 22 -->
@@ -820,7 +845,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Don't get so used to just listening to me that I forget to tell you — and my love ends up staying locked inside, never spoken.</div>
+    <div class="poem-meaning">Don't get so used to just listening to me that I forget to tell you — and my love ends up staying locked inside, never spoken.</div>
   </div>
 
   <!-- Poem 23 -->
@@ -838,7 +863,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Once dreamed of loving you; you made it real by letting me try. Today I woke not from a dream, but to reality — the most beautiful surprise of all.</div>
+    <div class="poem-meaning">Once dreamed of loving you; you made it real by letting me try. Today I woke not from a dream, but to reality — the most beautiful surprise of all.</div>
   </div>
 
   <!-- Poem 24 -->
@@ -862,7 +887,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>On nights you don't appear in dreams, I think I'll write poetry — but those nights are unbearable too. Our moments were beautiful, but you were more so; my complaints are real, but not greater than my love.</div>
+    <div class="poem-meaning">On nights you don't appear in dreams, I think I'll write poetry — but those nights are unbearable too. Our moments were beautiful, but you were more so; my complaints are real, but not greater than my love.</div>
   </div>
 
   <!-- Poem 25 -->
@@ -892,7 +917,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>When trying to write a poem about you, even words refused. They said: how can we describe the life you've lived? Bloom always — so others find a reason to smile just by seeing you.</div>
+    <div class="poem-meaning">When trying to write a poem about you, even words refused. They said: how can we describe the life you've lived? Bloom always — so others find a reason to smile just by seeing you.</div>
   </div>
 
   <!-- Poem 26 -->
@@ -935,7 +960,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Your dream came last night and brought back a lost smile. Every gift, every conversation remembered. Since you rarely come in daylight, a dream became the only reliable way to meet you.</div>
+    <div class="poem-meaning">Your dream came last night and brought back a lost smile. Every gift, every conversation remembered. Since you rarely come in daylight, a dream became the only reliable way to meet you.</div>
   </div>
 
   <!-- Poem 27 -->
@@ -967,7 +992,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>People ask where words come from — search the lane you walk through. People ask how to love — does a bud ask how to bloom? Love is our nature; fate is its request.</div>
+    <div class="poem-meaning">People ask where words come from — search the lane you walk through. People ask how to love — does a bud ask how to bloom? Love is our nature; fate is its request.</div>
   </div>
 
   <!-- Poem 28 -->
@@ -1011,7 +1036,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Don't ask how I am — I won't be able to say. It'll take time. This poem isn't blame — it's just truth. And someday, if we meet again, I'll just smile and hold you close.</div>
+    <div class="poem-meaning">Don't ask how I am — I won't be able to say. It'll take time. This poem isn't blame — it's just truth. And someday, if we meet again, I'll just smile and hold you close.</div>
   </div>
 
   <!-- Poem 29 -->
@@ -1049,7 +1074,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>That was then — when she existed in my world. Now the rains have dried, memories faded, tears too. But it was then when love was life itself.</div>
+    <div class="poem-meaning">That was then — when she existed in my world. Now the rains have dried, memories faded, tears too. But it was then when love was life itself.</div>
   </div>
 
   <!-- Poem 30 -->
@@ -1085,7 +1110,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Two people in dim light, wondering if they'd be together forever. No words were needed. They relived memories, knew the journey was beautiful, and accepted the fight that lay ahead.</div>
+    <div class="poem-meaning">Two people in dim light, wondering if they'd be together forever. No words were needed. They relived memories, knew the journey was beautiful, and accepted the fight that lay ahead.</div>
   </div>
 
   <!-- Poem 31 -->
@@ -1103,7 +1128,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Dreams locked behind glass, light peeking in secretly. Neither eyes nor mind could pull away — her face reflected on the glass in front.</div>
+    <div class="poem-meaning">Dreams locked behind glass, light peeking in secretly. Neither eyes nor mind could pull away — her face reflected on the glass in front.</div>
   </div>
 
   <!-- Poem 32 -->
@@ -1121,7 +1146,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>At night there are no shadows — only depth. Without you, this sky holds only moonlight. Nothing more.</div>
+    <div class="poem-meaning">At night there are no shadows — only depth. Without you, this sky holds only moonlight. Nothing more.</div>
   </div>
 
   <!-- Poem 33 -->
@@ -1144,7 +1169,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Such beauty that you want to become a mirror for it; such a voice that you want to become the request. A love so precious it deserves to be guarded carefully.</div>
+    <div class="poem-meaning">Such beauty that you want to become a mirror for it; such a voice that you want to become the request. A love so precious it deserves to be guarded carefully.</div>
   </div>
 
   <!-- Poem 34 -->
@@ -1160,7 +1185,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>To talk to you, feelings are enough — no words needed. For love, one meeting is enough — no togetherness required.</div>
+    <div class="poem-meaning">To talk to you, feelings are enough — no words needed. For love, one meeting is enough — no togetherness required.</div>
   </div>
 
   <!-- Poem 35 -->
@@ -1200,7 +1225,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A man sat under stars, troubled but with a clear path ahead. He loved her, was a stranger at her door, gathered courage to confess — only to wake and find it was all a dream. Yet morning brought happiness: he had been charged with the crime of love.</div>
+    <div class="poem-meaning">A man sat under stars, troubled but with a clear path ahead. He loved her, was a stranger at her door, gathered courage to confess — only to wake and find it was all a dream. Yet morning brought happiness: he had been charged with the crime of love.</div>
   </div>
 
   <!-- Poem 36 -->
@@ -1228,7 +1253,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Whether it lasts a moment or becomes forever, love blooms in the castle we built together. The ship sailed far from shore; an evening whispered its secrets. Where to find such a smile again — eternity wonders.</div>
+    <div class="poem-meaning">Whether it lasts a moment or becomes forever, love blooms in the castle we built together. The ship sailed far from shore; an evening whispered its secrets. Where to find such a smile again — eternity wonders.</div>
   </div>
 
   <!-- Poem 37 -->
@@ -1251,7 +1276,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Your harmony lives with the moist air and the ocean. Be the light, be my beloved, fly for the moon — and let's meet wherever you land.</div>
+    <div class="poem-meaning">Your harmony lives with the moist air and the ocean. Be the light, be my beloved, fly for the moon — and let's meet wherever you land.</div>
   </div>
 
   <!-- Poem 38 -->
@@ -1277,7 +1302,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Only I had asked for love. The refusal was clear. In that foolish rush of feeling, friendship itself was lost — like a dewdrop sliding off a lotus leaf, carrying life's joy away.</div>
+    <div class="poem-meaning">Only I had asked for love. The refusal was clear. In that foolish rush of feeling, friendship itself was lost — like a dewdrop sliding off a lotus leaf, carrying life's joy away.</div>
   </div>
 
   <!-- Poem 39 — NEW -->
@@ -1301,7 +1326,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>The heart wants to know its beloved's heartbeat, not follow rules. Books and dreams matter more than rituals and destinations. All that's needed on the road is a friend's presence.</div>
+    <div class="poem-meaning">The heart wants to know its beloved's heartbeat, not follow rules. Books and dreams matter more than rituals and destinations. All that's needed on the road is a friend's presence.</div>
   </div>
 
   <!-- Poem 40 — NEW -->
@@ -1319,7 +1344,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Meeting you was just an excuse — the occasion was simply that. One wish was made, and you had to come and fulfil it. It was always meant to be.</div>
+    <div class="poem-meaning">Meeting you was just an excuse — the occasion was simply that. One wish was made, and you had to come and fulfil it. It was always meant to be.</div>
   </div>
 
   <!-- Poem 41 — NEW -->
@@ -1341,7 +1366,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>When eyelids fall by accident, they don't rise easily again. When she gets upset once, there's no easy return. Like a deep sleep — it doesn't visit just anyone. A metaphor for emotional depth.</div>
+    <div class="poem-meaning">When eyelids fall by accident, they don't rise easily again. When she gets upset once, there's no easy return. Like a deep sleep — it doesn't visit just anyone. A metaphor for emotional depth.</div>
   </div>
 
   <!-- Poem 42 — NEW -->
@@ -1357,7 +1382,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Found the spots on the moon, now searching for the moon itself. Found the flaws in passing moments — now looking for the speed at which they vanish.</div>
+    <div class="poem-meaning">Found the spots on the moon, now searching for the moon itself. Found the flaws in passing moments — now looking for the speed at which they vanish.</div>
   </div>
 
   <!-- Poem 43 — NEW -->
@@ -1375,7 +1400,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>No request to stay nearby — just a wish to see the moon together. Settle wherever you like, but don't forget to pass through my lane every now and then.</div>
+    <div class="poem-meaning">No request to stay nearby — just a wish to see the moon together. Settle wherever you like, but don't forget to pass through my lane every now and then.</div>
   </div>
 
   <!-- Poem 44 — NEW -->
@@ -1393,7 +1418,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>When colours scatter, the heart gets adorned. Like birds taking flight with the wind, the soul finds its wings.</div>
+    <div class="poem-meaning">When colours scatter, the heart gets adorned. Like birds taking flight with the wind, the soul finds its wings.</div>
   </div>
 
 </div><!-- end page Part I -->
@@ -1442,7 +1467,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Friends are wonderfully strange — they celebrate and grieve together, know life's real fire, and are hard to find. A prayer: before our last rites, let us meet and embrace at least once.</div>
+    <div class="poem-meaning">Friends are wonderfully strange — they celebrate and grieve together, know life's real fire, and are hard to find. A prayer: before our last rites, let us meet and embrace at least once.</div>
   </div>
 
   <!-- Poem 46 -->
@@ -1480,7 +1505,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>An old friend rediscovered — since that meeting, even loneliness feels like conversation. You're not just a friend; you're family. Not a guest — you belong here.</div>
+    <div class="poem-meaning">An old friend rediscovered — since that meeting, even loneliness feels like conversation. You're not just a friend; you're family. Not a guest — you belong here.</div>
   </div>
 
   <!-- Poem 47 -->
@@ -1500,7 +1525,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>In one moment, all memories appear. When birds leave, it sends a shiver. Friends give meaning to life by standing beside you in the difficult times.</div>
+    <div class="poem-meaning">In one moment, all memories appear. When birds leave, it sends a shiver. Friends give meaning to life by standing beside you in the difficult times.</div>
   </div>
 
   <!-- Poem 48 -->
@@ -1520,7 +1545,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>If love happened, it will pass — we'll talk about it and tease a little too. That's friendship: you bring the paper, we'll colour it in.</div>
+    <div class="poem-meaning">If love happened, it will pass — we'll talk about it and tease a little too. That's friendship: you bring the paper, we'll colour it in.</div>
   </div>
 
   <!-- Poem 49 -->
@@ -1548,7 +1573,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Setting out with a bag full of dreams, hoping life ahead will be better. A shared promise to move forward but not forget to look back, to keep doors open, and stay connected despite distance.</div>
+    <div class="poem-meaning">Setting out with a bag full of dreams, hoping life ahead will be better. A shared promise to move forward but not forget to look back, to keep doors open, and stay connected despite distance.</div>
   </div>
 
   <!-- Poem 50 -->
@@ -1585,7 +1610,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Testing reveals the true foundation of a bond — showing off does not. Even without a name, what we had was real. A closeness like rain on dry earth. Memories that poems bring back, every single time.</div>
+    <div class="poem-meaning">Testing reveals the true foundation of a bond — showing off does not. Even without a name, what we had was real. A closeness like rain on dry earth. Memories that poems bring back, every single time.</div>
   </div>
 
   <!-- Poem 51 — NEW -->
@@ -1609,7 +1634,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Those who never learned to speak or never faced hardship — keep them at arm's length. Think carefully: the people alongside whom you became capable — keep them close.</div>
+    <div class="poem-meaning">Those who never learned to speak or never faced hardship — keep them at arm's length. Think carefully: the people alongside whom you became capable — keep them close.</div>
   </div>
 
   <!-- Poem 52 — NEW -->
@@ -1632,7 +1657,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Not children who only look forward, not old enough to only look back. Somewhere in between — young, figuring out how to balance relationships and responsibilities.</div>
+    <div class="poem-meaning">Not children who only look forward, not old enough to only look back. Somewhere in between — young, figuring out how to balance relationships and responsibilities.</div>
   </div>
 
 </div><!-- end page Part II -->
@@ -1704,7 +1729,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp &nbsp;&middot;&nbsp; (for Aai)</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A son's tribute to his mother — she raised him, loves beyond herself, is both firm and gentle. Even a five-star meal can't match food from her hands. However tall he grows, he'll always be her little one.</div>
+    <div class="poem-meaning">A son's tribute to his mother — she raised him, loves beyond herself, is both firm and gentle. Even a five-star meal can't match food from her hands. However tall he grows, he'll always be her little one.</div>
   </div>
 
   <!-- Poem 54 -->
@@ -1752,7 +1777,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; सौ.</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A brother described in three languages — first friend, best memory, teacher of mischief and wisdom. My closet has more of his clothes than mine. However tall I grow, I'll always be your younger brother.</div>
+    <div class="poem-meaning">A brother described in three languages — first friend, best memory, teacher of mischief and wisdom. My closet has more of his clothes than mine. However tall I grow, I'll always be your younger brother.</div>
   </div>
 
   <!-- Poem 55 -->
@@ -1776,7 +1801,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Those who taught him to speak — now he can't find words to speak to them. Those who were once the reason for laughter — no meetings happen anymore. Grown up, yet still needing a parent's warmth.</div>
+    <div class="poem-meaning">Those who taught him to speak — now he can't find words to speak to them. Those who were once the reason for laughter — no meetings happen anymore. Grown up, yet still needing a parent's warmth.</div>
   </div>
 
 </div><!-- end page Part III -->
@@ -1804,7 +1829,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>The pen kept writing and life kept living. Some hands taught him how to write; others taught him how to live.</div>
+    <div class="poem-meaning">The pen kept writing and life kept living. Some hands taught him how to write; others taught him how to live.</div>
   </div>
 
   <!-- Poem 57 -->
@@ -1836,7 +1861,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A young man searching for happiness and connection. Haunted by the future, careful with each step. He stumbles, loses his way — but from failure and experience, a successful person is quietly emerging.</div>
+    <div class="poem-meaning">A young man searching for happiness and connection. Haunted by the future, careful with each step. He stumbles, loses his way — but from failure and experience, a successful person is quietly emerging.</div>
   </div>
 
   <!-- Poem 58 -->
@@ -1858,7 +1883,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Why does worry about tomorrow consume today? Which hope remains to dream upon? A universal ache — anxiety about the future quietly eating the present.</div>
+    <div class="poem-meaning">Why does worry about tomorrow consume today? Which hope remains to dream upon? A universal ache — anxiety about the future quietly eating the present.</div>
   </div>
 
   <!-- Poem 59 -->
@@ -1887,7 +1912,7 @@ body {
       </div>
     </div>
     <div class="poem-sig" style="margin-top:28px;">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Living with some shortage is a skill; laughing through some pain is grace. Knowing someone's wish before they say it — that's art. A gentle observation about resilience and quiet attentiveness.</div>
+    <div class="poem-meaning">Living with some shortage is a skill; laughing through some pain is grace. Knowing someone's wish before they say it — that's art. A gentle observation about resilience and quiet attentiveness.</div>
   </div>
 
   <!-- Poem 60 -->
@@ -1924,7 +1949,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Words alone are incomplete in a poem — they need a melody. A memory tied to a song is impossible to forget. Some cry, others give thanks — the same music, different lives. Live openly, not just thoughtfully.</div>
+    <div class="poem-meaning">Words alone are incomplete in a poem — they need a melody. A memory tied to a song is impossible to forget. Some cry, others give thanks — the same music, different lives. Live openly, not just thoughtfully.</div>
   </div>
 
   <!-- Poem 61 -->
@@ -1948,7 +1973,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A familiar song triggers a memory — just one day spent together, but the music carries that person back. Some cry, some give thanks. The same tune, different lives, different feeling.</div>
+    <div class="poem-meaning">A familiar song triggers a memory — just one day spent together, but the music carries that person back. Some cry, some give thanks. The same tune, different lives, different feeling.</div>
   </div>
 
   <!-- Poem 62 -->
@@ -1967,7 +1992,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>In trying to become someone else, we lose ourselves. Grow as a unique identity — not as a copy of someone who is already great.</div>
+    <div class="poem-meaning">In trying to become someone else, we lose ourselves. Grow as a unique identity — not as a copy of someone who is already great.</div>
   </div>
 
   <!-- Poem 63 -->
@@ -1994,7 +2019,7 @@ body {
       </div>
     </div>
     <div class="poem-sig" style="margin-top:28px;">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Life and circumstances forged this skill — craftsmanship was never learned easily. In both Hindi and Marathi, the message is the same: our struggles made us who we are.</div>
+    <div class="poem-meaning">Life and circumstances forged this skill — craftsmanship was never learned easily. In both Hindi and Marathi, the message is the same: our struggles made us who we are.</div>
   </div>
 
   <!-- Poem 64 -->
@@ -2019,7 +2044,7 @@ body {
       </div>
     </div>
     <div class="poem-sig" style="margin-top:28px;">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>If all souls are connected, why does everyone live such a separate life? A philosophical question about the contradiction between spiritual oneness and the reality of lived isolation.</div>
+    <div class="poem-meaning">If all souls are connected, why does everyone live such a separate life? A philosophical question about the contradiction between spiritual oneness and the reality of lived isolation.</div>
   </div>
 
   <!-- Poem 65 -->
@@ -2037,7 +2062,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Are you even aware of your own selflessness? Then for whom are you living? The answer isn't simple — but the entire universe is waiting for you to know your purpose.</div>
+    <div class="poem-meaning">Are you even aware of your own selflessness? Then for whom are you living? The answer isn't simple — but the entire universe is waiting for you to know your purpose.</div>
   </div>
 
   <!-- Poem 66 -->
@@ -2055,7 +2080,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Work hard to reach your goal — that's the easy answer. The real question is what comes after success? What do you pursue once you've achieved what you set out for?</div>
+    <div class="poem-meaning">Work hard to reach your goal — that's the easy answer. The real question is what comes after success? What do you pursue once you've achieved what you set out for?</div>
   </div>
 
   <!-- Poem 67 -->
@@ -2071,7 +2096,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>The dead feel nothing — it's those who remain who suffer. Don't blame death; blame life for its cruelties. Death, in the end, is innocent.</div>
+    <div class="poem-meaning">The dead feel nothing — it's those who remain who suffer. Don't blame death; blame life for its cruelties. Death, in the end, is innocent.</div>
   </div>
 
   <!-- Poem 68 -->
@@ -2099,7 +2124,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>If time won't change, change yourself. If your identity feels stuck, change your name. Everything is changeable — because when you change yourself, the world changes too.</div>
+    <div class="poem-meaning">If time won't change, change yourself. If your identity feels stuck, change your name. Everything is changeable — because when you change yourself, the world changes too.</div>
   </div>
 
   <!-- Poem 69 -->
@@ -2122,7 +2147,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Laugh with people, cry alone. Show strength, ignore small provocations, stay positive. One day, you will be known — for a genuinely good reason.</div>
+    <div class="poem-meaning">Laugh with people, cry alone. Show strength, ignore small provocations, stay positive. One day, you will be known — for a genuinely good reason.</div>
   </div>
 
   <!-- Poem 70 -->
@@ -2153,7 +2178,7 @@ body {
       </div>
     </div>
     <div class="poem-sig" style="margin-top:28px;">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A birthday feels like a festival, and friendship deepens a little more. The most beautiful dream is the one felt after truly living. Sleep deeply when the people you love are near.</div>
+    <div class="poem-meaning">A birthday feels like a festival, and friendship deepens a little more. The most beautiful dream is the one felt after truly living. Sleep deeply when the people you love are near.</div>
   </div>
 
   <!-- Poem 71 -->
@@ -2181,7 +2206,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>In youth, there's a somewhat absurd romance in every struggle, a hidden simplicity in every skill. Decisions shift as you learn to respect age; relationships are sustained by recognising their worth.</div>
+    <div class="poem-meaning">In youth, there's a somewhat absurd romance in every struggle, a hidden simplicity in every skill. Decisions shift as you learn to respect age; relationships are sustained by recognising their worth.</div>
   </div>
 
   <!-- Poem 72 -->
@@ -2209,7 +2234,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Belonging is hard to measure; a worried father's feelings — impossible to describe. No clear destination, no easy road — yet this stubborn human keeps walking to find an identity in an unknown world.</div>
+    <div class="poem-meaning">Belonging is hard to measure; a worried father's feelings — impossible to describe. No clear destination, no easy road — yet this stubborn human keeps walking to find an identity in an unknown world.</div>
   </div>
 
   <!-- Poem 73 -->
@@ -2225,7 +2250,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Life is incomplete — not love. Love, for every person, is whole and enough. But the world and its structures remain unfinished.</div>
+    <div class="poem-meaning">Life is incomplete — not love. Love, for every person, is whole and enough. But the world and its structures remain unfinished.</div>
   </div>
 
   <!-- Poem 74 — NEW -->
@@ -2270,7 +2295,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Everyone has many thoughts but no time. Everyone speaks but no one listens. Art flourishes but audiences disappear. Relationships soften but distances deepen. We all live under the same sky but feel rootless. We'll change things — but later, because time is never with us.</div>
+    <div class="poem-meaning">Everyone has many thoughts but no time. Everyone speaks but no one listens. Art flourishes but audiences disappear. Relationships soften but distances deepen. We all live under the same sky but feel rootless. We'll change things — but later, because time is never with us.</div>
   </div>
 
   <!-- Poem 75 — NEW -->
@@ -2288,7 +2313,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Every season brings a different dawn, every rain a different journey. In every direction, every pair of eyes holds a different view of the very same world.</div>
+    <div class="poem-meaning">Every season brings a different dawn, every rain a different journey. In every direction, every pair of eyes holds a different view of the very same world.</div>
   </div>
 
   <!-- Poem 76 — NEW -->
@@ -2312,7 +2337,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>The heart became so careless that it forgot to ask how you were. Your loneliness was such that I forgot to walk beside you. When life tests you like this, we even forget to simply pass through.</div>
+    <div class="poem-meaning">The heart became so careless that it forgot to ask how you were. Your loneliness was such that I forgot to walk beside you. When life tests you like this, we even forget to simply pass through.</div>
   </div>
 
   <!-- Poem 77 — NEW -->
@@ -2336,7 +2361,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>If you want to soar, why keep looking down at the earth? If you want to turn in every direction, how will you keep every promise? Don't celebrate the stars when you want the moon. The question is: why does everyone scramble daily for a happy life, yet so rarely find one?</div>
+    <div class="poem-meaning">If you want to soar, why keep looking down at the earth? If you want to turn in every direction, how will you keep every promise? Don't celebrate the stars when you want the moon. The question is: why does everyone scramble daily for a happy life, yet so rarely find one?</div>
   </div>
 
   <!-- Poem 78 — NEW -->
@@ -2365,7 +2390,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>The moon has a story hidden in cloud shapes — a wandering dreamer's untold tale. He searches for a destination even God doesn't know. Look within for the secret that drives you — it's everyone's story. We must run and also learn to rise after falling.</div>
+    <div class="poem-meaning">The moon has a story hidden in cloud shapes — a wandering dreamer's untold tale. He searches for a destination even God doesn't know. Look within for the secret that drives you — it's everyone's story. We must run and also learn to rise after falling.</div>
   </div>
 
   <!-- Poem 79 — NEW -->
@@ -2383,7 +2408,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Ready to be earth — just promise to be the rain. Ready to hold fragrance within — just promise to become the gentle request. A metaphor for pure, selfless readiness in love.</div>
+    <div class="poem-meaning">Ready to be earth — just promise to be the rain. Ready to hold fragrance within — just promise to become the gentle request. A metaphor for pure, selfless readiness in love.</div>
   </div>
 
   <!-- Poem 80 — NEW (Marathi) -->
@@ -2405,7 +2430,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Full-hearted laughter, fulfilling joy — and immediately, the feeling of touching the sky. Such a simple verse, so deep to truly understand. Stars guide us, and human greatness is built upon this very joy.</div>
+    <div class="poem-meaning">Full-hearted laughter, fulfilling joy — and immediately, the feeling of touching the sky. Such a simple verse, so deep to truly understand. Stars guide us, and human greatness is built upon this very joy.</div>
   </div>
 
   <!-- Poem 81 — NEW (prose) -->
@@ -2426,7 +2451,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>We control nothing before birth or after death. Even within life, control follows a curve — helpless at the start, peaking in midlife, surrendering again toward the end. Life is a gentle arc back to surrender.</div>
+    <div class="poem-meaning">We control nothing before birth or after death. Even within life, control follows a curve — helpless at the start, peaking in midlife, surrendering again toward the end. Life is a gentle arc back to surrender.</div>
   </div>
 
   <!-- Poem 82 — NEW (Marathi) -->
@@ -2454,7 +2479,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A chain of wonder at nature — the sun, the moon, the sea, rivers, and the smallest living things — ending with a quiet question: how do we forget the gifts that all of existence gives us?</div>
+    <div class="poem-meaning">A chain of wonder at nature — the sun, the moon, the sea, rivers, and the smallest living things — ending with a quiet question: how do we forget the gifts that all of existence gives us?</div>
   </div>
 
   <!-- Poem 83 — NEW -->
@@ -2478,7 +2503,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>When you listen matters. When you speak matters. Nothing is inherently good or bad — it's always about the right moment. Whether you remember this or not: that is what matters most.</div>
+    <div class="poem-meaning">When you listen matters. When you speak matters. Nothing is inherently good or bad — it's always about the right moment. Whether you remember this or not: that is what matters most.</div>
   </div>
 
   <!-- Poem 84 — NEW -->
@@ -2496,7 +2521,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>The view was the same, but their worlds were entirely different. Both had solutions — just different problems. Every destination had success written into it — only the effort required was different.</div>
+    <div class="poem-meaning">The view was the same, but their worlds were entirely different. Both had solutions — just different problems. Every destination had success written into it — only the effort required was different.</div>
   </div>
 
   <!-- Poem 85 — NEW -->
@@ -2520,7 +2545,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>If you yourself are just a thought in someone's mind, how can you be tested? If you're simply getting through life, how do you give advice to others? Among the successful, how do we even begin to speak our truth?</div>
+    <div class="poem-meaning">If you yourself are just a thought in someone's mind, how can you be tested? If you're simply getting through life, how do you give advice to others? Among the successful, how do we even begin to speak our truth?</div>
   </div>
 
   <!-- Poem 86 — NEW (prose) -->
@@ -2538,7 +2563,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Everything about how happy or sad we feel is decided by time. An absurd amount of power for something that knows only one direction and cannot even pause.</div>
+    <div class="poem-meaning">Everything about how happy or sad we feel is decided by time. An absurd amount of power for something that knows only one direction and cannot even pause.</div>
   </div>
 
   <!-- Poem 87 — NEW (combined p133+138) -->
@@ -2569,7 +2594,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>How can you achieve success if you don't first find a path better than the goal itself? How can you truly understand someone after just one meeting? And how can you sleep well when you go to bed carrying today's grief and tomorrow's worry?</div>
+    <div class="poem-meaning">How can you achieve success if you don't first find a path better than the goal itself? How can you truly understand someone after just one meeting? And how can you sleep well when you go to bed carrying today's grief and tomorrow's worry?</div>
   </div>
 
   <!-- Poem 88 — NEW -->
@@ -2593,7 +2618,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>I don't wish to be understood — I want the restraint to explain myself well. Not conspiracy, but the courage to write truth. Not the end of customs, but change within some. Not God in stone — but humanity in hearts.</div>
+    <div class="poem-meaning">I don't wish to be understood — I want the restraint to explain myself well. Not conspiracy, but the courage to write truth. Not the end of customs, but change within some. Not God in stone — but humanity in hearts.</div>
   </div>
 
   <!-- Poem 89 — NEW -->
@@ -2618,7 +2643,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>What do you actually want? Not the habit of steadiness — just permission to slip. Not worship — just a moment of grace. Not obligation — just the warmth of friendship. Not fame in the neighbourhood — just recognition of oneself.</div>
+    <div class="poem-meaning">What do you actually want? Not the habit of steadiness — just permission to slip. Not worship — just a moment of grace. Not obligation — just the warmth of friendship. Not fame in the neighbourhood — just recognition of oneself.</div>
   </div>
 
   <!-- Poem 90 — NEW -->
@@ -2642,7 +2667,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Like birds that quietly change homes, like rivers that must keep flowing — seasons teach them to change, and finally the ocean teaches them to still. Nature's way of moving and, eventually, finding rest.</div>
+    <div class="poem-meaning">Like birds that quietly change homes, like rivers that must keep flowing — seasons teach them to change, and finally the ocean teaches them to still. Nature's way of moving and, eventually, finding rest.</div>
   </div>
 
   <!-- Poem 91 — NEW -->
@@ -2666,7 +2691,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Walk with the wind and you'll end up arguing with clouds. Stretch out and you'll find yourself clinging to the earth. Leaves will teach you to scatter; time will teach you to pass. Look around once — life itself will teach you to stand.</div>
+    <div class="poem-meaning">Walk with the wind and you'll end up arguing with clouds. Stretch out and you'll find yourself clinging to the earth. Leaves will teach you to scatter; time will teach you to pass. Look around once — life itself will teach you to stand.</div>
   </div>
 
   <!-- Poem 92 — NEW (combined p143+144) -->
@@ -2699,7 +2724,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>It's all about when and where. The right time, the right place — that determines everything. Rain and sun make a rainbow; the moon moves oceans; earth and sun bloom jungles. Know your time, know yourself — and your story will write itself.</div>
+    <div class="poem-meaning">It's all about when and where. The right time, the right place — that determines everything. Rain and sun make a rainbow; the moon moves oceans; earth and sun bloom jungles. Know your time, know yourself — and your story will write itself.</div>
   </div>
 
   <!-- Poem 93 — NEW (prose) -->
@@ -2720,7 +2745,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Purpose turns discomfort into meaningful sacrifice. When purpose is clear, even pain feels fulfilling. When it disappears, the same pain becomes regret. The real task: hold on to purpose before discomfort takes over.</div>
+    <div class="poem-meaning">Purpose turns discomfort into meaningful sacrifice. When purpose is clear, even pain feels fulfilling. When it disappears, the same pain becomes regret. The real task: hold on to purpose before discomfort takes over.</div>
   </div>
 
 </div><!-- end page Part IV -->
@@ -2785,7 +2810,7 @@ body {
       </div>
     </div>
     <div class="poem-sig" style="margin-top:28px;">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>You'll need to make a name — looks alone won't carry you far. Stay loyal to your country; soldiers' lives are not cheap. Some work simply has to be done by us — we cannot keep waiting for the government.</div>
+    <div class="poem-meaning">You'll need to make a name — looks alone won't carry you far. Stay loyal to your country; soldiers' lives are not cheap. Some work simply has to be done by us — we cannot keep waiting for the government.</div>
   </div>
 
   <!-- Poem 95 -->
@@ -2817,7 +2842,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>What will knowing my name achieve? All gods are acceptable to me. History is open for those brave enough to seek truth. I measure good days by my own effort, not the stars. Those who walk with me — I call my own.</div>
+    <div class="poem-meaning">What will knowing my name achieve? All gods are acceptable to me. History is open for those brave enough to seek truth. I measure good days by my own effort, not the stars. Those who walk with me — I call my own.</div>
   </div>
 
   <!-- Poem 96 -->
@@ -2846,7 +2871,7 @@ body {
       </div>
     </div>
     <div class="poem-sig" style="margin-top:28px;">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Adults are becoming childish and children are losing their innocence. In this relentlessly busy world, peaceful sleep is quietly suffocating somewhere.</div>
+    <div class="poem-meaning">Adults are becoming childish and children are losing their innocence. In this relentlessly busy world, peaceful sleep is quietly suffocating somewhere.</div>
   </div>
 
   <!-- Poem 97 -->
@@ -2866,7 +2891,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Prices in markets rise while values in society fall. Daily spectacles of division and violence — the nation split, though blood runs the same colour everywhere.</div>
+    <div class="poem-meaning">Prices in markets rise while values in society fall. Daily spectacles of division and violence — the nation split, though blood runs the same colour everywhere.</div>
   </div>
 
   <!-- Poem 98 — NEW -->
@@ -2882,7 +2907,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Your story may be incomplete — but at least finish the poem, sir. A wry, affectionate nudge to someone who has given up halfway.</div>
+    <div class="poem-meaning">Your story may be incomplete — but at least finish the poem, sir. A wry, affectionate nudge to someone who has given up halfway.</div>
   </div>
 
   <!-- Poem 99 — NEW -->
@@ -2900,7 +2925,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>In my own story so far, other people's tales take up more space. And in the estate of gratitude, parents still hold the largest share.</div>
+    <div class="poem-meaning">In my own story so far, other people's tales take up more space. And in the estate of gratitude, parents still hold the largest share.</div>
   </div>
 
 </div><!-- end page Part V -->
@@ -2936,7 +2961,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A rapid-fire inquiry into identity — language, genes, emotions, the present moment — all dismissed one by one. The conclusion: you're just an abstraction. A playful yet genuinely deep question about what defines a person.</div>
+    <div class="poem-meaning">A rapid-fire inquiry into identity — language, genes, emotions, the present moment — all dismissed one by one. The conclusion: you're just an abstraction. A playful yet genuinely deep question about what defines a person.</div>
   </div>
 
   <!-- Poem 101 — NEW -->
@@ -2961,7 +2986,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>What exactly is 'you'? Not the body (it ages), not the brain (it changes), not mood (it shifts), not heartbeat (it spikes), not the people around or the place you stand. Not even dreams or the past. The self remains stubbornly undefined.</div>
+    <div class="poem-meaning">What exactly is 'you'? Not the body (it ages), not the brain (it changes), not mood (it shifts), not heartbeat (it spikes), not the people around or the place you stand. Not even dreams or the past. The self remains stubbornly undefined.</div>
   </div>
 
   <!-- Poem 102 — NEW (combined p139+140) -->
@@ -2988,7 +3013,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A list of human contradictions — forgetting is easy, remembering is hard; letting go is easy, holding on is not. We speak easily but listen poorly, make mistakes easily but forgive rarely. Why are we like this? Easy to ask — difficult to answer.</div>
+    <div class="poem-meaning">A list of human contradictions — forgetting is easy, remembering is hard; letting go is easy, holding on is not. We speak easily but listen poorly, make mistakes easily but forgive rarely. Why are we like this? Easy to ask — difficult to answer.</div>
   </div>
 
   <!-- Poem 103 — NEW -->
@@ -3012,7 +3037,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>Keep smiling from wherever you are, swim across and find me. Don't forget to say hello. Stay near in thought. We're here for a long time — let's enjoy the ride.</div>
+    <div class="poem-meaning">Keep smiling from wherever you are, swim across and find me. Don't forget to say hello. Stay near in thought. We're here for a long time — let's enjoy the ride.</div>
   </div>
 
   <!-- Poem 104 — NEW -->
@@ -3042,7 +3067,7 @@ body {
       </div>
     </div>
     <div class="poem-sig">&mdash; ssp</div>
-    <div class="poem-meaning"><span class="meaning-label">Meaning</span>A few rare days when your night is mine and we wake to the same dawn. Life continues in other days too, but we miss those precious few — when time is short and hugs are overdue. Come join me in the promise of small, joyful things.</div>
+    <div class="poem-meaning">A few rare days when your night is mine and we wake to the same dawn. Life continues in other days too, but we miss those precious few — when time is short and hugs are overdue. Come join me in the promise of small, joyful things.</div>
   </div>
 
 </div><!-- end page Part VI -->
