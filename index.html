@@ -191,15 +191,211 @@ body {
   margin-bottom: 5px;
   font-family: 'EB Garamond', serif;
 }
+
+/* ═══ IDEA 1: INK-WRITING COVER ANIMATION ═══ */
+.cover-ink-drop {
+  animation: coverFadeUp 0.8s ease 0.1s both;
+}
+.cover-title span {
+  display: inline-block;
+  animation: inkLetter 0.75s cubic-bezier(0.2, 0.8, 0.4, 1) both;
+}
+.cover-title span:nth-child(1) { animation-delay: 0.45s; }
+.cover-title span:nth-child(2) { animation-delay: 0.72s; }
+.cover-title span:nth-child(3) { animation-delay: 0.99s; }
+.cover-title span:nth-child(4) { animation-delay: 1.26s; }
+.cover-title span:nth-child(5) { animation-delay: 1.53s; }
+.cover-title span:nth-child(6) { animation-delay: 1.80s; }
+@keyframes inkLetter {
+  from { opacity: 0; filter: blur(12px); transform: scale(1.12); }
+  60%  { opacity: 0.85; filter: blur(1.5px); transform: scale(1.01); }
+  to   { opacity: 1; filter: blur(0); transform: scale(1); }
+}
+.cover-title-hi { animation: coverFadeUp 0.85s ease 2.15s both; }
+.cover-rule     { animation: coverRuleGrow 0.9s ease 2.45s both; transform-origin: center; }
+.cover-subtitle { animation: coverFadeUp 0.85s ease 2.75s both; }
+.cover-author   { animation: coverFadeUp 0.85s ease 3.05s both; }
+.cover-year     { animation: coverFadeUp 0.85s ease 3.25s both; }
+@keyframes coverFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes coverRuleGrow {
+  from { opacity: 0; transform: scaleX(0); }
+  to   { opacity: 1; transform: scaleX(1); }
+}
+
+/* ═══ IDEA 2: POEM FADE-IN ON SCROLL ═══ */
+.poem-block {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.poem-block.ink-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ═══ IDEA 3: SILK BOOKMARK RIBBON ═══ */
+.book { position: relative; }
+.ribbon {
+  position: absolute;
+  top: 0;
+  right: -12px;
+  width: 20px;
+  height: 0;
+  background: linear-gradient(180deg, #8b1a1a 0%, #c03030 35%, #a02525 100%);
+  border-radius: 0 0 2px 2px;
+  z-index: 50;
+  pointer-events: none;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.3), inset -2px 0 5px rgba(0,0,0,0.12);
+  transition: height 60ms linear;
+}
+.ribbon::after {
+  content: '';
+  position: absolute;
+  bottom: -11px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left:  10px solid #a02525;
+  border-right: 10px solid #a02525;
+  border-bottom: 11px solid transparent;
+}
+
+/* ═══ IDEA 4: CHAPTER QUICK-NAV ═══ */
+.chapter-nav {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 300;
+  display: flex;
+  align-items: stretch;
+}
+.chapter-nav-tab {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  background: var(--accent);
+  color: #fdf8ef;
+  font-family: 'EB Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  padding: 16px 7px;
+  cursor: pointer;
+  border-radius: 5px 0 0 5px;
+  box-shadow: -3px 2px 12px rgba(0,0,0,0.3);
+  transition: background 0.2s, letter-spacing 0.2s;
+  user-select: none;
+  border: none;
+  outline: none;
+  flex-shrink: 0;
+}
+.chapter-nav-tab:hover { background: #6b2e0a; letter-spacing: 5px; }
+.chapter-nav-panel {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(calc(100% + 1px));
+  background: var(--paper);
+  border-left: 2px solid var(--accent);
+  border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+  border-radius: 6px 0 0 6px;
+  box-shadow: -6px 0 30px rgba(0,0,0,0.18);
+  padding: 18px 22px 18px 18px;
+  z-index: 299;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 200px;
+}
+.chapter-nav-panel.open {
+  transform: translateY(-50%) translateX(0);
+}
+.chapter-nav-close {
+  display: block;
+  text-align: right;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  margin-bottom: 14px;
+  font-family: 'EB Garamond', serif;
+  border: none;
+  background: none;
+  padding: 0;
+  width: 100%;
+}
+.chapter-nav-close:hover { color: var(--accent); }
+.chapter-nav-panel a {
+  display: block;
+  padding: 8px 0;
+  font-family: 'EB Garamond', serif;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--divider);
+  transition: color 0.15s, padding-left 0.15s;
+  line-height: 1.35;
+}
+.chapter-nav-panel a:last-child { border-bottom: none; }
+.chapter-nav-panel a:hover { color: var(--accent); padding-left: 4px; }
+.cn-part {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 1px;
+}
+.cn-name { font-style: italic; font-size: 14px; }
+
+/* ═══ IDEA 5: AMBIENT BACKGROUND TRANSITION ═══ */
+body { transition: background-color 1.4s ease; }
+
+/* ═══ IDEA 6: CHAPTER HEADER PARALLAX (CSS Scroll Timeline) ═══ */
+@supports (animation-timeline: view()) {
+  .chapter-header .ch-title-en {
+    animation: chParallax linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+  @keyframes chParallax {
+    from { transform: translateY(18px); }
+    to   { transform: translateY(-18px); }
+  }
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 860px) {
+  .chapter-nav { display: none; }
+  .ribbon { right: 0; width: 14px; }
+}
 </style>
 </head>
 <body>
+<!-- ── CHAPTER QUICK-NAV (fixed right side) ── -->
+<nav class="chapter-nav" id="chapterNav">
+  <div class="chapter-nav-panel" id="chNavPanel">
+    <button class="chapter-nav-close" id="chNavClose">close ✕</button>
+    <a href="#part-1"><span class="cn-part">Part I</span><span class="cn-name">Ishq — Love &amp; Longing</span></a>
+    <a href="#part-2"><span class="cn-part">Part II</span><span class="cn-name">Dosti — Friendship</span></a>
+    <a href="#part-3"><span class="cn-part">Part III</span><span class="cn-name">Rishtey — Family &amp; Bonds</span></a>
+    <a href="#part-4"><span class="cn-part">Part IV</span><span class="cn-name">Zindagi — Life &amp; Philosophy</span></a>
+    <a href="#part-5"><span class="cn-part">Part V</span><span class="cn-name">Samaj — Society</span></a>
+    <a href="#part-6"><span class="cn-part">Part VI</span><span class="cn-name">English Verses</span></a>
+  </div>
+  <button class="chapter-nav-tab" id="chNavTab">Chapters</button>
+</nav>
+
 <div class="book">
+<div class="ribbon" id="ribbon"></div>
 <!-- ===== COVER ===== -->
 <div class="cover">
   <div class="cover-border"></div>
   <div class="cover-ink-drop">&#10022; &nbsp;&nbsp; saumitra s. phatak &nbsp;&nbsp; &#10022;</div>
-  <div class="cover-title">SIYAHI</div>
+  <div class="cover-title"><span>S</span><span>I</span><span>Y</span><span>A</span><span>H</span><span>I</span></div>
   <div class="cover-title-hi">सियाही</div>
   <div class="cover-rule"></div>
   <div class="cover-subtitle">A Collection of Poems, Shayari &amp; Prose<br>in Hindi &middot; Marathi &middot; English</div>
@@ -355,7 +551,7 @@ body {
   </div>
 </div>
 <!-- ===== PART I: ISHQ ===== -->
-<div class="chapter-header">
+<div class="chapter-header" id="part-1">
   <div class="ch-part">Part One</div>
   <div class="ch-title-en">Ishq</div>
   <div class="ch-title-hi">इश्क</div>
@@ -1423,7 +1619,7 @@ body {
 
 </div><!-- end page Part I -->
 <!-- ===== PART II: DOSTI ===== -->
-<div class="chapter-header">
+<div class="chapter-header" id="part-2">
   <div class="ch-part">Part Two</div>
   <div class="ch-title-en">Dosti</div>
   <div class="ch-title-hi">दोस्ती</div>
@@ -1663,7 +1859,7 @@ body {
 </div><!-- end page Part II -->
 
 <!-- ===== PART III: RISHTEY ===== -->
-<div class="chapter-header">
+<div class="chapter-header" id="part-3">
   <div class="ch-part">Part Three</div>
   <div class="ch-title-en">Rishtey</div>
   <div class="ch-title-hi">रिश्ते</div>
@@ -1807,7 +2003,7 @@ body {
 </div><!-- end page Part III -->
 
 <!-- ===== PART IV: ZINDAGI ===== -->
-<div class="chapter-header">
+<div class="chapter-header" id="part-4">
   <div class="ch-part">Part Four</div>
   <div class="ch-title-en">Zindagi</div>
   <div class="ch-title-hi">जिंदगी</div>
@@ -2751,7 +2947,7 @@ body {
 </div><!-- end page Part IV -->
 
 <!-- ===== PART V: SAMAJ ===== -->
-<div class="chapter-header">
+<div class="chapter-header" id="part-5">
   <div class="ch-part">Part Five</div>
   <div class="ch-title-en">Samaj</div>
   <div class="ch-title-hi">समाज</div>
@@ -2931,7 +3127,7 @@ body {
 </div><!-- end page Part V -->
 
 <!-- ===== PART VI: ENGLISH VERSES ===== -->
-<div class="chapter-header">
+<div class="chapter-header" id="part-6">
   <div class="ch-part">Part Six</div>
   <div class="ch-title-en">English</div>
   <div class="ch-title-hi">अंग्रेजी में</div>
@@ -3134,5 +3330,76 @@ body {
 </div>
 
 </div><!-- end .book -->
+
+<script>
+// ═══ IDEA 2: POEM FADE-IN ON SCROLL ═══
+// Each poem-block fades up as it enters the viewport — ink appearing on page.
+const poemObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('ink-visible');
+      poemObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.poem-block').forEach(p => poemObserver.observe(p));
+
+// ═══ IDEA 3: SILK BOOKMARK RIBBON ═══
+// Crimson ribbon descends the right edge of the book as you scroll.
+const ribbon = document.getElementById('ribbon');
+const book   = document.querySelector('.book');
+function updateRibbon() {
+  if (!ribbon || !book) return;
+  const bookH  = book.scrollHeight;
+  const winH   = window.innerHeight;
+  const total  = document.documentElement.scrollHeight - winH;
+  const pct    = total > 0 ? Math.min(window.scrollY / total, 1) : 0;
+  // Ribbon height scales with % of page scrolled, maxing at 94% of book height
+  ribbon.style.height = Math.round(pct * bookH * 0.94) + 'px';
+}
+window.addEventListener('scroll', updateRibbon, { passive: true });
+updateRibbon();
+
+// ═══ IDEA 4: CHAPTER QUICK-NAV ═══
+const panel   = document.getElementById('chNavPanel');
+const tabBtn  = document.getElementById('chNavTab');
+const closeBtn = document.getElementById('chNavClose');
+if (tabBtn && panel) {
+  tabBtn.addEventListener('click', () => panel.classList.toggle('open'));
+  closeBtn.addEventListener('click', () => panel.classList.remove('open'));
+  panel.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => panel.classList.remove('open'))
+  );
+  // Close panel on outside click
+  document.addEventListener('click', e => {
+    if (!panel.contains(e.target) && e.target !== tabBtn) {
+      panel.classList.remove('open');
+    }
+  });
+}
+
+// ═══ IDEA 5: PER-CHAPTER AMBIENT COLOUR SHIFT ═══
+// Body background subtly shifts as you scroll into each Part.
+const ambients = {
+  'part-1': '#b8a48a',   // Ishq      — warm amber (original)
+  'part-2': '#8fa89a',   // Dosti     — sage green
+  'part-3': '#a89898',   // Rishtey   — dusty rose
+  'part-4': '#8898a8',   // Zindagi   — slate blue
+  'part-5': '#a89870',   // Samaj     — golden ochre
+  'part-6': '#9898a0',   // English   — cool silver-grey
+};
+const ambientObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const color = ambients[e.target.id];
+      if (color) document.body.style.backgroundColor = color;
+    }
+  });
+}, { rootMargin: '-15% 0px -75% 0px' });
+Object.keys(ambients).forEach(id => {
+  const el = document.getElementById(id);
+  if (el) ambientObs.observe(el);
+});
+</script>
 </body>
 </html>
