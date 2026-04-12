@@ -1,0 +1,139 @@
+# Siyahi — Full Content
+
+**Live site:** https://saumitraphatak.github.io/siyahi-poetry/
+**Author:** Saumitra S. Phatak — Physics PhD candidate, Purdue University, Hood Lab
+**Source:** https://github.com/saumitraphatak/siyahi-poetry
+**Purpose:** Personal poetry collection. Siyahi (सियाही) means *ink* in Hindi and Urdu. Original poems in Hindi, Marathi, and English by a physicist who writes poetry. Themes: love, longing, identity, diaspora, science and wonder, memory, Mumbai, Indiana, the human condition.
+
+---
+
+## ABOUT THE COLLECTION
+
+This is not an academic project. It is a personal one — a book that grew out of late nights in a quantum physics lab, long flights between Mumbai and Indiana, and years of keeping a private notes app open alongside physics papers.
+
+The poems move across three languages not as a stylistic choice, but because some feelings only arrive in a particular tongue. A longing might be Marathi. A philosophical shrug might be English. A love letter almost always wants to be Hindi.
+
+---
+
+## TECH STACK
+
+- Pure static HTML/CSS — single page, all content in `index.html`
+- Minimal JS (page numbering via CSS counter; minor UI interactions)
+- Google Fonts: Playfair Display (headings), EB Garamond (body prose), Noto Serif Devanagari (Hindi/Marathi script)
+- No npm, no build tools, no frameworks
+- Single file site — everything in `index.html`
+
+---
+
+## FILE STRUCTURE
+
+```
+siyahi-poetry/
+├── index.html      # Single page — full poetry collection (cover + all poems)
+├── robots.txt
+└── sitemap.xml
+```
+
+---
+
+## DESIGN SYSTEM
+
+Book-format aesthetic — designed to feel like a real physical poetry book.
+
+### CSS Variables (in index.html `<style>`)
+```css
+--paper:       #fdf8ef;   /* warm cream — page background */
+--paper-dark:  #f5edd8;   /* slightly darker cream */
+--ink:         #2c1a0e;   /* dark brown ink — primary text */
+--accent:      #8b4513;   /* saddle brown — headings, borders */
+--accent-light:#c4894a;   /* light brown/gold — decorative elements */
+--divider:     #d4a574;   /* warm tan — section dividers */
+--muted:       #6b4c30;   /* muted brown — secondary text, captions */
+--shadow:      rgba(44,26,14,0.08);
+```
+
+### Fonts
+- `'Playfair Display'` — cover title, poem titles, chapter headings
+- `'EB Garamond'` — body text, English poems, prose elements
+- `'Noto Serif Devanagari'` — Hindi and Marathi script poems
+
+### Layout Structure
+- `.book` — outer container: `max-width: 780px; margin: 0 auto; background: var(--paper); box-shadow: 0 0 60px rgba(0,0,0,0.5)`
+- `.cover` — dark cover page: `background: linear-gradient(160deg, #0f0602, #2a1005, #5c2a10, #7a3a18)` — full viewport height
+- `.page` — standard poem page: `padding: 90px 100px 110px; border-bottom: 1px solid #ede0c8`
+- `.page-half` — shorter poems: `padding: 60px 100px 90px`
+- Page numbering via CSS counter: `counter-reset: page-num` on `.book`; `counter-increment: page-num` on `.page` and `.page-half`; page number shown via `::after { content: counter(page-num) }`
+
+### Cover Design
+- Ornamental border: `position: absolute; inset: 20px; border: 1px solid rgba(196,137,74,0.2)` with inner border
+- Large title "SIYAHI" — 110px Playfair Display, letter-spacing 18px, color #f2d49a
+- Hindi subtitle "सियाही" — 38px Noto Serif Devanagari, color #c4894a
+- Rule line — gradient: `transparent → #c4894a → transparent`
+- Subtitle (italic): "Verses in Hindi, Marathi, and English"
+- Author name: Playfair Display, letter-spacing 5px
+
+---
+
+## POEM STRUCTURE (HTML pattern)
+
+```html
+<section class="page">
+  <div class="poem-meta">
+    <span class="poem-num">I.</span>
+    <span class="poem-lang">Hindi · हिन्दी</span>
+  </div>
+  <h2 class="poem-title">Poem Title / कविता का शीर्षक</h2>
+  <div class="poem-body">
+    <p>First stanza line 1<br>First stanza line 2<br>First stanza line 3</p>
+    <p>Second stanza line 1<br>Second stanza line 2</p>
+  </div>
+  <div class="poem-note">Optional translator's note or context</div>
+</section>
+```
+
+Short poems use `<section class="page-half">`.
+
+---
+
+## THEMES AND CONTENT
+
+### Love and Longing
+The largest theme. Hindi love poems in the shayari tradition — distance, waiting, the ache of being between two places. The object of longing shifts: sometimes a person, sometimes a city (Mumbai), sometimes a feeling that keeps moving.
+
+### Diaspora and Identity
+Poems about being neither fully here nor fully there. The specific experience of a Mumbaikar in Indiana — what it means to hold two languages, two weathers, two sets of expectations inside one body. Written from the inside.
+
+### Science and Wonder
+Poems where quantum physics and poetry share vocabulary. Superposition (of identities, emotions, choices). Uncertainty principle (the act of observing changes the observed). Entanglement (connection at a distance). Written by someone who actually knows the physics — not as metaphor-borrowing but as genuine parallel.
+
+### Memory
+Poems about specific remembered moments — a monsoon afternoon, a train platform, a lab at 2 AM, a specific smell from childhood. The work memory does: how it selects, distorts, preserves.
+
+### Mumbai
+The city appears throughout — not as backdrop but as character. The smell of the sea and petrol. The specific quality of light during monsoon. Local train compartments. Juhu beach at dusk. Marine Drive at night.
+
+---
+
+## LANGUAGES
+
+| Language | Script | Style |
+|---|---|---|
+| Hindi | Devanagari + Roman transliteration | Shayari-influenced, lyrical, formal |
+| Marathi | Devanagari | Grounded, earthy, mother-tongue intimate |
+| English | Latin | Scientific vocabulary meets feeling; diaspora perspective |
+
+---
+
+## HOW TO ADD A POEM
+
+1. Open `index.html`
+2. Find the `<div class="book">` container
+3. Add a new `<section class="page">` (or `.page-half` for short poems)
+4. Set `class="poem-lang"` to the language
+5. Write poem content as `<p>` elements with `<br>` for line breaks within a stanza
+
+No build step needed — just save and open in browser.
+
+---
+
+*Generated 2026-04-12 for LLM/RAG ingestion.*

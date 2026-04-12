@@ -1,0 +1,26 @@
+# Siyahi — सियाही
+
+> A bilingual poetry collection by Saumitra S. Phatak — verses in Hindi, Marathi, and English exploring love, longing, science, memory, and the human condition; written by a physicist who couldn't stop feeling things.
+
+**Live site:** https://saumitraphatak.github.io/siyahi-poetry/
+**Author:** Saumitra S. Phatak — Physics PhD candidate, Purdue University
+**Source:** https://github.com/saumitraphatak/siyahi-poetry
+**Languages:** Hindi (Devanagari + Roman), Marathi (Devanagari), English
+**Tech:** Single-page static HTML/CSS — book-format design, no frameworks
+
+Siyahi (सियाही) means *ink* in Hindi and Urdu. This is a single-page poetry collection styled as a physical book — dark cover, cream pages, ink typography. Poems are organized as "pages" within a book layout (max-width 780px, box-shadow like a real book). The collection moves across three languages not as a stylistic choice, but because some feelings only arrive in a particular tongue.
+
+## The Collection
+
+- [Full poetry collection](https://saumitraphatak.github.io/siyahi-poetry/): All poems on one scrollable page — cover, then poem "pages" in sequence. Themes: love and longing, the diaspora experience, science and wonder, identity, Mumbai and Indiana, memory, the strangeness of being human
+
+## Themes by Language
+
+- Hindi poems: Love letters, longing, shayari-influenced lyricism, the physics of missing someone
+- Marathi poems: Rooted in city and mother tongue — Mumbai streets, monsoon, family
+- English poems: Where the scientific mind and the feeling mind meet — quantum metaphors, diaspora in-between-ness
+
+## Optional
+
+- [Source code](https://github.com/saumitraphatak/siyahi-poetry)
+- [Sitemap](https://saumitraphatak.github.io/siyahi-poetry/sitemap.xml)
