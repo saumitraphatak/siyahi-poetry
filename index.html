@@ -114,6 +114,41 @@ body {
 .note-text { font-size: 17px; line-height: 2; color: var(--ink); max-width: 520px; }
 .note-text p { margin-bottom: 18px; }
 .toc-title { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--accent); border-bottom: 1px solid var(--divider); padding-bottom: 18px; margin-bottom: 45px; letter-spacing: 4px; }
+.chapter-jump-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: -20px 0 42px;
+}
+.chapter-jump {
+  display: block;
+  padding: 14px 16px;
+  border: 1px solid rgba(139, 69, 19, 0.16);
+  border-radius: 14px;
+  background: rgba(212,165,116,0.08);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+.chapter-jump:hover {
+  transform: translateY(-2px);
+  border-color: rgba(139, 69, 19, 0.38);
+  background: rgba(212,165,116,0.15);
+}
+.chapter-jump span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent-light);
+}
+.chapter-jump strong {
+  display: block;
+  margin-top: 2px;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: var(--accent);
+}
 .toc-section { margin-bottom: 32px; }
 .toc-section-label { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: var(--accent-light); letter-spacing: 2px; margin-bottom: 10px; padding-left: 14px; border-left: 2px solid var(--divider); }
 .toc-item { display: flex; align-items: baseline; padding: 4px 0; font-size: 15px; }
@@ -181,6 +216,7 @@ body {
   color: var(--muted);
   font-style: italic;
 }
+body.hide-meanings .poem-meaning { display: none; }
 .meaning-label {
   display: block;
   font-size: 10px;
@@ -350,6 +386,70 @@ body {
   margin-bottom: 1px;
 }
 .cn-name { font-style: italic; font-size: 14px; }
+.reader-tools {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  z-index: 280;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid rgba(139, 69, 19, 0.22);
+  border-radius: 999px;
+  background: rgba(253, 248, 239, 0.88);
+  box-shadow: 0 14px 45px rgba(44, 26, 14, 0.22);
+  backdrop-filter: blur(12px);
+}
+.reader-tools a,
+.reader-tools button {
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  font-family: 'EB Garamond', serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 10px 13px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.reader-tools a:hover,
+.reader-tools button:hover,
+.reader-tools button[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--paper);
+}
+.collection-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: #ead8b7;
+  border-bottom: 1px solid #dfc69b;
+}
+.collection-stats div {
+  background: linear-gradient(180deg, #fbf3e3 0%, #f5ead2 100%);
+  padding: 22px 16px;
+  text-align: center;
+}
+.collection-stats strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--accent);
+}
+.collection-stats span {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
 .author-footer {
   max-width: 780px;
   margin: 0 auto;
@@ -390,6 +490,45 @@ body { transition: background-color 1.4s ease; }
   .chapter-nav { display: none; }
   .ribbon { right: 0; width: 14px; }
 }
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .book { max-width: 100%; box-shadow: none; }
+  .cover { min-height: 92vh; padding: 72px 26px; }
+  .cover-border { inset: 12px; }
+  .cover-ink-drop { letter-spacing: 4px; margin-bottom: 38px; }
+  .cover-title { font-size: clamp(56px, 18vw, 92px); letter-spacing: 0.12em; }
+  .cover-title-hi { font-size: 30px; margin-bottom: 36px; }
+  .cover-year { bottom: 30px; }
+  .collection-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .page, .page-half { padding: 56px 28px 84px; }
+  .center-page { padding: 78px 28px; }
+  .chapter-header { padding: 78px 28px 76px; }
+  .ch-title-en { font-size: 46px; }
+  .chapter-jump-grid { grid-template-columns: 1fr; }
+  .toc-dots { display: none; }
+  .toc-item { align-items: flex-start; gap: 10px; }
+  .toc-num { min-width: 26px; }
+  .poem-block { margin-bottom: 58px; padding-bottom: 52px; }
+  .poem-title { font-size: 25px; }
+  .bilingual { grid-template-columns: 1fr; gap: 24px; }
+  .bilingual-sep { display: none; }
+  .reader-tools {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    transform: none;
+    justify-content: center;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+  .poem-block { opacity: 1; transform: none; }
+}
 </style>
 </head>
 <body>
@@ -407,10 +546,16 @@ body { transition: background-color 1.4s ease; }
   <button class="chapter-nav-tab" id="chNavTab">Chapters</button>
 </nav>
 
+<div class="reader-tools" aria-label="Reader tools">
+  <a href="#index">Index</a>
+  <button id="meaningToggle" type="button" aria-pressed="false">Hide meanings</button>
+  <a href="#top">Top</a>
+</div>
+
 <div class="book">
 <div class="ribbon" id="ribbon"></div>
 <!-- ===== COVER ===== -->
-<div class="cover">
+<div class="cover" id="top">
   <div class="cover-border"></div>
   <div class="cover-ink-drop">&#10022; &nbsp;&nbsp; saumitra s. phatak &nbsp;&nbsp; &#10022;</div>
   <div class="cover-title"><span>S</span><span>I</span><span>Y</span><span>A</span><span>H</span><span>I</span></div>
@@ -419,6 +564,12 @@ body { transition: background-color 1.4s ease; }
   <div class="cover-subtitle">A Collection of Poems, Shayari &amp; Prose<br>in Hindi &middot; Marathi &middot; English</div>
   <div class="cover-author">S S P</div>
   <div class="cover-year">2023</div>
+</div>
+<div class="collection-stats" aria-label="Collection overview">
+  <div><strong>104</strong><span>poems</span></div>
+  <div><strong>3</strong><span>languages</span></div>
+  <div><strong>6</strong><span>parts</span></div>
+  <div><strong>+notes</strong><span>meanings</span></div>
 </div>
 <!-- ===== AUTHOR'S NOTE ===== -->
 <div class="page-half">
@@ -432,8 +583,17 @@ body { transition: background-color 1.4s ease; }
   </div>
 </div>
 <!-- ===== TABLE OF CONTENTS ===== -->
-<div class="page">
+<div class="page" id="index">
   <div class="toc-title">INDEX</div>
+
+  <div class="chapter-jump-grid" aria-label="Jump to a part">
+    <a class="chapter-jump" href="#part-1"><span>Part I</span><strong>Ishq</strong></a>
+    <a class="chapter-jump" href="#part-2"><span>Part II</span><strong>Dosti</strong></a>
+    <a class="chapter-jump" href="#part-3"><span>Part III</span><strong>Rishtey</strong></a>
+    <a class="chapter-jump" href="#part-4"><span>Part IV</span><strong>Zindagi</strong></a>
+    <a class="chapter-jump" href="#part-5"><span>Part V</span><strong>Samaj</strong></a>
+    <a class="chapter-jump" href="#part-6"><span>Part VI</span><strong>English Verses</strong></a>
+  </div>
 
   <div class="toc-section">
     <div class="toc-section-label">Part I &nbsp;&middot;&nbsp; Ishq &mdash; Love &amp; Longing</div>
