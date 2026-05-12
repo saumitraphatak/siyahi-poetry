@@ -350,6 +350,24 @@ body {
   margin-bottom: 1px;
 }
 .cn-name { font-style: italic; font-size: 14px; }
+.author-footer {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 28px 24px 34px;
+  text-align: center;
+  color: rgba(44, 26, 14, 0.72);
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+.author-footer a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(139, 69, 19, 0.35);
+}
+.author-footer a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
 
 /* ═══ IDEA 5: AMBIENT BACKGROUND TRANSITION ═══ */
 body { transition: background-color 1.4s ease; }
@@ -3330,6 +3348,10 @@ body { transition: background-color 1.4s ease; }
 </div>
 
 </div><!-- end .book -->
+
+<footer class="author-footer">
+  Built by <a href="https://www.curious96.com" target="_blank" rel="noopener">Saumitra Phatak</a>
+</footer>
 
 <script>
 // ═══ IDEA 2: POEM FADE-IN ON SCROLL ═══
