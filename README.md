@@ -1,104 +1,70 @@
 # Siyahi — सियाही
 
-*A bilingual poetry collection by Saumitra S. Phatak*
-
-Siyahi (सियाही) means *ink* in Hindi and Urdu. This is a collection of original poems in Hindi, Marathi, and English — written by a physicist who couldn't stop feeling things. Verses on love, longing, memory, science, and the strangeness of being human.
+An online poetry archive by Saumitra S. Phatak, with 104 original poems in Hindi, Marathi, and English.
 
 **Live site:** https://saumitraphatak.github.io/siyahi-poetry/
 
----
+## The website
 
-## About the Collection
+The main page is designed for browsing rather than reading the collection as one long document:
 
-This is not an academic project. It is a personal one — a book that grew out of late nights in a lab, long flights between Mumbai and Indiana, and years of keeping a private notes app open alongside quantum physics papers.
+- language tabs for Hindi, Marathi, and English
+- search across titles, lines, and meanings
+- theme filters
+- a focused poem reader with previous/next navigation
+- shareable links to individual poems
+- a daily line from the collection's aphorisms
+- a random-poem button
 
-The poems move across three languages not as a stylistic choice, but because some feelings only arrive in a particular tongue. A longing might be Marathi. A philosophical shrug might be English. A love letter almost always wants to be Hindi.
+The original complete book remains available at [`book.html`](book.html).
 
----
+## Collection
 
-## Languages
+The archive contains 104 poems organized around six themes:
 
-| Language | Script | Poems |
-|---|---|---|
-| Hindi | Devanagari + Roman | Most of the collection |
-| Marathi | Devanagari | Poems rooted in the city and the mother tongue |
-| English | Latin | Where the scientific mind and the feeling mind meet |
+- Ishq — love and longing
+- Dosti — friendship
+- Rishtey — family and bonds
+- Zindagi — life and philosophy
+- Samaj — society
+- English Verses — identity and reflection
 
----
+Some poems belong to more than one language. The trilingual poem “Bhai,” for example, appears in all three language tabs.
 
-## Themes
+## Project structure
 
-- **Love & Longing** — distance, memory, the specific ache of missing someone across time zones
-- **Science & Wonder** — what it feels like to work at the edge of human knowledge, trapped between data and awe
-- **Identity & Belonging** — the experience of being a Mumbaikar abroad, neither fully here nor fully there
-- **The Human Condition** — the small, universal absurdities of being alive
-
----
-
-## Design
-
-The site is designed to feel like a physical book:
-
-- Cream paper background (`#fdf8ef`) with deep brown ink (`#2c1a0e`)
-- A dark, textured cover page with gold lettering
-- Wide margins and generous line-height for comfortable reading
-- Fonts: Playfair Display (headings), EB Garamond (body), Noto Serif Devanagari (Hindi/Marathi text)
-- No distractions — no nav bars, no sidebars, no analytics banners
-
----
-
-## Tech Stack
-
-- Single `index.html` file — the entire collection is one page
-- Pure HTML + inline CSS (no external stylesheets, no JS)
-- Fonts via Google Fonts CDN
-- Zero dependencies, zero build step
-
----
-
-## Project Structure
-
-```
+```text
 siyahi-poetry/
-├── index.html    # The entire book — cover, note from the author, all poems
+├── index.html
+├── book.html
+├── assets/
+│   └── siyahi-cover.png
+├── css/
+│   └── styles.css
+├── js/
+│   ├── app.js
+│   └── poems-data.js
+├── scripts/
+│   └── build_content.py
 ├── robots.txt
 └── sitemap.xml
 ```
 
----
+The site is static and has no build step. Open `index.html` directly, or serve the folder with any simple static server.
 
-## Running Locally
+To regenerate `js/poems-data.js` after editing the original book:
 
 ```bash
-git clone https://github.com/saumitraphatak/siyahi-poetry.git
-cd siyahi-poetry
-open index.html
+python3 scripts/build_content.py
 ```
-
-No install. Just open the file.
-
----
 
 ## Deployment
 
-Deployed via **GitHub Pages** from the `main` branch root.
-
----
-
-## A Note on the Title
-
-*Siyahi* — ink. The thing that makes thought permanent. The bridge between the mind and the page. It felt like the right word for a collection that exists because some things needed to stop living only in the head.
-
----
+GitHub Pages serves the repository from the `main` branch root.
 
 ## Author
 
 **Saumitra Phatak** — physicist, writer, Mumbaikar.
-- Website: [curious96.com](https://www.curious96.com)
-- GitHub: [@saumitraphatak](https://github.com/saumitraphatak)
+[curious96.com](https://www.curious96.com) · [@saumitraphatak](https://github.com/saumitraphatak)
 
----
-
-## License
-
-© Saumitra S. Phatak. All poems are original works. Please do not reproduce without attribution.
+© Saumitra S. Phatak. All poems are original works.
