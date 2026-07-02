@@ -15,6 +15,13 @@ OUTPUT = ROOT / "js" / "poems-data.js"
 ENGLISH = {30, 36, 37, 54, 62, 81, 86, 93, 100, 101, 102, 103, 104}
 MARATHI = {38, 47, 53, 54, 57, 58, 80, 82, 97}
 
+# Editor's picks — a curated "best of" shelf for first-time visitors.
+# Order matters: index 0 is the top pick. Surfaced on index.html and book.html.
+FEATURED = [
+    6, 18, 50, 45, 102, 86, 32, 68, 54, 1,
+    8, 42, 93, 81, 100, 101, 78, 97, 53, 73,
+]
+
 THEMES = (
     (range(1, 45), "ishq", "Ishq", "Love & longing"),
     (range(45, 53), "dosti", "Dosti", "Friendship"),
@@ -84,6 +91,7 @@ def main():
                 "meaning": meaning,
                 "searchText": search_text,
                 "contentHtml": content.decode_contents(),
+                "featuredRank": FEATURED.index(number) + 1 if number in FEATURED else None,
             }
         )
 

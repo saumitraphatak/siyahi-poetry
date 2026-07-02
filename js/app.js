@@ -30,6 +30,7 @@
     readerClose: document.getElementById("readerClose"),
     randomPoem: document.getElementById("randomPoem"),
     dailyLine: document.getElementById("dailyLine"),
+    featuredGrid: document.getElementById("featuredGrid"),
   };
 
   function escapeHtml(value) {
@@ -215,6 +216,52 @@
     elements.dailyLine.textContent = `“${data.aphorisms[dayIndex]}”`;
   }
 
+  function openPoem(id, openOnMobile) {
+    const poem = data.poems.find((item) => item.id === id);
+    if (!poem) return false;
+
+    state.language = poem.languages[0];
+    elements.tabs.forEach((tab) => {
+      const active = tab.dataset.language === state.language;
+      tab.classList.toggle("is-active", active);
+      tab.setAttribute("aria-selected", String(active));
+    });
+    state.theme = "all";
+    elements.themeSelect.value = "all";
+    state.query = "";
+    elements.searchInput.value = "";
+
+    selectPoem(poem.id, openOnMobile);
+    return true;
+  }
+
+  function renderFeatured() {
+    if (!elements.featuredGrid) return;
+
+    const featured = data.poems
+      .filter((poem) => poem.featuredRank)
+      .sort((a, b) => a.featuredRank - b.featuredRank);
+
+    elements.featuredGrid.innerHTML = featured
+      .map(
+        (poem) => `
+          <button class="featured-card" type="button" data-poem-id="${poem.id}">
+            <span class="featured-rank">${String(poem.featuredRank).padStart(2, "0")}</span>
+            <span class="featured-title">${escapeHtml(poem.title)}</span>
+            <span class="featured-meta">${escapeHtml(poem.theme.label)} · ${languageNames[poem.languages[0]]}</span>
+          </button>
+        `
+      )
+      .join("");
+
+    elements.featuredGrid.querySelectorAll(".featured-card").forEach((button) => {
+      button.addEventListener("click", () => {
+        openPoem(button.dataset.poemId, true);
+        elements.reader.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  }
+
   elements.tabs.forEach((tab) => {
     tab.addEventListener("click", () => switchLanguage(tab.dataset.language));
   });
@@ -237,24 +284,16 @@
 
   window.addEventListener("popstate", () => {
     const id = location.hash.slice(1);
-    if (id.startsWith("poem-")) selectPoem(id, false);
+    if (id.startsWith("poem-")) openPoem(id, false);
   });
 
   updateCounts();
   populateThemes();
   setDailyLine();
+  renderFeatured();
 
   const hashId = location.hash.slice(1);
-  const hashPoem = data.poems.find((poem) => poem.id === hashId);
-  if (hashPoem) {
-    state.language = hashPoem.languages[0];
-    elements.tabs.forEach((tab) => {
-      const active = tab.dataset.language === state.language;
-      tab.classList.toggle("is-active", active);
-      tab.setAttribute("aria-selected", String(active));
-    });
-    selectPoem(hashPoem.id, false);
-  } else {
+  if (!openPoem(hashId, false)) {
     const first = filteredPoems()[0];
     if (first && !window.matchMedia("(max-width: 900px)").matches) {
       selectPoem(first.id, false);

@@ -149,12 +149,20 @@ body {
   font-size: 18px;
   color: var(--accent);
 }
+.picks-callout { margin: -20px 0 42px; padding: 24px 26px; border: 1px solid rgba(139, 69, 19, 0.22); border-radius: 14px; background: rgba(212,165,116,0.10); }
+.picks-callout .toc-section-label { border-left-color: var(--accent); color: var(--accent); }
+.picks-note { font-style: italic; font-size: 13px; color: var(--muted); margin: 4px 0 16px; }
+.picks-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; }
+.picks-item { display: flex; align-items: baseline; gap: 8px; padding: 5px 0; font-size: 15px; color: var(--ink); text-decoration: none; border-bottom: 1px dotted transparent; }
+.picks-item:hover { color: var(--accent); border-bottom-color: var(--divider); }
+.picks-item .toc-num { color: var(--accent-light); font-size: 12px; min-width: 26px; }
 .toc-section { margin-bottom: 32px; }
 .toc-section-label { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: var(--accent-light); letter-spacing: 2px; margin-bottom: 10px; padding-left: 14px; border-left: 2px solid var(--divider); }
 .toc-item { display: flex; align-items: baseline; padding: 4px 0; font-size: 15px; }
 .toc-num { color: var(--accent-light); font-size: 12px; min-width: 30px; letter-spacing: 1px; }
 .toc-name { flex: 1; }
 .toc-dots { flex: 1; border-bottom: 1px dotted #d4a574; margin: 0 12px; position: relative; bottom: 3px; max-width: 120px; }
+#index, .chapter-header, .poem-block { scroll-margin-top: 84px; }
 .chapter-header { padding: 110px 80px 90px; text-align: center; background: linear-gradient(180deg, #f0e6d0 0%, var(--paper) 100%); border-bottom: 1px solid #ede0c8; position: relative; counter-increment: page-num; }
 .chapter-header::after {
   content: counter(page-num);
@@ -300,12 +308,18 @@ body.hide-meanings .poem-meaning { display: none; }
 }
 
 /* ═══ IDEA 4: CHAPTER QUICK-NAV ═══ */
-.chapter-nav {
+.side-nav-stack {
   position: fixed;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
   z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.chapter-nav {
+  position: static;
   display: flex;
   align-items: stretch;
 }
@@ -345,6 +359,8 @@ body.hide-meanings .poem-meaning { display: none; }
   z-index: 299;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   min-width: 200px;
+  max-height: 82vh;
+  overflow-y: auto;
 }
 .chapter-nav-panel.open {
   transform: translateY(-50%) translateX(0);
@@ -553,7 +569,7 @@ body { transition: background-color 1.4s ease; }
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 860px) {
-  .chapter-nav { display: none; }
+  .side-nav-stack { display: none; }
   .ribbon { right: 0; width: 14px; }
 }
 @media (max-width: 640px) {
@@ -571,6 +587,8 @@ body { transition: background-color 1.4s ease; }
   .chapter-header { padding: 78px 28px 76px; }
   .ch-title-en { font-size: 46px; }
   .chapter-jump-grid { grid-template-columns: 1fr; }
+  .picks-grid { grid-template-columns: 1fr; }
+  .picks-callout { padding: 20px 18px; }
   .toc-dots { display: none; }
   .toc-item { align-items: flex-start; gap: 10px; }
   .toc-num { min-width: 26px; }
@@ -619,19 +637,47 @@ body { transition: background-color 1.4s ease; }
   <a class="book-archive-link" href="index.html">Poetry archive &rarr;</a>
 </header>
 
-<!-- ── CHAPTER QUICK-NAV (fixed right side) ── -->
-<nav class="chapter-nav" id="chapterNav">
-  <div class="chapter-nav-panel" id="chNavPanel">
-    <button class="chapter-nav-close" id="chNavClose">close ✕</button>
-    <a href="#part-1"><span class="cn-part">Part I</span><span class="cn-name">Ishq — Love &amp; Longing</span></a>
-    <a href="#part-2"><span class="cn-part">Part II</span><span class="cn-name">Dosti — Friendship</span></a>
-    <a href="#part-3"><span class="cn-part">Part III</span><span class="cn-name">Rishtey — Family &amp; Bonds</span></a>
-    <a href="#part-4"><span class="cn-part">Part IV</span><span class="cn-name">Zindagi — Life &amp; Philosophy</span></a>
-    <a href="#part-5"><span class="cn-part">Part V</span><span class="cn-name">Samaj — Society</span></a>
-    <a href="#part-6"><span class="cn-part">Part VI</span><span class="cn-name">English Verses</span></a>
-  </div>
-  <button class="chapter-nav-tab" id="chNavTab">Chapters</button>
-</nav>
+<!-- ── QUICK-NAV STACK (fixed right side) ── -->
+<div class="side-nav-stack">
+  <nav class="chapter-nav" id="bestNav">
+    <div class="chapter-nav-panel" id="bestNavPanel">
+      <button class="chapter-nav-close" id="bestNavClose">close ✕</button>
+      <a href="#poem-6"><span class="cn-part">Poem 06</span><span class="cn-name">Parchhayi</span></a>
+      <a href="#poem-18"><span class="cn-part">Poem 18</span><span class="cn-name">Kasoor</span></a>
+      <a href="#poem-50"><span class="cn-part">Poem 50</span><span class="cn-name">Azmane Se</span></a>
+      <a href="#poem-45"><span class="cn-part">Poem 45</span><span class="cn-name">Dost Hote Bde Ajeeb</span></a>
+      <a href="#poem-102"><span class="cn-part">Poem 102</span><span class="cn-name">So Easy to Forget</span></a>
+      <a href="#poem-86"><span class="cn-part">Poem 86</span><span class="cn-name">Time</span></a>
+      <a href="#poem-32"><span class="cn-part">Poem 32</span><span class="cn-name">Raat Mein Parchhai</span></a>
+      <a href="#poem-68"><span class="cn-part">Poem 68</span><span class="cn-name">Wakht Nhi Badal Raha</span></a>
+      <a href="#poem-54"><span class="cn-part">Poem 54</span><span class="cn-name">Bhai</span></a>
+      <a href="#poem-1"><span class="cn-part">Poem 01</span><span class="cn-name">नया है कुछ, अच्छा है</span></a>
+      <a href="#poem-8"><span class="cn-part">Poem 08</span><span class="cn-name">Kaabu Mein Dil</span></a>
+      <a href="#poem-42"><span class="cn-part">Poem 42</span><span class="cn-name">Daag Toh Mil Gye</span></a>
+      <a href="#poem-93"><span class="cn-part">Poem 93</span><span class="cn-name">Purpose</span></a>
+      <a href="#poem-81"><span class="cn-part">Poem 81</span><span class="cn-name">We Have the Least Control</span></a>
+      <a href="#poem-100"><span class="cn-part">Poem 100</span><span class="cn-name">The Language You Speak</span></a>
+      <a href="#poem-101"><span class="cn-part">Poem 101</span><span class="cn-name">What Defines You</span></a>
+      <a href="#poem-78"><span class="cn-part">Poem 78</span><span class="cn-name">Badalonke Surat Mein</span></a>
+      <a href="#poem-97"><span class="cn-part">Poem 97</span><span class="cn-name">Wyaparatil Bhav</span></a>
+      <a href="#poem-53"><span class="cn-part">Poem 53</span><span class="cn-name">Aai</span></a>
+      <a href="#poem-73"><span class="cn-part">Poem 73</span><span class="cn-name">Zindagi Adhuri</span></a>
+    </div>
+    <button class="chapter-nav-tab" id="bestNavTab">★ Best of</button>
+  </nav>
+  <nav class="chapter-nav" id="chapterNav">
+    <div class="chapter-nav-panel" id="chNavPanel">
+      <button class="chapter-nav-close" id="chNavClose">close ✕</button>
+      <a href="#part-1"><span class="cn-part">Part I</span><span class="cn-name">Ishq — Love &amp; Longing</span></a>
+      <a href="#part-2"><span class="cn-part">Part II</span><span class="cn-name">Dosti — Friendship</span></a>
+      <a href="#part-3"><span class="cn-part">Part III</span><span class="cn-name">Rishtey — Family &amp; Bonds</span></a>
+      <a href="#part-4"><span class="cn-part">Part IV</span><span class="cn-name">Zindagi — Life &amp; Philosophy</span></a>
+      <a href="#part-5"><span class="cn-part">Part V</span><span class="cn-name">Samaj — Society</span></a>
+      <a href="#part-6"><span class="cn-part">Part VI</span><span class="cn-name">English Verses</span></a>
+    </div>
+    <button class="chapter-nav-tab" id="chNavTab">Chapters</button>
+  </nav>
+</div>
 
 <div class="reader-tools" aria-label="Reader tools">
   <a href="#index">Index</a>
@@ -680,6 +726,33 @@ body { transition: background-color 1.4s ease; }
     <a class="chapter-jump" href="#part-4"><span>Part IV</span><strong>Zindagi</strong></a>
     <a class="chapter-jump" href="#part-5"><span>Part V</span><strong>Samaj</strong></a>
     <a class="chapter-jump" href="#part-6"><span>Part VI</span><strong>English Verses</strong></a>
+  </div>
+
+  <div class="picks-callout" aria-label="Editor's picks">
+    <div class="toc-section-label">New here? &nbsp;&middot;&nbsp; Start with these</div>
+    <p class="picks-note">20 poems I'd hand you first, across Hindi, Marathi &amp; English.</p>
+    <div class="picks-grid">
+      <a class="picks-item" href="#poem-6"><span class="toc-num">06</span><span>Parchhayi</span></a>
+      <a class="picks-item" href="#poem-18"><span class="toc-num">18</span><span>Kasoor</span></a>
+      <a class="picks-item" href="#poem-50"><span class="toc-num">50</span><span>Azmane Se</span></a>
+      <a class="picks-item" href="#poem-45"><span class="toc-num">45</span><span>Dost Hote Bde Ajeeb</span></a>
+      <a class="picks-item" href="#poem-102"><span class="toc-num">102</span><span>So Easy to Forget</span></a>
+      <a class="picks-item" href="#poem-86"><span class="toc-num">86</span><span>Time</span></a>
+      <a class="picks-item" href="#poem-32"><span class="toc-num">32</span><span>Raat Mein Parchhai</span></a>
+      <a class="picks-item" href="#poem-68"><span class="toc-num">68</span><span>Wakht Nhi Badal Raha</span></a>
+      <a class="picks-item" href="#poem-54"><span class="toc-num">54</span><span>Bhai</span></a>
+      <a class="picks-item" href="#poem-1"><span class="toc-num">01</span><span>नया है कुछ, अच्छा है</span></a>
+      <a class="picks-item" href="#poem-8"><span class="toc-num">08</span><span>Kaabu Mein Dil</span></a>
+      <a class="picks-item" href="#poem-42"><span class="toc-num">42</span><span>Daag Toh Mil Gye</span></a>
+      <a class="picks-item" href="#poem-93"><span class="toc-num">93</span><span>Purpose</span></a>
+      <a class="picks-item" href="#poem-81"><span class="toc-num">81</span><span>We Have the Least Control</span></a>
+      <a class="picks-item" href="#poem-100"><span class="toc-num">100</span><span>The Language You Speak</span></a>
+      <a class="picks-item" href="#poem-101"><span class="toc-num">101</span><span>What Defines You</span></a>
+      <a class="picks-item" href="#poem-78"><span class="toc-num">78</span><span>Badalonke Surat Mein</span></a>
+      <a class="picks-item" href="#poem-97"><span class="toc-num">97</span><span>Wyaparatil Bhav</span></a>
+      <a class="picks-item" href="#poem-53"><span class="toc-num">53</span><span>Aai</span></a>
+      <a class="picks-item" href="#poem-73"><span class="toc-num">73</span><span>Zindagi Adhuri</span></a>
+    </div>
   </div>
 
   <div class="toc-section">
@@ -825,7 +898,7 @@ body { transition: background-color 1.4s ease; }
 </div>
 <div class="page">
   <!-- Poem 01 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-1">
     <div class="poem-num">Poem 01</div>
     <div class="poem-title">नया है कुछ, अच्छा है</div>
     <div class="poem-subtitle">Naya Hai Kuch, Achha Hai</div>
@@ -867,7 +940,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 02 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-2">
     <div class="poem-num">Poem 02</div>
     <div class="poem-title">Sitara</div>
     <div class="poem-subtitle">The Star</div>
@@ -897,7 +970,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 03 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-3">
     <div class="poem-num">Poem 03</div>
     <div class="poem-title">Intezaar</div>
     <div class="poem-subtitle">Waiting</div>
@@ -918,7 +991,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 04 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-4">
     <div class="poem-num">Poem 04</div>
     <div class="poem-title">Wo Khoobsurat</div>
     <div class="poem-subtitle">That Beautiful One</div>
@@ -962,7 +1035,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 05 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-5">
     <div class="poem-num">Poem 05</div>
     <div class="poem-title">Baadal</div>
     <div class="poem-subtitle">The Sky &amp; The Earth</div>
@@ -982,7 +1055,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 06 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-6">
     <div class="poem-num">Poem 06</div>
     <div class="poem-title">Parchhayi</div>
     <div class="poem-subtitle">Shadow</div>
@@ -1002,7 +1075,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 07 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-7">
     <div class="poem-num">Poem 07</div>
     <div class="poem-title">Un Se</div>
     <div class="poem-subtitle">With Them</div>
@@ -1025,7 +1098,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 08 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-8">
     <div class="poem-num">Poem 08</div>
     <div class="poem-title">Kaabu Mein Dil</div>
     <div class="poem-subtitle">The Heart Uncontrolled</div>
@@ -1043,7 +1116,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 09 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-9">
     <div class="poem-num">Poem 09</div>
     <div class="poem-title">सवाल-ए-इश्क</div>
     <div class="poem-subtitle">Sawal-e-Ishq</div>
@@ -1060,7 +1133,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 10 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-10">
     <div class="poem-num">Poem 10</div>
     <div class="poem-title">Ldki Mili</div>
     <div class="poem-subtitle">When She Came Along</div>
@@ -1078,7 +1151,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 11 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-11">
     <div class="poem-num">Poem 11</div>
     <div class="poem-title">Agar Rakh Sako</div>
     <div class="poem-subtitle">If You Could</div>
@@ -1096,7 +1169,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 12 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-12">
     <div class="poem-num">Poem 12</div>
     <div class="poem-title">Nind Mein</div>
     <div class="poem-subtitle">In Sleep</div>
@@ -1114,7 +1187,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 13 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-13">
     <div class="poem-num">Poem 13</div>
     <div class="poem-title">Bolna Chahta Hu</div>
     <div class="poem-subtitle">I Want to Say</div>
@@ -1133,7 +1206,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 14 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-14">
     <div class="poem-num">Poem 14</div>
     <div class="poem-title">Wakht Khuddar</div>
     <div class="poem-subtitle">Time Grows Proud</div>
@@ -1151,7 +1224,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 15 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-15">
     <div class="poem-num">Poem 15</div>
     <div class="poem-title">Dua</div>
     <div class="poem-subtitle">A Prayer</div>
@@ -1173,7 +1246,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 16 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-16">
     <div class="poem-num">Poem 16</div>
     <div class="poem-title">Man Behle</div>
     <div class="poem-subtitle">When the Heart Wanders</div>
@@ -1191,7 +1264,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 17 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-17">
     <div class="poem-num">Poem 17</div>
     <div class="poem-title">ज़िन्दगी की खुशियां</div>
     <div class="poem-subtitle">Zindagi Ki Khushiyan</div>
@@ -1207,7 +1280,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 18 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-18">
     <div class="poem-num">Poem 18</div>
     <div class="poem-title">Kasoor</div>
     <div class="poem-subtitle">The Fault</div>
@@ -1231,7 +1304,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 19 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-19">
     <div class="poem-num">Poem 19</div>
     <div class="poem-title">Raatonka Agaaz</div>
     <div class="poem-subtitle">The Beginning of Nights</div>
@@ -1247,7 +1320,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 20 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-20">
     <div class="poem-num">Poem 20</div>
     <div class="poem-title">Ek Pal</div>
     <div class="poem-subtitle">That One Afternoon</div>
@@ -1270,7 +1343,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 21 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-21">
     <div class="poem-num">Poem 21</div>
     <div class="poem-title">Moonlight</div>
     <div class="poem-subtitle">Stuck in the Moonlight</div>
@@ -1292,7 +1365,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 22 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-22">
     <div class="poem-num">Poem 22</div>
     <div class="poem-title">इतनी भी</div>
     <div class="poem-subtitle">Itni Bhi</div>
@@ -1310,7 +1383,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 23 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-23">
     <div class="poem-num">Poem 23</div>
     <div class="poem-title">एक सपना</div>
     <div class="poem-subtitle">Ek Sapna &mdash; A Dream</div>
@@ -1328,7 +1401,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 24 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-24">
     <div class="poem-num">Poem 24</div>
     <div class="poem-title">सोचा उन रातों पे</div>
     <div class="poem-subtitle">Socha Un Raaton Pe</div>
@@ -1352,7 +1425,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 25 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-25">
     <div class="poem-num">Poem 25</div>
     <div class="poem-title">Kavita Par</div>
     <div class="poem-subtitle">Writing a Poem on You</div>
@@ -1382,7 +1455,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 26 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-26">
     <div class="poem-num">Poem 26</div>
     <div class="poem-title">Khwab Aya</div>
     <div class="poem-subtitle">The Dream Came</div>
@@ -1425,7 +1498,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 27 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-27">
     <div class="poem-num">Poem 27</div>
     <div class="poem-title">लोग पूछते हैं</div>
     <div class="poem-subtitle">Log Poochhtey Hain</div>
@@ -1457,7 +1530,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 28 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-28">
     <div class="poem-num">Poem 28</div>
     <div class="poem-title">Puchhna Mat</div>
     <div class="poem-subtitle">Don't Ask How I Am</div>
@@ -1501,7 +1574,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 29 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-29">
     <div class="poem-num">Poem 29</div>
     <div class="poem-title">Tab Ki Ye Baat</div>
     <div class="poem-subtitle">That Was Then</div>
@@ -1539,7 +1612,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 30 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-30">
     <div class="poem-num">Poem 30</div>
     <div class="poem-title">The Dim Lights</div>
     <div class="poem-subtitle">An English Verse</div>
@@ -1575,7 +1648,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 31 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-31">
     <div class="poem-num">Poem 31</div>
     <div class="poem-title">Sapne Kanch Mein</div>
     <div class="poem-subtitle">Dreams in Glass</div>
@@ -1593,7 +1666,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 32 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-32">
     <div class="poem-num">Poem 32</div>
     <div class="poem-title">Raat Mein Parchhai</div>
     <div class="poem-subtitle">Shadow at Night</div>
@@ -1611,7 +1684,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 33 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-33">
     <div class="poem-num">Poem 33</div>
     <div class="poem-title">Khoobsurati Aisi</div>
     <div class="poem-subtitle">Such Beauty</div>
@@ -1634,7 +1707,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 34 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-34">
     <div class="poem-num">Poem 34</div>
     <div class="poem-title">Baat</div>
     <div class="poem-subtitle">Words Are Not Enough</div>
@@ -1650,7 +1723,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 35 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-35">
     <div class="poem-num">Poem 35</div>
     <div class="poem-title">एक रात थी वो ऐसी</div>
     <div class="poem-subtitle">Ek Raat Thi Wo Aisi</div>
@@ -1690,7 +1763,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 36 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-36">
     <div class="poem-num">Poem 36</div>
     <div class="poem-title">For the Moment</div>
     <div class="poem-subtitle">An English Verse</div>
@@ -1718,7 +1791,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 37 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-37">
     <div class="poem-num">Poem 37</div>
     <div class="poem-title">Your Harmony</div>
     <div class="poem-subtitle">An English Verse</div>
@@ -1741,7 +1814,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 38 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-38">
     <div class="poem-num">Poem 38</div>
     <div class="poem-title">पण बहुतेक</div>
     <div class="poem-subtitle">Pan Bahuteka &mdash; (Marathi)</div>
@@ -1767,7 +1840,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 39 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-39">
     <div class="poem-num">Poem 39</div>
     <div class="poem-title">Dhadkano Ka Haal Chahiye</div>
     <div class="poem-subtitle">The Heart Wants More Than Rules</div>
@@ -1791,7 +1864,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 40 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-40">
     <div class="poem-num">Poem 40</div>
     <div class="poem-title">Milne Ka Beshak</div>
     <div class="poem-subtitle">Meeting Was the Excuse</div>
@@ -1809,7 +1882,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 41 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-41">
     <div class="poem-num">Poem 41</div>
     <div class="poem-title">Galti Se Palke Jhuki</div>
     <div class="poem-subtitle">A Deep Sleep</div>
@@ -1831,7 +1904,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 42 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-42">
     <div class="poem-num">Poem 42</div>
     <div class="poem-title">Daag Toh Mil Gye</div>
     <div class="poem-subtitle">Found the Spots, Now Searching for the Moon</div>
@@ -1847,7 +1920,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 43 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-43">
     <div class="poem-num">Poem 43</div>
     <div class="poem-title">Pass Rehne Ki Sifarish Nahi</div>
     <div class="poem-subtitle">No Request to Stay Close</div>
@@ -1865,7 +1938,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 44 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-44">
     <div class="poem-num">Poem 44</div>
     <div class="poem-title">Rang Bikhar Jaye Toh</div>
     <div class="poem-subtitle">When Colours Scatter</div>
@@ -1894,7 +1967,7 @@ body { transition: background-color 1.4s ease; }
 <div class="page">
 
   <!-- Poem 45 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-45">
     <div class="poem-num">Poem 45</div>
     <div class="poem-title">Dost Hote Bde Ajeeb</div>
     <div class="poem-subtitle">Friends Are Strange</div>
@@ -1932,7 +2005,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 46 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-46">
     <div class="poem-num">Poem 46</div>
     <div class="poem-title">पुराना ही था दोस्त</div>
     <div class="poem-subtitle">Purana Hi Tha Dost</div>
@@ -1970,7 +2043,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 47 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-47">
     <div class="poem-num">Poem 47</div>
     <div class="poem-title">एका क्षणात</div>
     <div class="poem-subtitle">Eka Kshnat &mdash; In One Moment (Marathi)</div>
@@ -1990,7 +2063,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 48 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-48">
     <div class="poem-num">Poem 48</div>
     <div class="poem-title">Hua Pyar To</div>
     <div class="poem-subtitle">If There Was Love</div>
@@ -2010,7 +2083,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 49 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-49">
     <div class="poem-num">Poem 49</div>
     <div class="poem-title">Nikle Hai Khwabonka</div>
     <div class="poem-subtitle">Setting Out with Dreams</div>
@@ -2038,7 +2111,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 50 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-50">
     <div class="poem-num">Poem 50</div>
     <div class="poem-title">Azmane Se</div>
     <div class="poem-subtitle">On Testing Bonds</div>
@@ -2075,7 +2148,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 51 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-51">
     <div class="poem-num">Poem 51</div>
     <div class="poem-title">Jinho Ne Baat Karna</div>
     <div class="poem-subtitle">Choose Your Circle Carefully</div>
@@ -2099,7 +2172,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 52 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-52">
     <div class="poem-num">Poem 52</div>
     <div class="poem-title">Hum Dekhenge</div>
     <div class="poem-subtitle">We Shall See</div>
@@ -2134,7 +2207,7 @@ body { transition: background-color 1.4s ease; }
 <div class="page">
 
   <!-- Poem 53 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-53">
     <div class="poem-num">Poem 53</div>
     <div class="poem-title">Aai</div>
     <div class="poem-subtitle">For My Mother &mdash; (Marathi)</div>
@@ -2194,7 +2267,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 54 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-54">
     <div class="poem-num">Poem 54</div>
     <div class="poem-title">Bhai</div>
     <div class="poem-subtitle">For My Brother &mdash; (Three Languages)</div>
@@ -2242,7 +2315,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 55 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-55">
     <div class="poem-num">Poem 55</div>
     <div class="poem-title">Jinhone Bolna Sikhaya</div>
     <div class="poem-subtitle">Those Who Taught Me to Speak</div>
@@ -2278,7 +2351,7 @@ body { transition: background-color 1.4s ease; }
 <div class="page">
 
   <!-- Poem 56 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-56">
     <div class="poem-num">Poem 56</div>
     <div class="poem-title">Kalam</div>
     <div class="poem-subtitle">The Pen</div>
@@ -2294,7 +2367,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 57 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-57">
     <div class="poem-num">Poem 57</div>
     <div class="poem-title">स्वप्नातील सुख</div>
     <div class="poem-subtitle">Swapnatil Sukh &mdash; (Marathi)</div>
@@ -2326,7 +2399,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 58 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-58">
     <div class="poem-num">Poem 58</div>
     <div class="poem-title">Udyachich Chinta</div>
     <div class="poem-subtitle">Tomorrow's Worry &mdash; (Marathi)</div>
@@ -2348,7 +2421,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 59 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-59">
     <div class="poem-num">Poem 59</div>
     <div class="poem-title">Kuch Kami</div>
     <div class="poem-subtitle">The Art of Living with Less</div>
@@ -2377,7 +2450,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 60 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-60">
     <div class="poem-num">Poem 60</div>
     <div class="poem-title">Kavita Mein Shabd</div>
     <div class="poem-subtitle">Words in a Poem</div>
@@ -2414,7 +2487,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 61 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-61">
     <div class="poem-num">Poem 61</div>
     <div class="poem-title">Sangeet</div>
     <div class="poem-subtitle">Music &amp; Memory</div>
@@ -2438,7 +2511,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 62 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-62">
     <div class="poem-num">Poem 62</div>
     <div class="poem-title">In Quest</div>
     <div class="poem-subtitle">On Identity &mdash; A Prose Reflection</div>
@@ -2457,7 +2530,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 63 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-63">
     <div class="poem-num">Poem 63</div>
     <div class="poem-title">Halat Ne Majbur</div>
     <div class="poem-subtitle">Life Made Me a Craftsman</div>
@@ -2484,7 +2557,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 64 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-64">
     <div class="poem-num">Poem 64</div>
     <div class="poem-title">Agar Sab Hi Ki Ruh</div>
     <div class="poem-subtitle">If All Souls Are One</div>
@@ -2509,7 +2582,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 65 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-65">
     <div class="poem-num">Poem 65</div>
     <div class="poem-title">Bekhudi</div>
     <div class="poem-subtitle">On Purpose</div>
@@ -2527,7 +2600,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 66 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-66">
     <div class="poem-num">Poem 66</div>
     <div class="poem-title">Laksh</div>
     <div class="poem-subtitle">After Success, What?</div>
@@ -2545,7 +2618,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 67 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-67">
     <div class="poem-num">Poem 67</div>
     <div class="poem-title">Mar Gye</div>
     <div class="poem-subtitle">On Death &amp; Blame</div>
@@ -2561,7 +2634,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 68 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-68">
     <div class="poem-num">Poem 68</div>
     <div class="poem-title">Wakht Nhi Badal Raha</div>
     <div class="poem-subtitle">Change Everything</div>
@@ -2589,7 +2662,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 69 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-69">
     <div class="poem-num">Poem 69</div>
     <div class="poem-title">Laugh Out</div>
     <div class="poem-subtitle">On Strength</div>
@@ -2612,7 +2685,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 70 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-70">
     <div class="poem-num">Poem 70</div>
     <div class="poem-title">Janam Din</div>
     <div class="poem-subtitle">The Dream of Living</div>
@@ -2643,7 +2716,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 71 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-71">
     <div class="poem-num">Poem 71</div>
     <div class="poem-title">जवानी की उम्र</div>
     <div class="poem-subtitle">Jawani Ki Umar &mdash; The Age of Youth</div>
@@ -2671,7 +2744,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 72 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-72">
     <div class="poem-num">Poem 72</div>
     <div class="poem-title">Apnepan</div>
     <div class="poem-subtitle">On Belonging</div>
@@ -2699,7 +2772,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 73 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-73">
     <div class="poem-num">Poem 73</div>
     <div class="poem-title">Zindagi Adhuri</div>
     <div class="poem-subtitle">Life Is Incomplete</div>
@@ -2715,7 +2788,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 74 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-74">
     <div class="poem-num">Poem 74</div>
     <div class="poem-title">Wakht</div>
     <div class="poem-subtitle">Time</div>
@@ -2760,7 +2833,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 75 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-75">
     <div class="poem-num">Poem 75</div>
     <div class="poem-title">Har Hrutu Mein Alag Sawera</div>
     <div class="poem-subtitle">Every Season, a New Dawn</div>
@@ -2778,7 +2851,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 76 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-76">
     <div class="poem-num">Poem 76</div>
     <div class="poem-title">Dil Ki Laparwahi</div>
     <div class="poem-subtitle">The Heart's Carelessness</div>
@@ -2802,7 +2875,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 77 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-77">
     <div class="poem-num">Poem 77</div>
     <div class="poem-title">Aasman Mein Udna Ho Toh</div>
     <div class="poem-subtitle">If You Wish to Fly</div>
@@ -2826,7 +2899,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 78 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-78">
     <div class="poem-num">Poem 78</div>
     <div class="poem-title">Badalonke Surat Mein</div>
     <div class="poem-subtitle">In the Shape of Clouds</div>
@@ -2855,7 +2928,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 79 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-79">
     <div class="poem-num">Poem 79</div>
     <div class="poem-title">Mitti Banne Taiyyar</div>
     <div class="poem-subtitle">Ready to Become Earth</div>
@@ -2873,7 +2946,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 80 — NEW (Marathi) -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-80">
     <div class="poem-num">Poem 80</div>
     <div class="poem-title">Dilkhulas Hasya Agdi</div>
     <div class="poem-subtitle">Wholehearted Joy &mdash; (Marathi)</div>
@@ -2895,7 +2968,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 81 — NEW (prose) -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-81">
     <div class="poem-num">Poem 81</div>
     <div class="poem-title">We Have the Least Control</div>
     <div class="poem-subtitle">A Prose Reflection</div>
@@ -2916,7 +2989,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 82 — NEW (Marathi) -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-82">
     <div class="poem-num">Poem 82</div>
     <div class="poem-title">Surya Kade Pahun</div>
     <div class="poem-subtitle">Looking at the Sun &mdash; (Marathi)</div>
@@ -2944,7 +3017,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 83 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-83">
     <div class="poem-num">Poem 83</div>
     <div class="poem-title">Kab Kya Sunte Ho</div>
     <div class="poem-subtitle">When You Listen Matters</div>
@@ -2968,7 +3041,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 84 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-84">
     <div class="poem-num">Poem 84</div>
     <div class="poem-title">Nazara Wohi</div>
     <div class="poem-subtitle">Same View, Different Worlds</div>
@@ -2986,7 +3059,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 85 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-85">
     <div class="poem-num">Poem 85</div>
     <div class="poem-title">Khud Ek Khayal</div>
     <div class="poem-subtitle">How to Speak When You Are a Thought</div>
@@ -3010,7 +3083,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 86 — NEW (prose) -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-86">
     <div class="poem-num">Poem 86</div>
     <div class="poem-title">Time</div>
     <div class="poem-subtitle">A Prose Reflection</div>
@@ -3028,7 +3101,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 87 — NEW (combined p133+138) -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-87">
     <div class="poem-num">Poem 87</div>
     <div class="poem-title">Kaise?</div>
     <div class="poem-subtitle">How?</div>
@@ -3059,7 +3132,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 88 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-88">
     <div class="poem-num">Poem 88</div>
     <div class="poem-title">Samjhne Ki Khwaish Nahin</div>
     <div class="poem-subtitle">I Don't Want to Be Understood &mdash; I Want Restraint</div>
@@ -3083,7 +3156,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 89 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-89">
     <div class="poem-num">Poem 89</div>
     <div class="poem-title">Akhir Chahte Kya Ho?</div>
     <div class="poem-subtitle">What Do You Actually Want?</div>
@@ -3108,7 +3181,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 90 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-90">
     <div class="poem-num">Poem 90</div>
     <div class="poem-title">Panchhiyon Ki Tarah</div>
     <div class="poem-subtitle">Like Birds</div>
@@ -3132,7 +3205,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 91 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-91">
     <div class="poem-num">Poem 91</div>
     <div class="poem-title">Koi Hawa Ke Sath Chalkar</div>
     <div class="poem-subtitle">Walk with the Wind</div>
@@ -3156,7 +3229,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 92 — NEW (combined p143+144) -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-92">
     <div class="poem-num">Poem 92</div>
     <div class="poem-title">Kab Aur Kaha</div>
     <div class="poem-subtitle">Right Time, Right Place</div>
@@ -3189,7 +3262,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 93 — NEW (prose) -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-93">
     <div class="poem-num">Poem 93</div>
     <div class="poem-title">Purpose</div>
     <div class="poem-subtitle">A Prose Reflection</div>
@@ -3222,7 +3295,7 @@ body { transition: background-color 1.4s ease; }
 <div class="page">
 
   <!-- Poem 94 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-94">
     <div class="poem-num">Poem 94</div>
     <div class="poem-title">Naam Bada Karna</div>
     <div class="poem-subtitle">Make a Name</div>
@@ -3275,7 +3348,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 95 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-95">
     <div class="poem-num">Poem 95</div>
     <div class="poem-title">Nam Jaan Kar</div>
     <div class="poem-subtitle">What Will Knowing My Name Achieve?</div>
@@ -3307,7 +3380,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 96 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-96">
     <div class="poem-num">Poem 96</div>
     <div class="poem-title">Badonka Bachpna</div>
     <div class="poem-subtitle">Adults Are Becoming Children</div>
@@ -3336,7 +3409,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 97 -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-97">
     <div class="poem-num">Poem 97</div>
     <div class="poem-title">Wyaparatil Bhav</div>
     <div class="poem-subtitle">Values Lost in Trade</div>
@@ -3356,7 +3429,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 98 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-98">
     <div class="poem-num">Poem 98</div>
     <div class="poem-title">Kahani Toh Adhuri</div>
     <div class="poem-subtitle">At Least Finish the Poem</div>
@@ -3372,7 +3445,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 99 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-99">
     <div class="poem-num">Poem 99</div>
     <div class="poem-title">Meri Apni Kahani</div>
     <div class="poem-subtitle">My Own Story</div>
@@ -3402,7 +3475,7 @@ body { transition: background-color 1.4s ease; }
 <div class="page">
 
   <!-- Poem 100 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-100">
     <div class="poem-num">Poem 100</div>
     <div class="poem-title">The Language You Speak</div>
     <div class="poem-subtitle">An Inquiry into Identity</div>
@@ -3426,7 +3499,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 101 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-101">
     <div class="poem-num">Poem 101</div>
     <div class="poem-title">What Defines You</div>
     <div class="poem-subtitle">An Unanswered Question</div>
@@ -3451,7 +3524,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 102 — NEW (combined p139+140) -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-102">
     <div class="poem-num">Poem 102</div>
     <div class="poem-title">So Easy to Forget</div>
     <div class="poem-subtitle">The Paradox of Being Human</div>
@@ -3478,7 +3551,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 103 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-103">
     <div class="poem-num">Poem 103</div>
     <div class="poem-title">Keep Smiling on the Horizon</div>
     <div class="poem-subtitle">An English Verse</div>
@@ -3502,7 +3575,7 @@ body { transition: background-color 1.4s ease; }
   </div>
 
   <!-- Poem 104 — NEW -->
-  <div class="poem-block">
+  <div class="poem-block" id="poem-104">
     <div class="poem-num">Poem 104</div>
     <div class="poem-title">There Are Just a Few Days</div>
     <div class="poem-subtitle">An English Verse</div>
@@ -3629,23 +3702,45 @@ function updateRibbon() {
 window.addEventListener('scroll', updateRibbon, { passive: true });
 updateRibbon();
 
-// ═══ IDEA 4: CHAPTER QUICK-NAV ═══
+// ═══ IDEA 4: CHAPTER QUICK-NAV (+ BEST OF QUICK-NAV) ═══
 const panel   = document.getElementById('chNavPanel');
 const tabBtn  = document.getElementById('chNavTab');
 const closeBtn = document.getElementById('chNavClose');
+const bestPanel = document.getElementById('bestNavPanel');
+const bestTabBtn = document.getElementById('bestNavTab');
+const bestCloseBtn = document.getElementById('bestNavClose');
+
 if (tabBtn && panel) {
-  tabBtn.addEventListener('click', () => panel.classList.toggle('open'));
+  tabBtn.addEventListener('click', () => {
+    if (bestPanel) bestPanel.classList.remove('open');
+    panel.classList.toggle('open');
+  });
   closeBtn.addEventListener('click', () => panel.classList.remove('open'));
   panel.querySelectorAll('a').forEach(a =>
     a.addEventListener('click', () => panel.classList.remove('open'))
   );
-  // Close panel on outside click
-  document.addEventListener('click', e => {
-    if (!panel.contains(e.target) && e.target !== tabBtn) {
-      panel.classList.remove('open');
-    }
-  });
 }
+
+if (bestTabBtn && bestPanel) {
+  bestTabBtn.addEventListener('click', () => {
+    if (panel) panel.classList.remove('open');
+    bestPanel.classList.toggle('open');
+  });
+  bestCloseBtn.addEventListener('click', () => bestPanel.classList.remove('open'));
+  bestPanel.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => bestPanel.classList.remove('open'))
+  );
+}
+
+// Close either panel on outside click
+document.addEventListener('click', e => {
+  if (panel && !panel.contains(e.target) && e.target !== tabBtn) {
+    panel.classList.remove('open');
+  }
+  if (bestPanel && !bestPanel.contains(e.target) && e.target !== bestTabBtn) {
+    bestPanel.classList.remove('open');
+  }
+});
 
 // ═══ IDEA 5: PER-CHAPTER AMBIENT COLOUR SHIFT ═══
 // Body background subtly shifts as you scroll into each Part.
