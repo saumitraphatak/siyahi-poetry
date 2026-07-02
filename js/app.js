@@ -10,6 +10,45 @@
     english: "English",
   };
 
+  const moodPaths = [
+    {
+      title: "Longing",
+      subtitle: "when the heart keeps returning",
+      theme: "ishq",
+      poemId: "poem-6",
+    },
+    {
+      title: "Friendship",
+      subtitle: "the people who become weather",
+      theme: "dosti",
+      poemId: "poem-50",
+    },
+    {
+      title: "Home",
+      subtitle: "family, memory, and the old room inside you",
+      theme: "rishtey",
+      poemId: "poem-53",
+    },
+    {
+      title: "Becoming",
+      subtitle: "questions of time, self, and purpose",
+      theme: "zindagi",
+      poemId: "poem-93",
+    },
+    {
+      title: "Society",
+      subtitle: "what the world asks of us",
+      theme: "samaj",
+      poemId: "poem-97",
+    },
+    {
+      title: "Identity",
+      subtitle: "the English poems, slightly restless",
+      theme: "english-verses",
+      poemId: "poem-100",
+    },
+  ];
+
   const state = {
     language: "hindi",
     theme: "all",
@@ -31,6 +70,7 @@
     randomPoem: document.getElementById("randomPoem"),
     dailyLine: document.getElementById("dailyLine"),
     featuredGrid: document.getElementById("featuredGrid"),
+    moodGrid: document.getElementById("moodGrid"),
   };
 
   function escapeHtml(value) {
@@ -98,6 +138,40 @@
     });
   }
 
+  function languageChips(poem) {
+    return poem.languages
+      .map((language) => `<span>${escapeHtml(languageNames[language])}</span>`)
+      .join("");
+  }
+
+  function scrollToArchive() {
+    document.getElementById("archive")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function applyTheme(theme, poemId) {
+    const poem = data.poems.find((item) => item.id === poemId);
+    state.language = poem ? poem.languages[0] : state.language;
+    state.theme = theme;
+    state.query = "";
+
+    elements.tabs.forEach((tab) => {
+      const active = tab.dataset.language === state.language;
+      tab.classList.toggle("is-active", active);
+      tab.setAttribute("aria-selected", String(active));
+    });
+    elements.themeSelect.value = theme;
+    elements.searchInput.value = "";
+
+    if (poem && poem.languages.includes(state.language)) {
+      selectPoem(poem.id, true);
+    } else {
+      const first = filteredPoems()[0];
+      if (first) selectPoem(first.id, true);
+      else renderList();
+    }
+    scrollToArchive();
+  }
+
   function selectPoem(id, openOnMobile) {
     const poem = data.poems.find((item) => item.id === id);
     if (!poem) return;
@@ -114,6 +188,10 @@
         <p class="reader-kicker">Poem ${String(poem.number).padStart(3, "0")} · ${escapeHtml(poem.theme.label)}</p>
         <h2 class="reader-title">${escapeHtml(poem.title)}</h2>
         ${poem.subtitle ? `<p class="reader-subtitle">${escapeHtml(poem.subtitle)}</p>` : ""}
+        <div class="reader-meta" aria-label="Poem metadata">
+          ${languageChips(poem)}
+          <span>${escapeHtml(poem.theme.description)}</span>
+        </div>
         <div class="reader-rule" aria-hidden="true"></div>
         <div class="reader-content${state.meaningVisible ? "" : " hide-meaning"}">${poem.contentHtml}</div>
         <nav class="reader-tools" aria-label="Poem navigation">
@@ -249,6 +327,7 @@
             <span class="featured-rank">${String(poem.featuredRank).padStart(2, "0")}</span>
             <span class="featured-title">${escapeHtml(poem.title)}</span>
             <span class="featured-meta">${escapeHtml(poem.theme.label)} · ${languageNames[poem.languages[0]]}</span>
+            <span class="featured-excerpt">${escapeHtml(poem.meaning)}</span>
           </button>
         `
       )
@@ -257,9 +336,38 @@
     elements.featuredGrid.querySelectorAll(".featured-card").forEach((button) => {
       button.addEventListener("click", () => {
         openPoem(button.dataset.poemId, true);
-        elements.reader.scrollIntoView({ behavior: "smooth", block: "start" });
+        scrollToArchive();
       });
     });
+  }
+
+  function renderMoods() {
+    if (!elements.moodGrid) return;
+
+    elements.moodGrid.innerHTML = moodPaths
+      .map((mood) => {
+        const count = data.poems.filter((poem) => poem.theme.slug === mood.theme).length;
+        return `
+          <button class="mood-card" type="button" data-theme="${mood.theme}" data-poem-id="${mood.poemId}">
+            <span class="mood-title">${escapeHtml(mood.title)}</span>
+            <span class="mood-subtitle">${escapeHtml(mood.subtitle)}</span>
+            <span class="mood-count">${count} ${count === 1 ? "poem" : "poems"}</span>
+          </button>
+        `;
+      })
+      .join("");
+
+    elements.moodGrid.querySelectorAll(".mood-card").forEach((button) => {
+      button.addEventListener("click", () => applyTheme(button.dataset.theme, button.dataset.poemId));
+    });
+  }
+
+  function restoreSectionHash() {
+    const id = location.hash.slice(1);
+    if (!["featured", "moods", "archive"].includes(id)) return;
+    window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ block: "start" });
+    }, 80);
   }
 
   elements.tabs.forEach((tab) => {
@@ -291,6 +399,7 @@
   populateThemes();
   setDailyLine();
   renderFeatured();
+  renderMoods();
 
   const hashId = location.hash.slice(1);
   if (!openPoem(hashId, false)) {
@@ -301,4 +410,5 @@
       renderList();
     }
   }
+  restoreSectionHash();
 })();
