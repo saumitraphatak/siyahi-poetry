@@ -1471,21 +1471,19 @@ h1 {
 }
 
 .story-card {
-  display: block;
+  position: relative;
   padding: 26px clamp(20px, 3vw, 32px);
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
   color: var(--ink);
-  text-decoration: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .story-card:hover,
-.story-card:focus-visible {
+.story-card:has(a:focus-visible) {
   border-color: var(--gold);
   box-shadow: 0 12px 30px var(--shadow);
-  outline: 0;
   transform: translateY(-2px);
 }
 
@@ -1503,6 +1501,23 @@ h1 {
   font: 500 clamp(24px, 3vw, 32px)/1.15 var(--serif);
 }
 
+.story-card h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.story-card h2 a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.story-card h2 a:hover,
+.story-card h2 a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .story-card p {
   margin: 0 0 14px;
   max-width: 640px;
@@ -1518,10 +1533,32 @@ h1 {
   font-size: 12px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  margin-bottom: 16px;
 }
 
 .story-card .story-meta strong {
   color: var(--ink);
+}
+
+.story-card-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.story-card-actions .story-read-link {
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.story-card-actions .story-read-link:hover,
+.story-card-actions .story-read-link:focus-visible {
+  border-color: var(--blue);
 }
 
 .story-more {
@@ -1665,4 +1702,78 @@ h1 {
   .story-poem {
     font-size: 16px;
   }
+}
+
+/* Download links (story PDFs, full collection PDF) */
+
+.download-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.download-link:hover,
+.download-link:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+  outline: 0;
+}
+
+.download-link .arrow {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.story-page .download-link {
+  margin: 4px 0 0;
+}
+
+.story-card .download-link {
+  border-color: var(--line);
+  font-size: 12px;
+  padding: 6px 13px;
+}
+
+.story-card .download-link:hover,
+.story-card .download-link:focus-visible {
+  border-color: var(--ink);
+}
+
+.downloads-strip {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: clamp(28px, 4vw, 44px) clamp(20px, 5vw, 72px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 24px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--paper-deep);
+}
+
+.downloads-strip p {
+  margin: 0;
+  max-width: 480px;
+  color: var(--ink-soft);
+  font: 400 15px/1.5 var(--serif);
+}
+
+.downloads-strip p strong {
+  color: var(--ink);
+}
+
+.downloads-strip .download-link {
+  flex-shrink: 0;
 }

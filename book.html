@@ -215,7 +215,8 @@ a.toc-item:hover, a.toc-item:focus-visible { color: var(--accent); background: r
   .book { box-shadow: none; max-width: 100%; }
   .cover, .back-cover, .chapter-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .chapter-header { page-break-before: always; }
-  .poem-block { page-break-inside: avoid; }
+  .poem-block { page-break-inside: avoid; opacity: 1 !important; transform: none !important; }
+  .book-site-header, .side-nav-stack, .reader-tools { display: none !important; }
   @page { size: A4; margin: 0; }
 }
 
@@ -645,6 +646,7 @@ body { transition: background-color 1.4s ease; }
     </span>
   </a>
   <div class="book-header-actions">
+    <a class="book-archive-link" href="assets/siyahi-collected-poems.pdf" download>Download PDF</a>
     <a class="book-archive-link" href="stories/index.html">Stories</a>
     <a class="book-archive-link" href="index.html">Poetry archive &rarr;</a>
   </div>
