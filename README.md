@@ -1,6 +1,6 @@
 # Siyahi — सियाही
 
-An online poetry archive by Saumitra S. Phatak, with 133 original poems in Hindi, Marathi, and English.
+An online poetry archive by Saumitra S. Phatak, with 109 original poems in Hindi, Marathi, and English.
 
 **Live site:** https://saumitraphatak.github.io/siyahi-poetry/
 
@@ -20,7 +20,7 @@ The original complete book remains available at [`book.html`](book.html).
 
 ## Collection
 
-The archive contains 133 poems organized around seven themes:
+The archive contains 109 poems organized around seven themes:
 
 - Ishq — love and longing
 - Dosti — friendship
