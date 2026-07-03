@@ -1,6 +1,6 @@
 # Siyahi Poetry
 
-Siyahi ("ink") is Saumitra S. Phatak's static, multilingual poetry archive: 104 original poems (plus ~33 short aphorisms) in Hindi, Marathi, and English, presented as a searchable/browsable website with a separate original "book edition" view.
+Siyahi ("ink") is Saumitra S. Phatak's static, multilingual poetry archive: 153 original poems (plus ~33 short aphorisms) in Hindi, Marathi, and English, presented as a searchable/browsable website with a separate original "book edition" view.
 
 **Live site:** https://saumitraphatak.github.io/siyahi-poetry/ (GitHub Pages, served from `main` branch root)
 **Repo:** https://github.com/saumitraphatak/siyahi-poetry
@@ -68,7 +68,7 @@ Requires `beautifulsoup4` (already available via the Anaconda Python on this mac
 - **Preserve Devanagari Unicode exactly** — don't let an editor/tool normalize or mangle Hindi/Marathi text.
 - **The poem count is asserted at 104.** If you add or remove poems, the total will change and the script will intentionally throw until the assertion in `build_content.py` is updated.
 - **`google8a0c77e6409e4ccc.html`** is a Google Search Console ownership-verification file — leave it in place even though it looks like clutter.
-- No build tools, no linter, no tests — verify changes by opening `index.html`/`book.html` directly in a browser and/or running the Python script and checking its stdout ("Wrote 104 poems and N aphorisms...").
+- No build tools, no linter, no tests — verify changes by opening `index.html`/`book.html` directly in a browser and/or running the Python script and checking its stdout ("Wrote 153 poems and N aphorisms...").
 
 ## How to make a content change (actual workflow)
 
@@ -77,7 +77,7 @@ Requires `beautifulsoup4` (already available via the Anaconda Python on this mac
    ```bash
    python3 scripts/build_content.py
    ```
-3. Confirm it printed `Wrote 104 poems and ... aphorisms to .../js/poems-data.js` with no error.
+3. Confirm it printed `Wrote 153 poems and ... aphorisms to .../js/poems-data.js` with no error.
 4. Open `index.html` and `book.html` in a browser to spot-check the change (search for the poem, open the reader, check the language tab it appears under).
 5. If the change affects language classification, theme, or "featured" status, also update the corresponding set/list at the top of `scripts/build_content.py` before regenerating.
 6. Commit both `book.html` and the regenerated `js/poems-data.js` together — never commit one without the other.
