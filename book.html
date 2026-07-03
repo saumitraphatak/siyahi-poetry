@@ -159,6 +159,8 @@ body {
 .toc-section { margin-bottom: 32px; }
 .toc-section-label { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: var(--accent-light); letter-spacing: 2px; margin-bottom: 10px; padding-left: 14px; border-left: 2px solid var(--divider); }
 .toc-item { display: flex; align-items: baseline; padding: 4px 0; font-size: 15px; }
+a.toc-item { color: var(--ink); text-decoration: none; border-radius: 6px; transition: color 0.16s ease, background 0.16s ease, padding 0.16s ease; }
+a.toc-item:hover, a.toc-item:focus-visible { color: var(--accent); background: rgba(212,165,116,0.10); padding-left: 8px; outline: none; }
 .toc-num { color: var(--accent-light); font-size: 12px; min-width: 30px; letter-spacing: 1px; }
 .toc-name { flex: 1; }
 .toc-dots { flex: 1; border-bottom: 1px dotted #d4a574; margin: 0 12px; position: relative; bottom: 3px; max-width: 120px; }
@@ -194,6 +196,9 @@ body {
 .stanza:last-child { margin-bottom: 0; }
 .poem-note { font-style: italic; font-size: 13px; color: var(--muted); padding: 8px 16px; border-left: 2px solid var(--divider); margin-bottom: 22px; background: rgba(212,165,116,0.06); }
 .poem-sig { text-align: right; font-style: italic; font-size: 14px; color: var(--muted); margin-top: 28px; letter-spacing: 1px; }
+.poem-actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 10px; }
+.poem-actions a { display: inline-flex; align-items: center; min-height: 36px; padding: 7px 12px; border: 1px solid rgba(139,69,19,0.22); border-radius: 999px; color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 600; background: rgba(253,248,239,0.62); }
+.poem-actions a:hover, .poem-actions a:focus-visible { background: var(--accent); color: var(--paper); outline: none; }
 .bilingual { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0 35px; }
 .bilingual-sep { background: var(--divider); min-height: 80px; }
 .aph-title { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--accent); border-bottom: 1px solid var(--divider); padding-bottom: 14px; margin-bottom: 40px; letter-spacing: 2px; text-align: center; }
@@ -739,132 +744,132 @@ body { transition: background-color 1.4s ease; }
 
   <div class="toc-section">
     <div class="toc-section-label">Part I &nbsp;&middot;&nbsp; Rishtey &mdash; Family &amp; Bonds</div>
-    <div class="toc-item"><span class="toc-num">53</span><span class="toc-name">Aai</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">54</span><span class="toc-name">Bhai</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">55</span><span class="toc-name">Jinhone Bolna Sikhaya</span><span class="toc-dots"></span></div>
+    <a class="toc-item" href="#poem-53"><span class="toc-num">53</span><span class="toc-name">Aai</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-54"><span class="toc-num">54</span><span class="toc-name">Bhai</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-55"><span class="toc-num">55</span><span class="toc-name">Jinhone Bolna Sikhaya</span><span class="toc-dots"></span></a>
   </div>
   <div class="toc-section">
     <div class="toc-section-label">Part II &nbsp;&middot;&nbsp; Dosti &mdash; Friendship</div>
-    <div class="toc-item"><span class="toc-num">45</span><span class="toc-name">Dost Hote Bde Ajeeb</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">46</span><span class="toc-name">पुराना ही था दोस्त</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">47</span><span class="toc-name">एका क्षणात</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">48</span><span class="toc-name">Hua Pyar To</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">49</span><span class="toc-name">Nikle Hai Khwabonka</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">50</span><span class="toc-name">Azmane Se</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">51</span><span class="toc-name">Jinho Ne Baat Karna</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">52</span><span class="toc-name">Hum Dekhenge</span><span class="toc-dots"></span></div>
+    <a class="toc-item" href="#poem-45"><span class="toc-num">45</span><span class="toc-name">Dost Hote Bde Ajeeb</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-46"><span class="toc-num">46</span><span class="toc-name">पुराना ही था दोस्त</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-47"><span class="toc-num">47</span><span class="toc-name">एका क्षणात</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-48"><span class="toc-num">48</span><span class="toc-name">Hua Pyar To</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-49"><span class="toc-num">49</span><span class="toc-name">Nikle Hai Khwabonka</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-50"><span class="toc-num">50</span><span class="toc-name">Azmane Se</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-51"><span class="toc-num">51</span><span class="toc-name">Jinho Ne Baat Karna</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-52"><span class="toc-num">52</span><span class="toc-name">Hum Dekhenge</span><span class="toc-dots"></span></a>
   </div>
   <div class="toc-section">
     <div class="toc-section-label">Part III &nbsp;&middot;&nbsp; Zindagi &mdash; Life &amp; Philosophy</div>
-    <div class="toc-item"><span class="toc-num">56</span><span class="toc-name">Kalam</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">57</span><span class="toc-name">स्वप्नातील सुख</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">58</span><span class="toc-name">Udyachich Chinta</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">59</span><span class="toc-name">Kuch Kami</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">60</span><span class="toc-name">Kavita Mein Shabd</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">61</span><span class="toc-name">Sangeet</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">62</span><span class="toc-name">In Quest</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">63</span><span class="toc-name">Halat Ne Majbur</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">64</span><span class="toc-name">Agar Sab Hi Ki Ruh</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">65</span><span class="toc-name">Bekhudi</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">66</span><span class="toc-name">Laksh</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">67</span><span class="toc-name">Mar Gye</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">68</span><span class="toc-name">Wakht Nhi Badal Raha</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">69</span><span class="toc-name">Laugh Out</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">70</span><span class="toc-name">Janam Din</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">71</span><span class="toc-name">जवानी की उम्र</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">72</span><span class="toc-name">Apnepan</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">73</span><span class="toc-name">Zindagi Adhuri</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">74</span><span class="toc-name">Wakht</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">75</span><span class="toc-name">Har Hrutu Mein Alag Sawera</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">76</span><span class="toc-name">Dil Ki Laparwahi</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">77</span><span class="toc-name">Aasman Mein Udna Ho Toh</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">78</span><span class="toc-name">Badalonke Surat Mein</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">79</span><span class="toc-name">Mitti Banne Taiyyar</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">80</span><span class="toc-name">Dilkhulas Hasya Agdi</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">81</span><span class="toc-name">We Have the Least Control</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">82</span><span class="toc-name">Surya Kade Pahun</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">83</span><span class="toc-name">Kab Kya Sunte Ho</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">84</span><span class="toc-name">Nazara Wohi</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">85</span><span class="toc-name">Khud Ek Khayal</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">86</span><span class="toc-name">Time</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">87</span><span class="toc-name">Kaise?</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">88</span><span class="toc-name">Samjhne Ki Khwaish Nahin</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">89</span><span class="toc-name">Akhir Chahte Kya Ho?</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">90</span><span class="toc-name">Panchhiyon Ki Tarah</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">91</span><span class="toc-name">Koi Hawa Ke Sath Chalkar</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">92</span><span class="toc-name">Kab Aur Kaha</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">93</span><span class="toc-name">Purpose</span><span class="toc-dots"></span></div>
+    <a class="toc-item" href="#poem-56"><span class="toc-num">56</span><span class="toc-name">Kalam</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-57"><span class="toc-num">57</span><span class="toc-name">स्वप्नातील सुख</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-58"><span class="toc-num">58</span><span class="toc-name">Udyachich Chinta</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-59"><span class="toc-num">59</span><span class="toc-name">Kuch Kami</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-60"><span class="toc-num">60</span><span class="toc-name">Kavita Mein Shabd</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-61"><span class="toc-num">61</span><span class="toc-name">Sangeet</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-62"><span class="toc-num">62</span><span class="toc-name">In Quest</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-63"><span class="toc-num">63</span><span class="toc-name">Halat Ne Majbur</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-64"><span class="toc-num">64</span><span class="toc-name">Agar Sab Hi Ki Ruh</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-65"><span class="toc-num">65</span><span class="toc-name">Bekhudi</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-66"><span class="toc-num">66</span><span class="toc-name">Laksh</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-67"><span class="toc-num">67</span><span class="toc-name">Mar Gye</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-68"><span class="toc-num">68</span><span class="toc-name">Wakht Nhi Badal Raha</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-69"><span class="toc-num">69</span><span class="toc-name">Laugh Out</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-70"><span class="toc-num">70</span><span class="toc-name">Janam Din</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-71"><span class="toc-num">71</span><span class="toc-name">जवानी की उम्र</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-72"><span class="toc-num">72</span><span class="toc-name">Apnepan</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-73"><span class="toc-num">73</span><span class="toc-name">Zindagi Adhuri</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-74"><span class="toc-num">74</span><span class="toc-name">Wakht</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-75"><span class="toc-num">75</span><span class="toc-name">Har Hrutu Mein Alag Sawera</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-76"><span class="toc-num">76</span><span class="toc-name">Dil Ki Laparwahi</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-77"><span class="toc-num">77</span><span class="toc-name">Aasman Mein Udna Ho Toh</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-78"><span class="toc-num">78</span><span class="toc-name">Badalonke Surat Mein</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-79"><span class="toc-num">79</span><span class="toc-name">Mitti Banne Taiyyar</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-80"><span class="toc-num">80</span><span class="toc-name">Dilkhulas Hasya Agdi</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-81"><span class="toc-num">81</span><span class="toc-name">We Have the Least Control</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-82"><span class="toc-num">82</span><span class="toc-name">Surya Kade Pahun</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-83"><span class="toc-num">83</span><span class="toc-name">Kab Kya Sunte Ho</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-84"><span class="toc-num">84</span><span class="toc-name">Nazara Wohi</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-85"><span class="toc-num">85</span><span class="toc-name">Khud Ek Khayal</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-86"><span class="toc-num">86</span><span class="toc-name">Time</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-87"><span class="toc-num">87</span><span class="toc-name">Kaise?</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-88"><span class="toc-num">88</span><span class="toc-name">Samjhne Ki Khwaish Nahin</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-89"><span class="toc-num">89</span><span class="toc-name">Akhir Chahte Kya Ho?</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-90"><span class="toc-num">90</span><span class="toc-name">Panchhiyon Ki Tarah</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-91"><span class="toc-num">91</span><span class="toc-name">Koi Hawa Ke Sath Chalkar</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-92"><span class="toc-num">92</span><span class="toc-name">Kab Aur Kaha</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-93"><span class="toc-num">93</span><span class="toc-name">Purpose</span><span class="toc-dots"></span></a>
   </div>
   <div class="toc-section">
     <div class="toc-section-label">Part IV &nbsp;&middot;&nbsp; Samaj &mdash; Society &amp; Nation</div>
-    <div class="toc-item"><span class="toc-num">94</span><span class="toc-name">Naam Bada Karna</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">95</span><span class="toc-name">Nam Jaan Kar</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">96</span><span class="toc-name">Badonka Bachpna</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">97</span><span class="toc-name">Wyaparatil Bhav</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">98</span><span class="toc-name">Kahani Toh Adhuri</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">99</span><span class="toc-name">Meri Apni Kahani</span><span class="toc-dots"></span></div>
+    <a class="toc-item" href="#poem-94"><span class="toc-num">94</span><span class="toc-name">Naam Bada Karna</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-95"><span class="toc-num">95</span><span class="toc-name">Nam Jaan Kar</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-96"><span class="toc-num">96</span><span class="toc-name">Badonka Bachpna</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-97"><span class="toc-num">97</span><span class="toc-name">Wyaparatil Bhav</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-98"><span class="toc-num">98</span><span class="toc-name">Kahani Toh Adhuri</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-99"><span class="toc-num">99</span><span class="toc-name">Meri Apni Kahani</span><span class="toc-dots"></span></a>
   </div>
   <div class="toc-section">
     <div class="toc-section-label">Part V &nbsp;&middot;&nbsp; English Verses</div>
-    <div class="toc-item"><span class="toc-num">100</span><span class="toc-name">The Language You Speak</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">101</span><span class="toc-name">What Defines You</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">102</span><span class="toc-name">So Easy to Forget</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">103</span><span class="toc-name">Keep Smiling on the Horizon</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">104</span><span class="toc-name">There Are Just a Few Days</span><span class="toc-dots"></span></div>
+    <a class="toc-item" href="#poem-100"><span class="toc-num">100</span><span class="toc-name">The Language You Speak</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-101"><span class="toc-num">101</span><span class="toc-name">What Defines You</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-102"><span class="toc-num">102</span><span class="toc-name">So Easy to Forget</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-103"><span class="toc-num">103</span><span class="toc-name">Keep Smiling on the Horizon</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-104"><span class="toc-num">104</span><span class="toc-name">There Are Just a Few Days</span><span class="toc-dots"></span></a>
   </div>
   <div class="toc-section">
     <div class="toc-section-label">Part VI &nbsp;&middot;&nbsp; Ishq &mdash; Love &amp; Longing</div>
-    <div class="toc-item"><span class="toc-num">01</span><span class="toc-name">नया है कुछ, अच्छा है</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">02</span><span class="toc-name">Sitara</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">03</span><span class="toc-name">Intezaar</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">04</span><span class="toc-name">Wo Khoobsurat</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">05</span><span class="toc-name">Baadal</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">06</span><span class="toc-name">Parchhayi</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">07</span><span class="toc-name">Un Se</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">08</span><span class="toc-name">Kaabu Mein Dil</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">09</span><span class="toc-name">सवाल-ए-इश्क</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">10</span><span class="toc-name">Ldki Mili</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">11</span><span class="toc-name">Agar Rakh Sako</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">12</span><span class="toc-name">Nind Mein</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">13</span><span class="toc-name">Bolna Chahta Hu</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">14</span><span class="toc-name">Wakht Khuddar</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">15</span><span class="toc-name">Dua</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">16</span><span class="toc-name">Man Behle</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">17</span><span class="toc-name">ज़िन्दगी की खुशियां</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">18</span><span class="toc-name">Kasoor</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">19</span><span class="toc-name">Raatonka Agaaz</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">20</span><span class="toc-name">Ek Pal</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">21</span><span class="toc-name">Moonlight</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">22</span><span class="toc-name">इतनी भी</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">23</span><span class="toc-name">एक सपना</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">24</span><span class="toc-name">सोचा उन रातों पे</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">25</span><span class="toc-name">Kavita Par</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">26</span><span class="toc-name">Khwab Aya</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">27</span><span class="toc-name">लोग पूछते हैं</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">28</span><span class="toc-name">Puchhna Mat</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">29</span><span class="toc-name">Tab Ki Ye Baat</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">30</span><span class="toc-name">The Dim Lights</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">31</span><span class="toc-name">Sapne Kanch Mein</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">32</span><span class="toc-name">Raat Mein Parchhai</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">33</span><span class="toc-name">Khoobsurati Aisi</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">34</span><span class="toc-name">Baat</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">35</span><span class="toc-name">एक रात थी वो ऐसी</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">36</span><span class="toc-name">For the Moment</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">37</span><span class="toc-name">Your Harmony</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">38</span><span class="toc-name">पण बहुतेक</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">39</span><span class="toc-name">Dhadkano Ka Haal Chahiye</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">40</span><span class="toc-name">Milne Ka Beshak</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">41</span><span class="toc-name">Galti Se Palke Jhuki</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">42</span><span class="toc-name">Daag Toh Mil Gye</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">43</span><span class="toc-name">Pass Rehne Ki Sifarish Nahi</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">44</span><span class="toc-name">Rang Bikhar Jaye Toh</span><span class="toc-dots"></span></div>
+    <a class="toc-item" href="#poem-1"><span class="toc-num">01</span><span class="toc-name">नया है कुछ, अच्छा है</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-2"><span class="toc-num">02</span><span class="toc-name">Sitara</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-3"><span class="toc-num">03</span><span class="toc-name">Intezaar</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-4"><span class="toc-num">04</span><span class="toc-name">Wo Khoobsurat</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-5"><span class="toc-num">05</span><span class="toc-name">Baadal</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-6"><span class="toc-num">06</span><span class="toc-name">Parchhayi</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-7"><span class="toc-num">07</span><span class="toc-name">Un Se</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-8"><span class="toc-num">08</span><span class="toc-name">Kaabu Mein Dil</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-9"><span class="toc-num">09</span><span class="toc-name">सवाल-ए-इश्क</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-10"><span class="toc-num">10</span><span class="toc-name">Ldki Mili</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-11"><span class="toc-num">11</span><span class="toc-name">Agar Rakh Sako</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-12"><span class="toc-num">12</span><span class="toc-name">Nind Mein</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-13"><span class="toc-num">13</span><span class="toc-name">Bolna Chahta Hu</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-14"><span class="toc-num">14</span><span class="toc-name">Wakht Khuddar</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-15"><span class="toc-num">15</span><span class="toc-name">Dua</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-16"><span class="toc-num">16</span><span class="toc-name">Man Behle</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-17"><span class="toc-num">17</span><span class="toc-name">ज़िन्दगी की खुशियां</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-18"><span class="toc-num">18</span><span class="toc-name">Kasoor</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-19"><span class="toc-num">19</span><span class="toc-name">Raatonka Agaaz</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-20"><span class="toc-num">20</span><span class="toc-name">Ek Pal</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-21"><span class="toc-num">21</span><span class="toc-name">Moonlight</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-22"><span class="toc-num">22</span><span class="toc-name">इतनी भी</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-23"><span class="toc-num">23</span><span class="toc-name">एक सपना</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-24"><span class="toc-num">24</span><span class="toc-name">सोचा उन रातों पे</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-25"><span class="toc-num">25</span><span class="toc-name">Kavita Par</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-26"><span class="toc-num">26</span><span class="toc-name">Khwab Aya</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-27"><span class="toc-num">27</span><span class="toc-name">लोग पूछते हैं</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-28"><span class="toc-num">28</span><span class="toc-name">Puchhna Mat</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-29"><span class="toc-num">29</span><span class="toc-name">Tab Ki Ye Baat</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-30"><span class="toc-num">30</span><span class="toc-name">The Dim Lights</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-31"><span class="toc-num">31</span><span class="toc-name">Sapne Kanch Mein</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-32"><span class="toc-num">32</span><span class="toc-name">Raat Mein Parchhai</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-33"><span class="toc-num">33</span><span class="toc-name">Khoobsurati Aisi</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-34"><span class="toc-num">34</span><span class="toc-name">Baat</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-35"><span class="toc-num">35</span><span class="toc-name">एक रात थी वो ऐसी</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-36"><span class="toc-num">36</span><span class="toc-name">For the Moment</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-37"><span class="toc-num">37</span><span class="toc-name">Your Harmony</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-38"><span class="toc-num">38</span><span class="toc-name">पण बहुतेक</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-39"><span class="toc-num">39</span><span class="toc-name">Dhadkano Ka Haal Chahiye</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-40"><span class="toc-num">40</span><span class="toc-name">Milne Ka Beshak</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-41"><span class="toc-num">41</span><span class="toc-name">Galti Se Palke Jhuki</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-42"><span class="toc-num">42</span><span class="toc-name">Daag Toh Mil Gye</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-43"><span class="toc-num">43</span><span class="toc-name">Pass Rehne Ki Sifarish Nahi</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-44"><span class="toc-num">44</span><span class="toc-name">Rang Bikhar Jaye Toh</span><span class="toc-dots"></span></a>
   </div>
   <div class="toc-section">
     <div class="toc-section-label">Part VII &nbsp;&middot;&nbsp; Naye Panne</div>
-    <div class="toc-item"><span class="toc-num">105</span><span class="toc-name">नाम जानकर क्या करोगे ?</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">106</span><span class="toc-name">आखिर जरूरी क्या है?</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">107</span><span class="toc-name">अमेरिका अशी कशी?</span><span class="toc-dots"></span></div>
-    <div class="toc-item"><span class="toc-num">108</span><span class="toc-name">today’s generation</span><span class="toc-dots"></span></div>
+    <a class="toc-item" href="#poem-105"><span class="toc-num">105</span><span class="toc-name">नाम जानकर क्या करोगे ?</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-106"><span class="toc-num">106</span><span class="toc-name">आखिर जरूरी क्या है?</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-107"><span class="toc-num">107</span><span class="toc-name">अमेरिका अशी कशी?</span><span class="toc-dots"></span></a>
+    <a class="toc-item" href="#poem-108"><span class="toc-num">108</span><span class="toc-name">today’s generation</span><span class="toc-dots"></span></a>
   </div>
 
   <div class="toc-section">
@@ -3906,6 +3911,16 @@ body { transition: background-color 1.4s ease; }
 </footer>
 
 <script>
+// Add simple return controls to every poem so book mode can be browsed from the index.
+document.querySelectorAll('.poem-block').forEach(block => {
+  if (block.querySelector('.poem-actions')) return;
+  const nav = document.createElement('nav');
+  nav.className = 'poem-actions';
+  nav.setAttribute('aria-label', 'Poem navigation');
+  nav.innerHTML = '<a href="#index">Back to index</a><a href="#top">Top</a>';
+  block.appendChild(nav);
+});
+
 // Reader mode: hide notes for a cleaner book-like read, then bring them back on demand.
 const meaningToggle = document.getElementById('meaningToggle');
 if (meaningToggle) {
