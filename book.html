@@ -547,6 +547,11 @@ body { transition: background-color 1.4s ease; }
   letter-spacing: 1px;
   text-transform: uppercase;
 }
+.book-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 .book-archive-link {
   color: #fdf8ef;
   font-family: Arial, sans-serif;
@@ -639,7 +644,10 @@ body { transition: background-color 1.4s ease; }
       <small>Book view</small>
     </span>
   </a>
-  <a class="book-archive-link" href="index.html">Poetry archive &rarr;</a>
+  <div class="book-header-actions">
+    <a class="book-archive-link" href="stories/index.html">Stories</a>
+    <a class="book-archive-link" href="index.html">Poetry archive &rarr;</a>
+  </div>
 </header>
 
 <!-- ── QUICK-NAV STACK (fixed right side) ── -->
