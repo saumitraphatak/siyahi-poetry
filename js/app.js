@@ -454,9 +454,12 @@
   }
 
   function setDailyLine() {
-    if (!data.aphorisms.length) return;
-    const dayIndex = Math.floor(Date.now() / 86400000) % data.aphorisms.length;
-    elements.dailyLine.textContent = `“${data.aphorisms[dayIndex]}”`;
+    const homepageLines = data.aphorisms.filter(
+      (line) => line !== "Don't lose the child in you... even if one isn't pregnant!"
+    );
+    if (!homepageLines.length) return;
+    const dayIndex = Math.floor(Date.now() / 86400000) % homepageLines.length;
+    elements.dailyLine.textContent = `“${homepageLines[dayIndex]}”`;
   }
 
   function openPoem(id, openOnMobile) {
