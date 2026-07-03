@@ -12,22 +12,16 @@
 
   const moodPaths = [
     {
-      title: "Longing",
-      subtitle: "when the heart keeps returning",
-      theme: "ishq",
-      poemId: "poem-6",
+      title: "Home",
+      subtitle: "family, memory, and the old room inside you",
+      theme: "rishtey",
+      poemId: "poem-53",
     },
     {
       title: "Friendship",
       subtitle: "the people who become weather",
       theme: "dosti",
-      poemId: "poem-50",
-    },
-    {
-      title: "Home",
-      subtitle: "family, memory, and the old room inside you",
-      theme: "rishtey",
-      poemId: "poem-53",
+      poemId: "poem-45",
     },
     {
       title: "Becoming",
@@ -45,7 +39,13 @@
       title: "Identity",
       subtitle: "the English poems, slightly restless",
       theme: "english-verses",
-      poemId: "poem-100",
+      poemId: "poem-101",
+    },
+    {
+      title: "Longing",
+      subtitle: "when the heart keeps returning",
+      theme: "ishq",
+      poemId: "poem-18",
     },
   ];
 

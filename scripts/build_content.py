@@ -24,12 +24,12 @@ FEATURED = [
 ]
 
 THEMES = (
-    (range(1, 45), "ishq", "Ishq", "Love & longing"),
-    (range(45, 53), "dosti", "Dosti", "Friendship"),
     (range(53, 56), "rishtey", "Rishtey", "Family & bonds"),
+    (range(45, 53), "dosti", "Dosti", "Friendship"),
     (range(56, 94), "zindagi", "Zindagi", "Life & philosophy"),
     (range(94, 100), "samaj", "Samaj", "Society"),
     (range(100, 105), "english-verses", "English Verses", "Identity & reflection"),
+    (range(1, 45), "ishq", "Ishq", "Love & longing"),
     (range(105, 109), "naye-panne", "Naye Panne", "Newer poems"),
 )
 
