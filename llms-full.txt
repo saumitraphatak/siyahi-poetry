@@ -1,6 +1,6 @@
 # Siyahi — Full Site Context
 
-Siyahi is the personal poetry archive of Saumitra S. Phatak. It contains 153 original poems in Hindi, Marathi, and English, plus 33 short aphorisms. The title means “ink” in Hindi and Urdu.
+Siyahi is the personal poetry archive of Saumitra S. Phatak. It contains 133 original poems in Hindi, Marathi, and English, plus 33 short aphorisms. The title means “ink” in Hindi and Urdu.
 
 ## Reading model
 
@@ -31,10 +31,10 @@ Language labels overlap. “Bhai” is intentionally present in Hindi, Marathi, 
 | 56–93 | Zindagi — life and philosophy |
 | 94–99 | Samaj — society |
 | 100–104 | English Verses — identity and reflection |
-| 105–153 | Instagram Additions — recovered posts and fragments |
+| 105–133 | Naye Panne — newer poems and reflections |
 
 ## Technical structure
 
-The site is static HTML, CSS, and JavaScript with no dependency installation or build step. `scripts/build_content.py` parses `book.html` with BeautifulSoup and produces `js/poems-data.js`. The application then renders the archive client-side. Direct links use stable IDs such as `#poem-1` and `#poem-153`.
+The site is static HTML, CSS, and JavaScript with no dependency installation or build step. `scripts/build_content.py` parses `book.html` with BeautifulSoup and produces `js/poems-data.js`. The application then renders the archive client-side. Direct links use stable IDs such as `#poem-1` and `#poem-133`.
 
 All poems are original works by Saumitra S. Phatak.

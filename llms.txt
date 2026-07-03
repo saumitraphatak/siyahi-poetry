@@ -1,6 +1,6 @@
 # Siyahi — सियाही
 
-> A multilingual poetry archive by Saumitra S. Phatak with 153 original poems in Hindi, Marathi, and English.
+> A multilingual poetry archive by Saumitra S. Phatak with 133 original poems in Hindi, Marathi, and English.
 
 **Live site:** https://saumitraphatak.github.io/siyahi-poetry/
 **Author:** Saumitra S. Phatak
@@ -22,4 +22,4 @@ Siyahi means “ink.” The collection explores love, longing, friendship, famil
 - Zindagi — life and philosophy
 - Samaj — society
 - English Verses — identity and reflection
-- Instagram Additions — recovered posts and fragments
+- Naye Panne — newer poems and reflections
