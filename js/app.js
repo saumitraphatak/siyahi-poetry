@@ -4,6 +4,8 @@
   const data = window.SIYAHI_DATA;
   if (!data || !Array.isArray(data.poems)) return;
 
+  const COMMENTS_REPO = "saumitraphatak/siyahi-poetry";
+
   const languageNames = {
     hindi: "Hindi",
     marathi: "Marathi",
@@ -49,12 +51,47 @@
     },
   ];
 
+  const readingPaths = [
+    {
+      key: "first-ten",
+      title: "The First Ten Pages",
+      subtitle: "the doorway I would hand to a new reader",
+      poemIds: ["poem-105", "poem-106", "poem-107", "poem-108", "poem-18", "poem-45", "poem-54", "poem-53", "poem-101", "poem-42"],
+    },
+    {
+      key: "home-distance",
+      title: "Home & Distance",
+      subtitle: "mother tongue, migration, and the room you carry with you",
+      poemIds: ["poem-53", "poem-54", "poem-55", "poem-107", "poem-108", "poem-100", "poem-103"],
+    },
+    {
+      key: "late-night",
+      title: "Late Night Pages",
+      subtitle: "for when the heart is awake before the mind is ready",
+      poemIds: ["poem-6", "poem-18", "poem-24", "poem-31", "poem-42", "poem-81", "poem-86"],
+    },
+    {
+      key: "growing-up",
+      title: "Growing Up, Still",
+      subtitle: "purpose, identity, responsibility, and small courage",
+      poemIds: ["poem-93", "poem-101", "poem-102", "poem-105", "poem-106", "poem-108", "poem-88"],
+    },
+    {
+      key: "chosen-people",
+      title: "Chosen People",
+      subtitle: "the friendships that become family without asking permission",
+      poemIds: ["poem-45", "poem-46", "poem-47", "poem-48", "poem-50", "poem-51", "poem-52"],
+    },
+  ];
+
   const state = {
     language: "hindi",
     theme: "all",
     query: "",
+    path: null,
     selectedId: null,
     meaningVisible: true,
+    transliterationVisible: false,
   };
 
   const elements = {
@@ -71,6 +108,20 @@
     dailyLine: document.getElementById("dailyLine"),
     featuredGrid: document.getElementById("featuredGrid"),
     moodGrid: document.getElementById("moodGrid"),
+    pathGrid: document.getElementById("pathGrid"),
+  };
+
+  const vowelMap = {
+    "अ": "a", "आ": "aa", "इ": "i", "ई": "ee", "उ": "u", "ऊ": "oo", "ऋ": "ri", "ए": "e", "ऐ": "ai", "ओ": "o", "औ": "au",
+    "ऑ": "o", "ॲ": "a", "ऍ": "e",
+  };
+  const matraMap = {
+    "ा": "aa", "ि": "i", "ी": "ee", "ु": "u", "ू": "oo", "ृ": "ri", "े": "e", "ै": "ai", "ो": "o", "ौ": "au", "ॉ": "o", "ॅ": "e", "ं": "n", "ँ": "n", "ः": "h",
+  };
+  const consonantMap = {
+    "क": "k", "ख": "kh", "ग": "g", "घ": "gh", "ङ": "ng", "च": "ch", "छ": "chh", "ज": "j", "झ": "jh", "ञ": "ny",
+    "ट": "t", "ठ": "th", "ड": "d", "ढ": "dh", "ण": "n", "त": "t", "थ": "th", "द": "d", "ध": "dh", "न": "n",
+    "प": "p", "फ": "ph", "ब": "b", "भ": "bh", "म": "m", "य": "y", "र": "r", "ल": "l", "व": "v", "श": "sh", "ष": "sh", "स": "s", "ह": "h", "ळ": "l", "क्ष": "ksh", "ज्ञ": "gy", "क़": "q", "ख़": "kh", "ग़": "gh", "ज़": "z", "ड़": "d", "ढ़": "dh", "फ़": "f", "य़": "y",
   };
 
   function escapeHtml(value) {
@@ -86,13 +137,75 @@
     return data.poems.filter((poem) => poem.languages.includes(language));
   }
 
+  function pathByKey(key) {
+    return readingPaths.find((path) => path.key === key) || null;
+  }
+
+  function poemsForPath(key) {
+    const path = pathByKey(key);
+    if (!path) return [];
+    return path.poemIds.map((id) => data.poems.find((poem) => poem.id === id)).filter(Boolean);
+  }
+
   function filteredPoems() {
     const query = state.query.trim().toLocaleLowerCase();
-    return poemsForLanguage(state.language).filter((poem) => {
-      const matchesTheme = state.theme === "all" || poem.theme.slug === state.theme;
+    const base = state.path ? poemsForPath(state.path) : poemsForLanguage(state.language);
+    return base.filter((poem) => {
+      const matchesTheme = state.path || state.theme === "all" || poem.theme.slug === state.theme;
       const matchesQuery = !query || poem.searchText.toLocaleLowerCase().includes(query);
       return matchesTheme && matchesQuery;
     });
+  }
+
+  function hasDevanagari(text) {
+    return /[\u0900-\u097F]/.test(text);
+  }
+
+  function romanizeDevanagari(text) {
+    let output = "";
+    for (let i = 0; i < text.length; i += 1) {
+      const two = text.slice(i, i + 2);
+      const char = text[i];
+      if (consonantMap[two]) {
+        const next = text[i + 2];
+        output += consonantMap[two];
+        if (next === "्") i += 2;
+        else if (matraMap[next]) {
+          output += matraMap[next];
+          i += 2;
+        } else output += "a";
+      } else if (consonantMap[char]) {
+        const next = text[i + 1];
+        output += consonantMap[char];
+        if (next === "्") i += 1;
+        else if (matraMap[next]) {
+          output += matraMap[next];
+          i += 1;
+        } else output += "a";
+      } else if (vowelMap[char]) {
+        output += vowelMap[char];
+      } else if (matraMap[char]) {
+        output += matraMap[char];
+      } else if (char === "।") {
+        output += ".";
+      } else {
+        output += char;
+      }
+    }
+    return output.replace(/a([,.!?;:])/g, "$1").replace(/\s+/g, " ");
+  }
+
+  function romanizedPoemHtml(html) {
+    const template = document.createElement("template");
+    template.innerHTML = html;
+    template.content.querySelectorAll(".poem-meaning, .meaning-label").forEach((node) => node.remove());
+    const walker = document.createTreeWalker(template.content, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((node) => {
+      if (hasDevanagari(node.nodeValue)) node.nodeValue = romanizeDevanagari(node.nodeValue);
+    });
+    return template.innerHTML;
   }
 
   function updateCounts() {
@@ -130,7 +243,10 @@
       )
       .join("");
 
-    elements.resultCount.textContent = `${poems.length} ${poems.length === 1 ? "poem" : "poems"} in ${languageNames[state.language]}`;
+    const activePath = pathByKey(state.path);
+    elements.resultCount.textContent = activePath
+      ? `${poems.length} ${poems.length === 1 ? "poem" : "poems"} in ${activePath.title}`
+      : `${poems.length} ${poems.length === 1 ? "poem" : "poems"} in ${languageNames[state.language]}`;
     elements.emptyState.hidden = poems.length !== 0;
 
     elements.poemList.querySelectorAll(".poem-row").forEach((button) => {
@@ -148,7 +264,13 @@
     document.getElementById("archive")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+  function clearPath() {
+    state.path = null;
+    elements.pathGrid?.querySelectorAll(".path-card").forEach((card) => card.classList.remove("is-active"));
+  }
+
   function applyTheme(theme, poemId) {
+    clearPath();
     const poem = data.poems.find((item) => item.id === poemId);
     state.language = poem ? poem.languages[0] : state.language;
     state.theme = theme;
@@ -172,6 +294,26 @@
     scrollToArchive();
   }
 
+  function loadComments(poem) {
+    const host = elements.reader.querySelector(".comments-thread");
+    const button = elements.reader.querySelector(".load-comments");
+    if (!host || host.dataset.loaded === "true") return;
+    host.dataset.loaded = "true";
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Loading comments";
+    }
+    const script = document.createElement("script");
+    script.src = "https://utteranc.es/client.js";
+    script.async = true;
+    script.crossOrigin = "anonymous";
+    script.setAttribute("repo", COMMENTS_REPO);
+    script.setAttribute("issue-term", poem.id);
+    script.setAttribute("label", "poem-comments");
+    script.setAttribute("theme", "github-light");
+    host.append(script);
+  }
+
   function selectPoem(id, openOnMobile) {
     const poem = data.poems.find((item) => item.id === id);
     if (!poem) return;
@@ -181,6 +323,13 @@
     const visibleIndex = visible.findIndex((item) => item.id === poem.id);
     const previous = visibleIndex > 0 ? visible[visibleIndex - 1] : null;
     const next = visibleIndex >= 0 && visibleIndex < visible.length - 1 ? visible[visibleIndex + 1] : null;
+    const canRomanize = hasDevanagari(poem.contentHtml);
+    const romanized = canRomanize && state.transliterationVisible
+      ? `<section class="transliteration-panel" aria-label="Approximate romanized reading">
+          <p class="transliteration-label">Romanized reading</p>
+          <div class="transliteration-content">${romanizedPoemHtml(poem.contentHtml)}</div>
+        </section>`
+      : "";
 
     elements.reader.innerHTML = `
       <button class="reader-close" id="readerClose" type="button" aria-label="Close poem">×</button>
@@ -194,12 +343,22 @@
         </div>
         <div class="reader-rule" aria-hidden="true"></div>
         <div class="reader-content${state.meaningVisible ? "" : " hide-meaning"}">${poem.contentHtml}</div>
+        ${romanized}
         <nav class="reader-tools" aria-label="Poem navigation">
           <button class="previous" type="button" ${previous ? `data-select="${previous.id}"` : "disabled"}>← Previous</button>
-          <button class="meaning" type="button" aria-pressed="${state.meaningVisible}">${state.meaningVisible ? "Hide meaning" : "Show meaning"}</button>
+          <button class="meaning" type="button" aria-pressed="${!state.meaningVisible}">${state.meaningVisible ? "Poetry mode" : "Annotated mode"}</button>
+          ${canRomanize ? `<button class="romanize" type="button" aria-pressed="${state.transliterationVisible}">${state.transliterationVisible ? "Original script" : "Romanize"}</button>` : ""}
           <button class="share" type="button">Share</button>
           <button class="next" type="button" ${next ? `data-select="${next.id}"` : "disabled"}>Next →</button>
         </nav>
+        <section class="poem-comments" aria-label="Reader comments">
+          <div>
+            <p class="comments-title">Reader notes</p>
+            <p class="comments-copy">Leave a public note on this poem, and read what other readers noticed.</p>
+          </div>
+          <button class="load-comments" type="button">Show comments</button>
+          <div class="comments-thread" data-loaded="false"></div>
+        </section>
       </article>
     `;
 
@@ -208,7 +367,12 @@
       button.addEventListener("click", () => selectPoem(button.dataset.select, false));
     });
     elements.reader.querySelector(".meaning").addEventListener("click", toggleMeaning);
+    elements.reader.querySelector(".romanize")?.addEventListener("click", () => {
+      state.transliterationVisible = !state.transliterationVisible;
+      selectPoem(poem.id, false);
+    });
     elements.reader.querySelector(".share").addEventListener("click", () => sharePoem(poem));
+    elements.reader.querySelector(".load-comments").addEventListener("click", () => loadComments(poem));
 
     renderList();
     history.replaceState(null, "", `#${poem.id}`);
@@ -229,8 +393,8 @@
     state.meaningVisible = !state.meaningVisible;
     const content = elements.reader.querySelector(".reader-content");
     content.classList.toggle("hide-meaning", !state.meaningVisible);
-    event.currentTarget.textContent = state.meaningVisible ? "Hide meaning" : "Show meaning";
-    event.currentTarget.setAttribute("aria-pressed", String(state.meaningVisible));
+    event.currentTarget.textContent = state.meaningVisible ? "Poetry mode" : "Annotated mode";
+    event.currentTarget.setAttribute("aria-pressed", String(!state.meaningVisible));
   }
 
   async function sharePoem(poem) {
@@ -255,6 +419,7 @@
   }
 
   function switchLanguage(language) {
+    clearPath();
     state.language = language;
     state.theme = "all";
     elements.themeSelect.value = "all";
@@ -298,6 +463,7 @@
     const poem = data.poems.find((item) => item.id === id);
     if (!poem) return false;
 
+    clearPath();
     state.language = poem.languages[0];
     elements.tabs.forEach((tab) => {
       const active = tab.dataset.language === state.language;
@@ -362,9 +528,49 @@
     });
   }
 
+  function renderPaths() {
+    if (!elements.pathGrid) return;
+
+    elements.pathGrid.innerHTML = readingPaths
+      .map((path) => {
+        const poems = poemsForPath(path.key);
+        const titles = poems.slice(0, 3).map((poem) => poem.title).join(" · ");
+        return `
+          <button class="path-card${state.path === path.key ? " is-active" : ""}" type="button" data-path="${path.key}">
+            <span class="path-title">${escapeHtml(path.title)}</span>
+            <span class="path-subtitle">${escapeHtml(path.subtitle)}</span>
+            <span class="path-preview">${escapeHtml(titles)}</span>
+            <span class="path-count">${poems.length} stops</span>
+          </button>
+        `;
+      })
+      .join("");
+
+    elements.pathGrid.querySelectorAll(".path-card").forEach((button) => {
+      button.addEventListener("click", () => applyPath(button.dataset.path));
+    });
+  }
+
+  function applyPath(key) {
+    const path = pathByKey(key);
+    if (!path) return;
+    state.path = key;
+    state.query = "";
+    state.theme = "all";
+    elements.searchInput.value = "";
+    elements.themeSelect.value = "all";
+    elements.pathGrid.querySelectorAll(".path-card").forEach((card) => {
+      card.classList.toggle("is-active", card.dataset.path === key);
+    });
+    const first = filteredPoems()[0];
+    if (first) selectPoem(first.id, true);
+    else renderList();
+    scrollToArchive();
+  }
+
   function restoreSectionHash() {
     const id = location.hash.slice(1);
-    if (!["featured", "moods", "archive"].includes(id)) return;
+    if (!["featured", "moods", "paths", "archive"].includes(id)) return;
     window.setTimeout(() => {
       document.getElementById(id)?.scrollIntoView({ block: "start" });
     }, 80);
@@ -375,6 +581,7 @@
   });
 
   elements.themeSelect.addEventListener("change", (event) => {
+    clearPath();
     state.theme = event.target.value;
     renderList();
   });
@@ -400,6 +607,7 @@
   setDailyLine();
   renderFeatured();
   renderMoods();
+  renderPaths();
 
   const hashId = location.hash.slice(1);
   if (!openPoem(hashId, false)) {

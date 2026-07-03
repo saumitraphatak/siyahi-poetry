@@ -672,7 +672,7 @@ body { transition: background-color 1.4s ease; }
 
 <div class="reader-tools" aria-label="Reader tools">
   <a href="#index">Index</a>
-  <button id="meaningToggle" type="button" aria-pressed="false">Hide meanings</button>
+  <button id="meaningToggle" type="button" aria-pressed="false">Poetry mode</button>
   <a href="#top">Top</a>
 </div>
 
@@ -878,7 +878,7 @@ body { transition: background-color 1.4s ease; }
   <div class="ch-title-en">Rishtey</div>
   <div class="ch-title-hi">रिश्ते</div>
   <div class="ch-rule"></div>
-  <div class="ch-desc">Family &amp; Bonds<br><em>for those who came before, and will remain after</em></div>
+  <div class="ch-desc">Every poem begins before the poet: in a mother's hand, a brother's mischief, and the voices that teach us how to name love before we know its many forms.</div>
 </div>
 <div class="page">
 
@@ -1022,7 +1022,7 @@ body { transition: background-color 1.4s ease; }
   <div class="ch-title-en">Dosti</div>
   <div class="ch-title-hi">दोस्ती</div>
   <div class="ch-rule"></div>
-  <div class="ch-desc">Friendship<br><em>for those who stayed, and those who couldn't</em></div>
+  <div class="ch-desc">Friendship is the first chosen home: ridiculous, loyal, weather-changing, and often wiser than romance admits.</div>
 </div>
 <div class="page">
 
@@ -1262,7 +1262,7 @@ body { transition: background-color 1.4s ease; }
   <div class="ch-title-en">Zindagi</div>
   <div class="ch-title-hi">जिंदगी</div>
   <div class="ch-rule"></div>
-  <div class="ch-desc">Life &amp; Philosophy<br><em>the ink that keeps spilling, the life that keeps living</em></div>
+  <div class="ch-desc">Here the poems turn outward and inward at once, asking what time, purpose, work, faith, and becoming do to a person.</div>
 </div>
 <div class="page">
 
@@ -2206,7 +2206,7 @@ body { transition: background-color 1.4s ease; }
   <div class="ch-title-en">Samaj</div>
   <div class="ch-title-hi">समाज</div>
   <div class="ch-rule"></div>
-  <div class="ch-desc">Society &amp; Nation<br><em>what the world owes us, and what we owe it back</em></div>
+  <div class="ch-desc">The private voice steps into the public square, where country, society, duty, dignity, and everyday hypocrisy start arguing with each other.</div>
 </div>
 <div class="page">
 
@@ -2386,7 +2386,7 @@ body { transition: background-color 1.4s ease; }
   <div class="ch-title-en">English Verses</div>
   <div class="ch-title-hi">अंग्रेजी में</div>
   <div class="ch-rule"></div>
-  <div class="ch-desc">English Verses<br><em>thoughts that chose their own language</em></div>
+  <div class="ch-desc">A language slightly outside home becomes a mirror for identity, distance, and the self learning to speak in more than one register.</div>
 </div>
 <div class="page">
 
@@ -2529,7 +2529,7 @@ body { transition: background-color 1.4s ease; }
   <div class="ch-title-en">Ishq</div>
   <div class="ch-title-hi">इश्क</div>
   <div class="ch-rule"></div>
-  <div class="ch-desc">Love &amp; Longing<br><em>poems of the heart that wouldn't stay quiet</em></div>
+  <div class="ch-desc">Only after family, friendship, society, and self does love arrive here: not as decoration, but as the risky center of the heart.</div>
 </div>
 <div class="page">
   <!-- Poem 01 -->
@@ -3597,7 +3597,7 @@ body { transition: background-color 1.4s ease; }
   <div class="ch-title-en">Naye Panne</div>
   <div class="ch-title-hi">नए पन्ने</div>
   <div class="ch-rule"></div>
-  <div class="ch-desc">Newer poems from the same notebook<br><em>the ink that kept arriving after the first book</em></div>
+  <div class="ch-desc">The newest pages keep the notebook open, carrying the older voice into sharper questions about identity, America, and the generation becoming itself.</div>
 </div>
 <div class="page">
   <!-- Poem 105 — Naye Panne (CLbuj8jl5y9) -->
@@ -3833,7 +3833,7 @@ body { transition: background-color 1.4s ease; }
   <div class="ch-title-en">Sukhanvad</div>
   <div class="ch-title-hi">सुखनवाद</div>
   <div class="ch-rule"></div>
-  <div class="ch-desc">Aphorisms &amp; One-liners<br><em>the small thoughts that carry the most weight</em></div>
+  <div class="ch-desc">Some thoughts do not need a full poem. They arrive as sparks, one-liners, and small truths that keep asking to be remembered.</div>
 </div>
 <div class="page-half">
   <div class="aph-title">Words That Stayed</div>
@@ -3876,6 +3876,17 @@ body { transition: background-color 1.4s ease; }
   </div>
 </div>
 
+<!-- ===== CLOSING NOTE ===== -->
+<div class="page-half closing-note">
+  <div class="note-title">The Ink Remains</div>
+  <div class="note-text">
+    <p>A book does not end because the feeling ends. It ends because one page has finally learned how to breathe.</p>
+    <p>Siyahi began as scattered lines: some for love, some for family, some for friends, some for the strange work of becoming a person. What stays after all of it is not a conclusion, but a habit of noticing.</p>
+    <p style="font-style:italic; color:var(--muted);">Raahein badalti rahengi. Kalam phir bhi saath rahegi.</p>
+    <p style="text-align:right; margin-top:20px; color:var(--muted); font-style:italic;">&mdash; Saumitra</p>
+  </div>
+</div>
+
 <!-- ===== BACK COVER ===== -->
 <div class="back-cover">
   <div class="back-border"></div>
@@ -3895,6 +3906,16 @@ body { transition: background-color 1.4s ease; }
 </footer>
 
 <script>
+// Reader mode: hide notes for a cleaner book-like read, then bring them back on demand.
+const meaningToggle = document.getElementById('meaningToggle');
+if (meaningToggle) {
+  meaningToggle.addEventListener('click', () => {
+    const hidden = document.body.classList.toggle('hide-meanings');
+    meaningToggle.textContent = hidden ? 'Annotated mode' : 'Poetry mode';
+    meaningToggle.setAttribute('aria-pressed', String(hidden));
+  });
+}
+
 // ═══ IDEA 2: POEM FADE-IN ON SCROLL ═══
 // Each poem-block fades up as it enters the viewport — ink appearing on page.
 const poemObserver = new IntersectionObserver(entries => {
