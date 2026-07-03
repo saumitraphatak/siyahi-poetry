@@ -13,9 +13,9 @@ SOURCE = ROOT / "book.html"
 OUTPUT = ROOT / "js" / "poems-data.js"
 
 ENGLISH = {30, 36, 37, 54, 62, 81, 86, 93, 100, 101, 102, 103, 104}
-ENGLISH.update({106})
+ENGLISH.update(set())
 MARATHI = {38, 47, 53, 54, 57, 58, 80, 82, 97}
-MARATHI.update({108, 109})
+MARATHI.update({107, 108})
 
 # Editor's picks — a curated "best of" shelf for first-time visitors.
 # Order matters: index 0 is the top pick. Surfaced on index.html and book.html.
@@ -31,7 +31,7 @@ THEMES = (
     (range(56, 94), "zindagi", "Zindagi", "Life & philosophy"),
     (range(94, 100), "samaj", "Samaj", "Society"),
     (range(100, 105), "english-verses", "English Verses", "Identity & reflection"),
-    (range(105, 110), "naye-panne", "Naye Panne", "Newer poems"),
+    (range(105, 109), "naye-panne", "Naye Panne", "Newer poems"),
 )
 
 
@@ -103,8 +103,8 @@ def main():
         for node in soup.select(".aph-item")
     ]
 
-    if len(poems) != 109:
-        raise RuntimeError(f"Expected 109 poems, found {len(poems)}")
+    if len(poems) != 108:
+        raise RuntimeError(f"Expected 108 poems, found {len(poems)}")
 
     payload = {
         "poems": poems,

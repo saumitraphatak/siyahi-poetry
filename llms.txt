@@ -1,6 +1,6 @@
 # Siyahi — सियाही
 
-> A multilingual poetry archive by Saumitra S. Phatak with 109 original poems in Hindi, Marathi, and English.
+> A multilingual poetry archive by Saumitra S. Phatak with 108 original poems in Hindi, Marathi, and English.
 
 **Live site:** https://saumitraphatak.github.io/siyahi-poetry/
 **Author:** Saumitra S. Phatak
