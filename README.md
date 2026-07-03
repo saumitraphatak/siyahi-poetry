@@ -35,28 +35,35 @@ Some poems belong to more than one language. The trilingual poem “Bhai,” for
 
 ```text
 siyahi-poetry/
-├── index.html
-├── book.html
+├── index.html                  # main archive site
+├── book.html                   # original book edition — source of truth for poem text
 ├── assets/
 │   └── siyahi-cover.png
 ├── css/
 │   └── styles.css
 ├── js/
-│   ├── app.js
-│   └── poems-data.js
+│   ├── app.js                  # archive UI: tabs, search, reader, mood paths
+│   └── poems-data.js           # generated — do not edit by hand
 ├── scripts/
-│   └── build_content.py
+│   └── build_content.py        # parses book.html -> writes js/poems-data.js
+├── llms.txt / llms-full.txt    # AI-crawler context files
 ├── robots.txt
 └── sitemap.xml
 ```
 
-The site is static and has no build step. Open `index.html` directly, or serve the folder with any simple static server.
+The site is static and has no build step. Open `index.html` directly, or serve the folder with any simple static server, e.g.:
 
-To regenerate `js/poems-data.js` after editing the original book:
+```bash
+python3 -m http.server 8000
+```
+
+`js/poems-data.js` is generated from `book.html` and should never be edited directly. To make a content change: edit the poem in `book.html`, then regenerate:
 
 ```bash
 python3 scripts/build_content.py
 ```
+
+This requires `beautifulsoup4` (`pip3 install beautifulsoup4` if not already available).
 
 ## Deployment
 
