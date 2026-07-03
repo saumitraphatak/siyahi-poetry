@@ -20,8 +20,7 @@ MARATHI.update({107, 108})
 # Editor's picks — a curated "best of" shelf for first-time visitors.
 # Order matters: index 0 is the top pick. Surfaced on index.html and book.html.
 FEATURED = [
-    6, 18, 50, 45, 102, 86, 32, 68, 54, 1,
-    8, 42, 93, 81, 100, 101, 78, 97, 53, 73,
+    105, 106, 107, 108, 18, 45, 54, 53, 101, 42,
 ]
 
 THEMES = (
