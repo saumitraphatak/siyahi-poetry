@@ -133,3 +133,54 @@ Checked (per rotation — (a), (b), (c) already done in prior passes; this was t
 `git status` was clean when this pass started and stayed clean throughout (no edits made), so nothing was skipped for being mid-edit.
 
 **Next pass should pick:** (d) stale content — the last uncovered rotation category (`CLAUDE.md`'s poem/theme counts are the known item to fix there).
+
+## 2026-09-17 — (d) Stale content
+
+Checked:
+- `CLAUDE.md`, `README.md`, `PROJECT_CONTEXT.md`, `llms.txt`, `llms-full.txt`, `sitemap.xml` for poem/theme counts and structural descriptions — cross-checked against the actual current state of `book.html` and `scripts/build_content.py` (`THEMES` tuple and the `len(poems) != 108` assertion).
+- Bio/contact/author info surfaced on the site itself — `index.html` only links out to `curious96.com` and the GitHub profile, it doesn't embed any bio text, role, or location copy of its own, so there was nothing here to go stale.
+- Dates appearing anywhere on the site: `book.html`'s cover year (`2023`) and the four Naye Panne poem-subtitle dates (2021-02-18, 2021-05-04, 2025-09-14, 2026-02-07) — these are creative/bibliographic content (the book's own publication year and each poem's written-on date), not maintenance metadata, so left untouched; none are placeholder or obviously wrong values, and editing them would be a content edit, not a stale-metadata fix.
+- Image references: only one `<img>` on the whole site (`index.html`'s cover image, per the 2026-09-15 pass) — confirmed the file it points to (`assets/siyahi-cover.png`) still exists.
+
+**Fixed:** `CLAUDE.md`'s stale documentation, exactly the drift flagged in the 2026-09-08 and subsequent entries — it still said 104 poems / 6 themes / an assertion at 104, while the live site, `book.html`, and `build_content.py` have been at 108 poems / 7 themes (the 7th, "Naye Panne," added since `CLAUDE.md` was last refreshed) for a while. Four documentation-only edits, all in `CLAUDE.md`:
+1. "the 6 theme definitions below" → "the 7 theme definitions below"
+2. Theme-ranges line: appended the missing "Naye Panne 105–108" (the other five ranges were already correct, including "English Verses 100–104," which is the real range and was left as-is)
+3. "hard-fails... if the poem count... isn't exactly 104" → "...isn't exactly 108"
+4. "The poem count is asserted at 104." → "...at 108."
+
+No other file needed a change — `README.md`, `PROJECT_CONTEXT.md`, `llms.txt`, `llms-full.txt`, and `sitemap.xml` were all already accurate (confirmed via grep for stray "104"/"6 theme" references repo-wide; the one remaining "104" hit is the legitimate "English Verses 100–104" range, not a bug). Verified via `git diff` that only these 4 lines in `CLAUDE.md` changed and nothing else was touched; the file still reads as valid Markdown (no broken structure introduced).
+
+**Cross-site note carried forward (informational only, not this repo, unresolved as of this run):** `curious96.com`'s bio copy was flagged on 2026-09-08 as still saying "104 original poems," which is behind Siyahi's actual 108. Not checked again today (out of scope, different repo) — still worth a fix whenever that site is touched.
+
+**Still outstanding from prior passes (different rotation categories, untouched today):**
+- Mislabeled `ambients` inline-script comments in `book.html` (flagged 2026-09-09 typo pass, code-comment-only, no functional effect).
+- Orphan `closing-note` CSS class in `book.html` (flagged 2026-09-09).
+- `book.html` has no semantic heading elements — structural/accessibility item, flagged 2026-09-09, bigger than an unattended-pass fix.
+- No favicon anywhere on the site (flagged 2026-09-15) — cosmetic, needs a new binary asset, outside the mechanical-fix bar.
+
+`git status` was clean when this pass started and only `CLAUDE.md` was touched (no pre-existing local modifications from Saumitra to avoid), so nothing was skipped for being mid-edit.
+
+**Next pass should pick:** the rotation has now covered all five categories once each ((a) 09-08, (b) 09-09, (c) 09-09, (d) 09-17, (e) 09-15) — next run should loop back to whichever is least-recently checked, i.e. **(a) broken/dead links** (last done 2026-09-08, the oldest of the five), re-verifying nothing has broken since (new poems/pages added, external links since gone stale) rather than assuming last time's clean result still holds.
+
+## 2026-09-19 — (a) Broken/dead links
+
+Re-run of the oldest-uncovered rotation category (last done 2026-09-08, before the poem count grew from 104 to 108) — re-verified rather than assuming the prior clean result still holds.
+
+Checked:
+- All internal `href`/`src` references (non-http, non-anchor) across `index.html`, `book.html`, `stories/index.html`, and all 6 individual story pages, resolved programmatically against the filesystem — every one resolves to a file that exists on disk. Zero missing references.
+- All `#poem-N` anchors referenced anywhere on the site against actual `id="poem-N"` targets in `book.html` — `book.html` has exactly 108 poem blocks (`poem-1`…`poem-108`, no gaps in the sequence), and every referenced anchor across all pages falls in range and exists. No orphaned/broken poem anchors.
+- `index.html` in-page anchors (`#archive`, `#featured`, `#moods`, `#paths`) — all four have matching `id` targets on the page.
+- `sitemap.xml` — still lists the same 8 URLs (home, book, stories index, 6 story pages); all correspond to real files; no orphaned or missing entries; matches `robots.txt`'s sitemap reference.
+- `robots.txt` — sitemap URL correct and unchanged.
+- All 7 PDFs (`assets/siyahi-collected-poems.pdf` and all 6 files in `stories/pdfs/`) — present on disk, filenames match what each story page links to.
+- External links — spot-checked via fetch: the live GitHub Pages site (`https://saumitraphatak.github.io/siyahi-poetry/`) loads correctly (title "Siyahi | Poems by Saumitra S. Phatak", archive UI intact); the stories index (`https://saumitraphatak.github.io/siyahi-poetry/stories/`) loads correctly; `https://www.curious96.com` loads correctly (his physics/portfolio site, no longer mentions being "recently" anything specific worth cross-checking against Siyahi — no bio text is duplicated between the two sites, consistent with the 2026-09-17 finding).
+- Utterances comments widget (`js/app.js`) — `COMMENTS_REPO` still correctly set to `"saumitraphatak/siyahi-poetry"`, matching the actual repo; script still loads from `https://utteranc.es/client.js`.
+- Searched for `http://` (non-HTTPS) links and empty `href=""`/`src=""` across all HTML — none found.
+
+**Fixed:** Nothing — no broken links found. No changes made to any file.
+
+**Suggestions / open items for Saumitra:** No new items today. Still outstanding from prior passes (different rotation categories, untouched — see prior entries for full detail): mislabeled `ambients` inline-script comments in `book.html` (2026-09-09); orphan `closing-note` CSS class in `book.html` (2026-09-09); `book.html` has no semantic heading elements (2026-09-09/2026-09-15); no favicon anywhere on the site (2026-09-15); cross-site note that `curious96.com`'s bio previously said "104 original poems" (2026-09-08) — not re-checked today since the fetched content had nothing quoted verbatim to confirm either way; worth a direct look next time that site is touched.
+
+`git status` showed `CLAUDE.md` and `docs/audit-log.md` as locally modified at the start of this pass — these are this task's own uncommitted edits from the 2026-09-17 run (never committed, since this task never commits/pushes), not concurrent edits from Saumitra, confirmed by inspecting the diff content before proceeding. No other files were modified, so nothing new was skipped for being mid-edit. `.git/index.lock` does not exist (the 2026-09-11 stale-lock issue remains resolved).
+
+**Next pass should pick:** (b) typos & spelling — the least-recently checked category now that (a) is refreshed (last done 2026-09-09), followed by (c) formatting/rendering consistency (also 2026-09-09) and (e) technical hygiene (2026-09-15, most recent).

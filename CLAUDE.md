@@ -42,14 +42,14 @@ siyahi-poetry/
 
 - `poems`: number, id (`poem-N`), title, subtitle, languages, theme, meaning, searchText, contentHtml, featuredRank
 - `aphorisms`: list of short lines (from `.aph-item` elements)
-- `themes`: the 6 theme definitions below
+- `themes`: the 7 theme definitions below
 
 Key logic inside the script (edit here, not in generated output):
 
-- **Theme ranges** (by poem number): Ishq 1–44, Dosti 45–52, Rishtey 53–55, Zindagi 56–93, Samaj 94–99, English Verses 100–104.
+- **Theme ranges** (by poem number): Ishq 1–44, Dosti 45–52, Rishtey 53–55, Zindagi 56–93, Samaj 94–99, English Verses 100–104, Naye Panne 105–108.
 - **Language sets**: `ENGLISH` and `MARATHI` are explicit hardcoded number sets in the script; anything not in either defaults to Hindi. Poems 54 and 97 are intentionally trilingual/bilingual (hard-coded to always include Hindi too).
 - **FEATURED**: an ordered list of poem numbers curated as "editor's picks," surfaced on `index.html`/`book.html`. Order matters — index 0 is the top pick.
-- The script hard-fails (`raise RuntimeError`) if the poem count parsed from `book.html` isn't exactly 104 — this is an intentional integrity check, not a bug.
+- The script hard-fails (`raise RuntimeError`) if the poem count parsed from `book.html` isn't exactly 108 — this is an intentional integrity check, not a bug.
 
 Run it with:
 
@@ -66,7 +66,7 @@ Requires `beautifulsoup4` (already available via the Anaconda Python on this mac
 - **Poem numbers must stay stable.** Shareable links use hash anchors like `#poem-54`; renumbering breaks existing shared links and the `FEATURED` list in `build_content.py`.
 - **If you add/remove/renumber a poem**, you likely need to update `ENGLISH`/`MARATHI`/`FEATURED` sets and `THEMES` ranges in `build_content.py` too — they're driven by poem number, not by any marker in `book.html` itself.
 - **Preserve Devanagari Unicode exactly** — don't let an editor/tool normalize or mangle Hindi/Marathi text.
-- **The poem count is asserted at 104.** If you add or remove poems, the total will change and the script will intentionally throw until the assertion in `build_content.py` is updated.
+- **The poem count is asserted at 108.** If you add or remove poems, the total will change and the script will intentionally throw until the assertion in `build_content.py` is updated.
 - **`google8a0c77e6409e4ccc.html`** is a Google Search Console ownership-verification file — leave it in place even though it looks like clutter.
 - No build tools, no linter, no tests — verify changes by opening `index.html`/`book.html` directly in a browser and/or running the Python script and checking its stdout ("Wrote 108 poems and N aphorisms...").
 
