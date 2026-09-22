@@ -184,3 +184,61 @@ Checked:
 `git status` showed `CLAUDE.md` and `docs/audit-log.md` as locally modified at the start of this pass — these are this task's own uncommitted edits from the 2026-09-17 run (never committed, since this task never commits/pushes), not concurrent edits from Saumitra, confirmed by inspecting the diff content before proceeding. No other files were modified, so nothing new was skipped for being mid-edit. `.git/index.lock` does not exist (the 2026-09-11 stale-lock issue remains resolved).
 
 **Next pass should pick:** (b) typos & spelling — the least-recently checked category now that (a) is refreshed (last done 2026-09-09), followed by (c) formatting/rendering consistency (also 2026-09-09) and (e) technical hygiene (2026-09-15, most recent).
+
+---
+
+## 2026-09-20 — (b) Typos & spelling (re-check)
+
+Re-run of the oldest-uncovered rotation category (last done 2026-09-09, before poems 105–108 / the "Naye Panne" chapter existed) — re-verified from scratch rather than assuming the prior clean result still holds, since new content (the four newest poems, all English-prose meaning glosses) has been added since.
+
+Checked:
+- All 108 `poem-meaning` glosses in `book.html`, including the four new poems (105–108) added since the last typo pass — no misspellings found; their glosses ("A later page from the same notebook...") are clean.
+- Framing prose in `stories/index.html` and all 6 individual story pages (kickers, subtitles, bylines, meta descriptions, body paragraphs).
+- Static UI copy in `index.html` (masthead, section intros, buttons, footer, meta/OG tags, JSON-LD).
+- `README.md`, `CLAUDE.md`, `PROJECT_CONTEXT.md`, `llms.txt`, `llms-full.txt` — read in full, no typos found.
+- UI strings in `js/app.js` (mood-path titles/subtitles, reading-path titles, button labels, romanization helper labels).
+- Pattern searches: doubled words, a standard list of common English misspellings (teh/recieve/seperate/occured/definately/etc. — zero hits), and a full re-check of the site's British-vs-American spelling convention (colour/recognising/digitised/moisturised/traveller/realisation/fulfil/grey are all still used consistently; searched every `-ize/-ization`, `-or/-our`, `-l/-ll` variant across all prose files).
+
+False positives inspected and left alone (same as prior passes, re-confirmed still correct): reduplicated Hindi/Marathi words (`पाहता पाहता`, `काढता काढता`, etc.); CSS/JS property and function names (`color:`, `scroll-behavior:`, `romanizeDevanagari`, `canRomanize`) which are code, not prose, and correctly follow CSS/JS spelling syntax rather than the site's British prose convention; `fulfilling`/`while`/`among`/`toward`/`focused` which are correct in both English dialects.
+
+**Fixed:** One genuine spelling-convention inconsistency — `stories/ink-remembers.html` line 103 used "romanticize" (American spelling) in framing prose about poem "Dosti ka matlab"; every other instance of this suffix pattern on the site uses British spelling. Changed to "romanticise" to match, same category of fix as the poem-14 "realization"→"realisation" correction from 2026-09-09. This is a standalone static HTML file (not generated from `book.html`), so no `build_content.py` rebuild was needed. Verified via `git diff` that only this one word changed, and ran the file through Python's `html.parser` to confirm no unclosed/mismatched tags were introduced.
+
+**Suggestions / open items for Saumitra (not implemented, flagged only) — carried forward, none new today:**
+1. Mislabeled `ambients` inline-script comments in `book.html` (2026-09-09, code-comment-only).
+2. Orphan `closing-note` CSS class in `book.html` (2026-09-09).
+3. `book.html` has no semantic heading elements (2026-09-09/2026-09-15) — structural/accessibility item, bigger than a mechanical fix.
+4. No favicon anywhere on the site (2026-09-15) — needs a new binary asset.
+5. Cross-site note: `curious96.com`'s bio previously said "104 original poems" (2026-09-08), behind Siyahi's current 108 — not re-checked today (different repo, out of scope).
+
+`git status` was clean when this pass started (only this task's own edit is now present); nothing was skipped for being mid-edit. `.git/index.lock` does not exist — no stale-lock issue.
+
+**Next pass should pick:** (c) formatting/rendering consistency — least-recently checked now (last done 2026-09-09), ahead of (d) stale content (2026-09-17) and (e) technical hygiene (2026-09-15).
+
+---
+
+## 2026-09-22 — (c) Formatting/rendering consistency (re-check)
+
+Re-run of the oldest-uncovered rotation category (last done 2026-09-09, before poems 105-108 / the "Naye Panne" chapter existed) - re-verified from scratch given new content since then, rather than assuming the prior clean result still holds. `git status` at start showed `docs/audit-log.md` and `stories/ink-remembers.html` as locally modified - confirmed via diff content these are this task's own uncommitted edits from the 2026-09-20 run (never committed, since this task never commits/pushes), not concurrent edits from Saumitra. No other files were modified, so nothing was skipped for being mid-edit. `.git/index.lock` does not exist - no stale-lock issue.
+
+Checked:
+- Tag balance (div/article/section/header/footer/ul/li/a/p/span/h1-h3/button) across `index.html`, `book.html`, `stories/index.html`, and all 6 story pages, programmatically - all balanced both before and after this pass's edit.
+- All 6 story pages' head-metadata pattern (charset, viewport, meta description, canonical, og:type, og:image, stylesheet) and structural markup (`article.story-page`, one `h1` each, `site-header`/`header-actions`, `story-footer-nav`, `site-footer`) - identical across every page, nothing missing.
+- Heading hierarchy (h1->h2->...) in `index.html`, `stories/index.html`, and all 6 story pages - no level skips anywhere.
+- JSON-LD blocks on every page - all still parse as valid JSON.
+- All 108 `poem-block` divs in `book.html` for the standard internal structure (`poem-num`, `poem-title`, `poem-subtitle`, `poem-rule`, `poem-body`, `poem-sig`, `poem-meaning`) - all present, no outliers, including the four newest poems (105-108).
+- Poem-number label padding (the 2026-09-09 fix, "Poem 1"-"Poem 9" unpadded) - confirmed still holding, no regression; the visible `009`-style substring in "Poem 100"-"Poem 108" is just the number itself, not zero-padding.
+- CSS class usage across all 9 main HTML pages, cross-checked against `css/styles.css` plus each file's own inline `<style>` block - only the already-known `closing-note` orphan (flagged 2026-09-09) turned up; no new orphan classes introduced by recent additions.
+- `book.html` parsed end-to-end with Python's `html.parser` (both before and after the edit below) - no parser errors.
+
+**Fixed:** A genuine rendering-consistency regression in the four newest poems (105-108, the "Naye Panne" chapter, added since the last (c) pass on 2026-09-09). Every other poem on the site whose body text is majority Devanagari script carries a `hi` or `mr` class on its `.poem-body` div, which is what triggers the site's Devanagari serif font/line-height rule (`css/styles.css:906-911` and the matching inline rule in `book.html`) - without it, that text falls back to the default Latin-oriented styling. Poems 105-108 are 63-75% Devanagari-script content by character count (verified programmatically, matching the profile of the 20 other poems that do carry the class) but were missing the class entirely - `<div class="poem-body">` instead of `<div class="poem-body hi">`/`<div class="poem-body mr">`. This wasn't a style judgment call: `scripts/build_content.py`'s own `ENGLISH`/`MARATHI` sets already classify 105 and 106 as Hindi and 107 and 108 as Marathi (confirmed via the generated `languages` field in `js/poems-data.js`), so the fix just brings the HTML markup in line with data the codebase already agrees on. Added `hi` to poems 105 and 106, `mr` to poems 107 and 108 (4 single-occurrence, id-scoped replacements in `book.html`, each verified unique before editing). Regenerated `js/poems-data.js` via `python3 scripts/build_content.py` afterward (output: "Wrote 108 poems and 33 aphorisms" - counts unchanged). Verified via `git diff --stat` that only `book.html` (4 lines) and `js/poems-data.js` (the single minified line) changed; loaded the regenerated data file in Node (with a `global.window` shim, since the file assigns to `window` and plain `node -e` has no `window`) to confirm all four poems' `languages` field and `contentHtml` class now agree, and counts are still 108 poems / 33 aphorisms. Re-ran the tag-balance and `html.parser` checks on `book.html` post-edit - still clean. No poem wording, punctuation, or stanza content was touched - this was a CSS-class/markup fix only.
+
+**Suggestions / open items for Saumitra (not implemented, flagged only):**
+
+1. **New today - poem 108 ("today's generation") has what looks like an accidental caption leaking into the verse itself.** Its first stanza reads only "Full poem: today's generation" (in English, standalone, before the actual Marathi verses begin), and the poem's own `poem-meaning` field notes "Source archive: https://www.instagram.com/p/DUc9Z0UjpWe/" - reading like this poem was imported from an Instagram post where "Full poem: <title>" was the caption pointing to a longer version, and that caption line got carried into the stanza along with the poem text. Not touched today: this is inside the poem's actual content/stanza structure, not a mechanical markup or spelling fix, and removing a line from a poem - however it got there - is a creative-content edit outside this task's mandate. Flagging for Saumitra to confirm intent and remove if it's indeed leftover caption text.
+2. Mislabeled `ambients` inline-script comments in `book.html` (2026-09-09, code-comment-only) - still outstanding.
+3. Orphan `closing-note` CSS class in `book.html` (2026-09-09) - still outstanding, reconfirmed today, still zero visible effect.
+4. `book.html` has no semantic heading elements (2026-09-09/2026-09-15) - structural/accessibility item, bigger than a mechanical fix - still outstanding.
+5. No favicon anywhere on the site (2026-09-15) - needs a new binary asset - still outstanding.
+6. Cross-site note: `curious96.com`'s bio previously said "104 original poems" (2026-09-08), behind Siyahi's current 108 - not re-checked today (different repo, out of scope).
+
+**Next pass should pick:** (e) technical hygiene - least-recently checked now (last done 2026-09-15), ahead of (d) stale content (2026-09-17).
