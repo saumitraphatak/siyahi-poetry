@@ -242,3 +242,33 @@ Checked:
 6. Cross-site note: `curious96.com`'s bio previously said "104 original poems" (2026-09-08), behind Siyahi's current 108 - not re-checked today (different repo, out of scope).
 
 **Next pass should pick:** (e) technical hygiene - least-recently checked now (last done 2026-09-15), ahead of (d) stale content (2026-09-17).
+
+## 2026-09-22 — (e) Technical hygiene (re-check)
+
+Ran the rotation's (e) technical-hygiene pass — least-recently checked category per the prior entry's recommendation (last done 2026-09-15, before the "Naye Panne" chapter / poems 105-108 existed). `git status` was clean at start (no uncommitted local changes to avoid), and a prior run's commit (`0f5ee45`, the 105-108 `hi`/`mr` class fix) had already been pushed by Saumitra since the last pass, so worked from current `main`. No `.git/index.lock` present.
+
+Checked:
+- **Alt text:** every `<img>` tag across `index.html`, `book.html`, and all 6 story pages — still only one `<img>` on the whole site (`index.html:89`, the cover image), still has descriptive alt text. No `background-image`/`url()` references in `css/styles.css` to check.
+- **CSS/JS/asset reference integrity:** every local (non-http) `href`/`src` across all 9 HTML pages, resolved programmatically against the filesystem — zero missing references.
+- **JS syntax validity:** `node --check` on `js/app.js` and `js/poems-data.js` (both OK), plus every inline `<script>` block across all 9 pages, extracted and checked individually via `node --check` — all valid. JSON-LD `<script type="application/ld+json">` blocks (one per page) parsed separately with `json.loads` — all valid JSON.
+- **Console-error-prone patterns:** searched `js/app.js` and all HTML files' inline scripts for leftover `console.log`/`console.debug`/`console.warn`/`console.error`/`debugger` statements — none found.
+- **Comments widget:** `js/app.js`'s Utterances integration (`script.src = "https://utteranc.es/client.js"`) still points at the correct endpoint.
+- **Meta hygiene:** `charset` and `viewport` meta tags present and consistent on all 9 pages; `<html lang="...">` present everywhere (`en` throughout except `book.html`'s `lang="hi"`, same known/accepted non-issue as 2026-09-15).
+- **Accessibility spot-check:** `aria-label` count in `js/app.js` unchanged at 5 (reader close/nav, transliteration panel, comments section).
+- **Favicon:** still absent site-wide (confirmed again — no `rel="icon"`/`apple-touch-icon`/`shortcut icon` anywhere, no favicon file in `assets/`). Same known item as 2026-09-15, still not implemented (new binary asset, outside mechanical-fix scope).
+- **New this pass — sitemap/robots/canonical consistency:** `sitemap.xml` validated as well-formed XML; all 9 listed URLs correspond to real pages, and no real page is missing from it. `robots.txt` parses fine and its `Sitemap:` line matches the actual sitemap URL. Cross-checked `sitemap.xml`/`robots.txt`/every page's `<link rel="canonical">` and `og:url` against each other and against the absence of a `CNAME` file — all agree on `https://saumitraphatak.github.io/siyahi-poetry/` as the canonical origin, no mismatches.
+- **Structural integrity:** re-ran `html.parser` end-to-end and tag-balance checks (div/article/section/header/footer/ul/li/a/p/span/h1-h3/button) across all 9 pages, including the newer poems-105-108 content in `book.html` — all clean, no parser errors, no mismatches.
+
+**Fixed:** Nothing — no technical issues found this pass. No files were changed (`git status`/`git diff --stat` clean before and after).
+
+**Still outstanding from prior passes (untouched today, different rotation categories or already-deferred items):**
+- No favicon anywhere on the site (flagged 2026-09-15, reconfirmed today).
+- Mislabeled `ambients` inline-script comments in `book.html` (flagged 2026-09-09, code-comment-only) — not rechecked this pass, still listed as outstanding per 2026-09-20's log.
+- Orphan `closing-note` CSS class in `book.html` (flagged 2026-09-09) — not rechecked this pass.
+- `book.html` has no semantic heading elements (flagged 2026-09-09/2026-09-15) — structural/accessibility item, bigger than a mechanical fix.
+- Poem 108's possible leaked Instagram caption line ("Full poem: today's generation") inside the verse itself (flagged 2026-09-20) — creative-content question for Saumitra, not touched.
+- Cross-site note: `curious96.com`'s bio poem-count (last checked 2026-09-08) — different repo, out of scope here.
+
+`git status` was clean when this pass started and stayed clean throughout (no edits made), so nothing was skipped for being mid-edit.
+
+**Next pass should pick:** (a) broken/dead links — least-recently checked now (last done 2026-09-19), ahead of (b) typos (2026-09-20) and (c) formatting (2026-09-22, done just before this pass on the same local day).
