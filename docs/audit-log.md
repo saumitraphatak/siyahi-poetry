@@ -272,3 +272,69 @@ Checked:
 `git status` was clean when this pass started and stayed clean throughout (no edits made), so nothing was skipped for being mid-edit.
 
 **Next pass should pick:** (a) broken/dead links — least-recently checked now (last done 2026-09-19), ahead of (b) typos (2026-09-20) and (c) formatting (2026-09-22, done just before this pass on the same local day).
+
+---
+
+## 2026-09-24 — (a) Broken/dead links (re-check)
+
+Re-run of the oldest-uncovered rotation category (last done 2026-09-19, before `stories/ink-remembers.html`'s 2026-09-20 typo fix and `book.html`'s 2026-09-22 `hi`/`mr` class fix — re-verified from scratch rather than assuming the prior clean result still holds). `git status` was clean at the start of this pass (prior passes' edits have since been committed/pushed by Saumitra — `main` is at `ea7635b`), so nothing was skipped for being mid-edit. `.git/index.lock` does not exist — no stale-lock issue.
+
+Checked:
+- All internal `href`/`src` references (non-http, non-anchor) across `index.html`, `book.html`, `stories/index.html`, and all 6 individual story pages, resolved programmatically against the filesystem — every one resolves to a file that exists on disk. Zero missing references.
+- All `#poem-N` anchors referenced anywhere on the site against actual `id="poem-N"` targets in `book.html` — still exactly 108 poem blocks (`poem-1`…`poem-108`, no gaps), every referenced anchor in range and present.
+- `index.html` in-page anchors (`#archive`, `#featured`, `#moods`, `#paths`) — all four have matching `id` targets.
+- `sitemap.xml` — still lists the same 9 URLs (home, book, stories index, 6 story pages, matching current file set); well-formed XML; no orphaned or missing entries.
+- `robots.txt` — sitemap URL correct, matches `sitemap.xml`.
+- All 7 PDFs (`assets/siyahi-collected-poems.pdf` and all 6 files in `stories/pdfs/`) — present on disk, every `href="...pdf"` across `index.html`, `book.html`, `stories/index.html`, and the individual story pages matches an existing file (14 PDF links total, all resolved).
+- Searched for `http://` (non-HTTPS) links and empty `href=""`/`src=""` across all 9 HTML pages — none found.
+- External links spot-checked via fetch: the live GitHub Pages site (`https://saumitraphatak.github.io/siyahi-poetry/`) loads correctly — title "Siyahi | Poems by Saumitra S. Phatak", nav/hero/archive/download sections all intact; `https://www.curious96.com` loads correctly.
+- **New this pass:** the 4 Instagram "Source archive" links inside poem-meaning glosses for poems 105–108 in `book.html` (added since the last link-focused passes, never individually spot-checked before) — attempted to fetch two of them directly; both are blocked by Instagram's own `robots.txt` for automated fetchers (`ROBOTS_DISALLOWED`, not a 404/dead-link signal), so this pass could not confirm or deny reachability either way. Not flagged as broken — a robots block is expected behavior for Instagram post URLs and not evidence of a bad link — but noting here since it's a real limitation of this pass's link-checking method going forward.
+
+**Fixed:** Nothing — no broken links found. No changes made to any file.
+
+**Resolved since last noted (informational, no repo change needed):** The cross-site note carried since 2026-09-08 — that `curious96.com`'s bio said "104 original poems," behind Siyahi's actual 108 — appears resolved. Today's fetch of `curious96.com` describes the writing section as covering "108 poems," matching Siyahi's current count. Not verified against the page's exact source text (out of scope, different repo), but the stale figure is no longer showing up in a general summary of the page, so this item is being dropped from the "still outstanding" list below rather than carried forward again.
+
+**Still outstanding from prior passes (different rotation categories, untouched today):**
+1. Mislabeled `ambients` inline-script comments in `book.html` (flagged 2026-09-09, code-comment-only, no functional effect).
+2. Orphan `closing-note` CSS class in `book.html` (flagged 2026-09-09).
+3. `book.html` has no semantic heading elements (flagged 2026-09-09/2026-09-15) — structural/accessibility item, bigger than a mechanical fix.
+4. No favicon anywhere on the site (flagged 2026-09-15) — needs a new binary asset.
+5. Poem 108's possible leaked Instagram caption line ("Full poem: today's generation") inside the verse itself (flagged 2026-09-20) — creative-content question for Saumitra, not touched.
+
+`git status` was clean when this pass started and stayed clean throughout (no edits made), so nothing was skipped for being mid-edit.
+
+**Next pass should pick:** (e) technical hygiene — least-recently checked now (last done 2026-09-22), ahead of (d) stale content (2026-09-17), (b) typos (2026-09-20), and (c) formatting (2026-09-22).
+
+---
+
+## 2026-09-25 — (e) Technical hygiene
+
+Rotation pick per prior pass's note (least-recently checked; last done 2026-09-22). `git status` was clean of any Saumitra edits at the start of this pass except `docs/audit-log.md` itself carrying yesterday's (2026-09-24) uncommitted entry — that's this log's own routine lag until Saumitra next pushes, not a mid-edit conflict, so it was left as-is and simply appended to. `.git/index.lock` does not exist — no stale-lock issue.
+
+Checked:
+- `<img>` tags site-wide: exactly one (`index.html`'s cover image), and it already has descriptive `alt` text. No other images on the site.
+- All `<link rel="stylesheet">` and `<script src="...">` references across all 9 HTML pages (`index.html`, `book.html`, `stories/index.html`, 6 story pages) resolve to existing files (`css/styles.css`, `js/app.js`, `js/poems-data.js`, or their `../` equivalents from `stories/`). Google Fonts links are external by design, not broken references.
+- `book.html` is self-contained (inline `<style>` and one inline `<script>`, no external CSS/JS file dependencies) — confirmed this is intentional, not a missing-reference bug.
+- JS syntax: `node --check` on `js/app.js`, `js/poems-data.js`, and the one inline `<script>` block in `book.html` — all parse cleanly, zero syntax errors.
+- CSS brace balance: `css/styles.css` (264 open / 264 close) and `book.html`'s inline `<style>` block (191/191) — both balanced.
+- HTML tag balance: wrote a small Python `HTMLParser`-based checker (void elements excluded) and ran it against all 9 pages — every page's tags are properly nested and closed, no unclosed or mismatched tags.
+- Cross-referenced every `getElementById`/`querySelector(All)` target and `dataset.*` attribute in `js/app.js` against `index.html` — every static `id` and `data-*` attribute the script reads exists; the ones not found as static HTML attributes (`data-select`, `data-theme`, `data-path`, `data-poem-id`, `data-loaded`) are confirmed to be written by `app.js` itself at render time, not missing markup.
+- Searched for leftover `TODO`/`FIXME`/`console.log` debug statements across `js/app.js` and all HTML — none found.
+- Confirmed every page has a `lang` attribute on `<html>` (`en` except `book.html`, which is correctly `hi` for the bilingual book edition).
+- `og:image`/`twitter:image` meta tags present and pointing at the existing cover asset on `index.html` and all story pages; `book.html` has full `og:*`/`twitter:*` tags except `og:image` (noted below, not fixed).
+
+**Fixed:** Nothing — no technical hygiene issues found. No changes made to any file. (Could not check actual browser console errors or live network requests from this environment — static analysis only; this is a known limitation of this pass's method, same as noted for external-link checks in other passes.)
+
+**New minor item (not fixed, flagging for Saumitra):** `book.html` has `og:type`, `og:title`, `og:description`, `og:url`, `og:site_name`, `og:locale`, and `twitter:*` tags, but no `og:image` — unlike `index.html` and every story page, which all set `og:image` to the cover asset. If `book.html` is ever shared directly as a link (rather than reached via `index.html`), it would preview without an image. Low priority, cosmetic — left for Saumitra to decide since it's a one-line addition he may want to do himself or may not care about for a page that's mostly linked-to from the archive.
+
+**Still outstanding from prior passes (different rotation categories, untouched today):**
+1. Mislabeled `ambients` inline-script comments in `book.html` (flagged 2026-09-09, code-comment-only, no functional effect).
+2. Orphan `closing-note` CSS class in `book.html` (flagged 2026-09-09).
+3. `book.html` has no semantic heading elements (flagged 2026-09-09/2026-09-15) — structural/accessibility item, bigger than a mechanical fix.
+4. No favicon anywhere on the site (flagged 2026-09-15) — needs a new binary asset. Confirmed still absent today.
+5. Poem 108's possible leaked Instagram caption line ("Full poem: today's generation") inside the verse itself (flagged 2026-09-20) — creative-content question for Saumitra, not touched.
+6. The 4 Instagram "Source archive" links in `book.html` poems 105–108 remain unverifiable by automated fetch (Instagram blocks scrapers via `robots.txt`) — not flagged as broken, just a standing blind spot in link-checking (flagged 2026-09-24).
+
+`git status` showed only `docs/audit-log.md` (this file, carrying forward uncommitted prior-pass entries) at both the start and end of this pass — no other file was touched, and nothing was skipped for being mid-edit.
+
+**Next pass should pick:** (d) stale content — least-recently checked now (last done 2026-09-17), ahead of (b) typos (2026-09-20), (c) formatting (2026-09-22), and (a) links (2026-09-24).
