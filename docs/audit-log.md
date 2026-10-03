@@ -338,3 +338,126 @@ Checked:
 `git status` showed only `docs/audit-log.md` (this file, carrying forward uncommitted prior-pass entries) at both the start and end of this pass — no other file was touched, and nothing was skipped for being mid-edit.
 
 **Next pass should pick:** (d) stale content — least-recently checked now (last done 2026-09-17), ahead of (b) typos (2026-09-20), (c) formatting (2026-09-22), and (a) links (2026-09-24).
+
+## 2026-09-26 — (d) Stale content
+
+Rotation pick per prior pass's note (least-recently checked; last done 2026-09-17, before the "Naye Panne" chapter existed on that rotation). `git status` was clean at the start of this pass (main at `becbe62`, prior passes' edits already committed/pushed by Saumitra), so nothing was skipped for being mid-edit. `.git/index.lock` does not exist — no stale-lock issue.
+
+Checked:
+- **Dates anywhere on the site:** `book.html`'s cover year (`2023`) and the four Naye Panne poem-subtitle dates (2021-02-18, 2021-05-04, 2025-09-14, 2026-02-07) — same as flagged in the 2026-09-17 entry, these are creative/bibliographic content (the book's own publication year and each poem's written-on date), not maintenance metadata, so left untouched. No copyright/footer year strings exist anywhere on the site (confirmed again — `README.md`'s `© Saumitra S. Phatak` line has no year to go stale). `sitemap.xml` has no `<lastmod>` entries, so nothing to check there either.
+- **Poem/theme/aphorism counts for drift:** re-ran `python3 scripts/build_content.py` — output "Wrote 108 poems and 33 aphorisms," `git diff --stat` showed zero changes, confirming `book.html` and `js/poems-data.js` are still perfectly in sync. Cross-checked the 108-poem / 7-theme / 33-aphorism figures across `README.md`, `PROJECT_CONTEXT.md`, `CLAUDE.md`, `llms.txt`, `llms-full.txt`, and `index.html`'s meta/OG/JSON-LD tags — all consistent with each other and with the actual `book.html` content (including `llms-full.txt`'s theme-range table, which still correctly ends at "105–108 | Naye Panne").
+- **Image references:** the site's one `<img>` (`index.html`'s cover) still points to `assets/siyahi-cover.png`, which exists; all 7 PDFs (`assets/siyahi-collected-poems.pdf` + 6 in `stories/pdfs/`) still present and correctly sized/non-empty.
+- **Bio/contact info surfaced on the site:** `index.html` only links out to `curious96.com` and the GitHub profile (no embedded bio text of its own — unchanged from 2026-09-17). `README.md`'s author line ("Saumitra Phatak — physicist, writer, Mumbaikar") and `book.html`'s meta description ("Written by a physicist who writes poetry") were cross-checked against `curious96.com`'s current bio (fetched today): that site describes him as "an AMO physicist and recent Purdue Ph.D. working on optical tweezers, single lithium and cesium atoms, laser cooling, and LiCs molecule assembly," a builder/writer/poet, with "Purdue University · Hood Lab" as current coordinates, and does not itself use the word "Mumbai" (though it references a 2023 Mumbai lecture series). This is not a contradiction — "physicist, writer, Mumbaikar" reads as an identity/origin descriptor rather than a CV line, and remains true regardless of where his PhD work is based — so nothing was changed. Flagging only as a soft suggestion below in case Saumitra wants the poetry-site bio to nod at "PhD" or "Purdue" the way `curious96.com` does; left as-is since this is a content/voice choice, not a factual error.
+- **Old/broken social or external links:** searched for Twitter/X, Instagram, LinkedIn, Facebook references site-wide — only generic `twitter:card` meta tags (not links) and the four already-known Instagram "Source archive" citations in poems 105–108's meaning glosses (flagged 2026-09-24, unverifiable by automated fetch due to Instagram's robots block, not new). No dead or outdated social links found.
+- **Google Search Console verification file** (`google8a0c77e6409e4ccc.html`) — present, static, nothing to go stale here.
+
+**Fixed:** Nothing — no stale content found this pass. No changes made to any file.
+
+**New (soft) suggestion for Saumitra (not implemented, flagging only):**
+1. `README.md`'s author bio ("physicist, writer, Mumbaikar") is noticeably terser than `curious96.com`'s current bio (AMO physicist, recent Purdue Ph.D., Hood Lab). Not inaccurate — just less detailed — so left untouched; only worth a look if Saumitra wants the two sites' bios to feel more in sync.
+
+**Still outstanding from prior passes (different rotation categories, untouched today):**
+1. Mislabeled `ambients` inline-script comments in `book.html` (flagged 2026-09-09, code-comment-only, no functional effect).
+2. Orphan `closing-note` CSS class in `book.html` (flagged 2026-09-09).
+3. `book.html` has no semantic heading elements (flagged 2026-09-09/2026-09-15) — structural/accessibility item, bigger than a mechanical fix.
+4. No favicon anywhere on the site (flagged 2026-09-15) — needs a new binary asset.
+5. Poem 108's possible leaked Instagram caption line ("Full poem: today's generation") inside the verse itself (flagged 2026-09-20) — creative-content question for Saumitra, not touched.
+6. The 4 Instagram "Source archive" links in `book.html` poems 105–108 remain unverifiable by automated fetch (flagged 2026-09-24).
+7. `book.html` is missing `og:image` (unlike `index.html` and all story pages) — flagged 2026-09-25, cosmetic, one-line fix left for Saumitra.
+
+`git status` was clean when this pass started and stayed clean throughout (no edits made — `python3 scripts/build_content.py` was re-run to check for drift but produced an identical `js/poems-data.js`, confirmed via `git diff --stat`), so nothing was skipped for being mid-edit.
+
+**Next pass should pick:** (b) typos & spelling — least-recently checked now (last done 2026-09-20), ahead of (c) formatting (2026-09-22) and (e) technical hygiene (2026-09-25).
+
+## 2026-09-27 — (b) Typos & spelling (re-check)
+
+Rotation pick per prior pass's note (least-recently checked; last done 2026-09-20). `GIT_OPTIONAL_LOCKS=0 git status` at the start showed only `docs/audit-log.md` as locally modified (this task's own carried-forward uncommitted entries — confirmed via `git log --name-status --since=2026-09-20` that the only content changes since the 2026-09-20 typo pass were that pass's own `book.html`/`js/poems-data.js`/`stories/ink-remembers.html` fixes, already reflected on `main` at `becbe62`); no other file was modified, so nothing was skipped for being mid-edit. `.git/index.lock` does not exist — no stale-lock issue.
+
+Checked (re-verified from scratch rather than assuming the 2026-09-20 clean result still holds, though no new poems/pages have been added since then to re-scan):
+- All 108 `poem-meaning` glosses in `book.html` — no misspellings found.
+- Framing prose in `stories/index.html` and all 6 individual story pages (kickers, subtitles, bylines, meta descriptions, body paragraphs) — no misspellings found.
+- Static UI copy in `index.html` (masthead, section intros, buttons, footer, meta/OG tags, JSON-LD).
+- `README.md`, `CLAUDE.md`, `PROJECT_CONTEXT.md`, `llms.txt`, `llms-full.txt` — read in full, no typos found.
+- Pattern searches: doubled words (`grep -oE '\b(\w+)\s+\1\b'` across all prose files) turned up only known false positives — CSS shorthand values (`0 0`, `2px 2px`), `book.html`'s "S S" (inside the `S I Y A H I` cover-letter spans plus the separate "S S P" author initials, not a doubled word), reduplicated Hindi/Marathi words (`कभी कभी`, `अलग अलग`, `apni apni`, `baton baton`, `पाहता पाहता`, `काढता काढता`), and `stories/proof-of-life.html`'s "you you" (intentional — "what exactly makes you you", correct grammar, appears 3× in its meta description/OG description/subtitle, all consistent with each other).
+- A 20-word common-misspelling list (teh/recieve/seperate/occured/definately/untill/thier/beleive/goverment/independant/acheive/neccessary/accomodate/noticable/embarass/priviledge/commited/arguement/maintainance/rythm, etc.) — zero hits site-wide.
+- British-vs-American spelling convention — re-confirmed still consistent: `colour`/`colours`/`COLOUR`(code comment)/`grey`/`recognising`/`digitised`/`moisturised`/`romanticise`(the 2026-09-20 fix, still holding)/`realisation` all British throughout; `color:`/`background-color`/etc. are CSS property names, correctly left as-is since CSS syntax isn't prose. No `-ize`/`-or`(American) stragglers found outside code identifiers.
+- Romanized Hindi/Marathi shayari spellings flagged by pattern search (e.g. `kahise` in a poem-105 stanza, also quoted in `stories/ink-remembers.html`) inspected and left alone — this is the poet's own consistent SMS-style romanization convention used throughout the collection (`nhi`, `paenge`, `krke`, `bta`, etc.), not an English typo; touching it would be editing the verse itself, which is out of scope per this task's standing instruction.
+- Double-space-in-prose check (`grep -oE '[a-zA-Z][ ]{2,}[a-zA-Z]'`) across `README.md`/`CLAUDE.md`/`PROJECT_CONTEXT.md`/`llms.txt`/`llms-full.txt` — none found.
+
+**Fixed:** Nothing — no typos found this pass. No changes made to any file.
+
+**Still outstanding from prior passes (different rotation categories, untouched today):**
+1. Mislabeled `ambients` inline-script comments in `book.html` (flagged 2026-09-09, code-comment-only, no functional effect) — reconfirmed present today while scanning `book.html` for spelling (comment reads "PER-CHAPTER AMBIENT COLOUR SHIFT", correctly spelled, just mislabeled per the 2026-09-09 note).
+2. Orphan `closing-note` CSS class in `book.html` (flagged 2026-09-09).
+3. `book.html` has no semantic heading elements (flagged 2026-09-09/2026-09-15) — structural/accessibility item, bigger than a mechanical fix.
+4. No favicon anywhere on the site (flagged 2026-09-15) — needs a new binary asset.
+5. Poem 108's possible leaked Instagram caption line ("Full poem: today's generation") inside the verse itself (flagged 2026-09-20) — creative-content question for Saumitra, not touched.
+6. The 4 Instagram "Source archive" links in `book.html` poems 105–108 remain unverifiable by automated fetch (flagged 2026-09-24).
+7. `book.html` is missing `og:image` (unlike `index.html` and all story pages) — flagged 2026-09-25, cosmetic, one-line fix left for Saumitra.
+8. `README.md`'s author bio ("physicist, writer, Mumbaikar") is terser than `curious96.com`'s current bio — flagged 2026-09-26 as a soft suggestion only, not a factual error.
+
+`git status` was clean of any content-file changes when this pass started and stayed that way throughout (no edits made — this was a read-only re-verification pass), so nothing was skipped for being mid-edit.
+
+**Next pass should pick:** (c) formatting/rendering consistency — least-recently checked now (last done 2026-09-22), ahead of (a) links (2026-09-24), (e) technical hygiene (2026-09-25), and (d) stale content (2026-09-26).
+
+## 2026-09-28 — (c) Formatting/rendering consistency (re-check)
+
+Rotation pick per prior pass's note (least-recently checked; last done 2026-09-22). `GIT_OPTIONAL_LOCKS=0 git status` at the start showed only `docs/audit-log.md` as locally modified (this task's own carried-forward uncommitted entries — no content file was mid-edit), so nothing was skipped. `.git/index.lock` does not exist — no stale-lock issue. `GIT_OPTIONAL_LOCKS=0 git log --since=2026-09-22 --name-status` confirmed no content files changed since the last (c) pass (only `docs/audit-log.md`), so this was a from-scratch re-verification of already-stable content rather than a check against new material.
+
+Checked, programmatically, across `index.html`, `book.html`, `stories/index.html`, and all 6 individual story pages:
+- **Tag balance / well-formedness:** parsed every page end-to-end with Python's `html.parser` (proper open/close stack, not just a substring tag-count) — all 9 pages balanced, zero parser errors.
+- **Heading hierarchy:** extracted the full h1–h6 sequence per page — no level skips anywhere (`book.html` still intentionally uses no heading elements at all, the known open item, not a new regression).
+- **JSON-LD:** every `<script type="application/ld+json">` block parsed with `json.loads` — all valid JSON. **New finding, correcting the record:** `stories/index.html` has *no* JSON-LD block at all (confirmed via `grep -c`), unlike the other 8 pages, which each have exactly one. Prior passes' notes ("JSON-LD blocks on every page") were imprecise — this gap already existed then and wasn't actually verified page-by-page. Not fixed today: composing a new structured-data block means choosing a schema.org type and content, which is a content decision rather than a mechanical fix — flagged below for Saumitra instead.
+- **Story page head-metadata pattern:** charset, viewport, meta description, canonical link, og:type, og:image, stylesheet link, `story-page` class, and exactly one `<h1>` — identical across all 6 story pages, nothing missing or out of order.
+- **`book.html`'s 108 `poem-block` divs:** every block still has the full standard field set (`poem-num`, `poem-title`, `poem-subtitle`, `poem-rule`, `poem-body`, `poem-sig`, `poem-meaning`) with no outliers, numbering is a clean unbroken 1–108 sequence, and the 2026-09-09 zero-padding fix ("Poem 1"–"Poem 9", not "Poem 01"–"Poem 09") is still holding with no regression.
+- **CSS class coverage:** cross-checked every `class="..."` used across all 9 pages against `css/styles.css` plus each page's own inline `<style>` block. Only the already-known `closing-note` orphan (flagged 2026-09-09, zero visible effect since `page-half` on the same element supplies all real styling) turned up — reconfirmed present, still not fixed today per the same reasoning as before (safe but cosmetic, felt outside the mechanical-fix bar). No newly-introduced orphan or missing-definition classes found.
+
+**Fixed:** Nothing — no rendering-consistency regressions found this pass. No files were changed (`git diff --stat` clean before and after, aside from this log entry).
+
+**New suggestion for Saumitra (not implemented, flagging only):**
+1. `stories/index.html` is the only one of the site's 9 pages with no JSON-LD structured-data block (see above) — the other 8 each have one (`WebSite`/`CreativeWork`/`Article`-style, per page). Worth adding a matching block (likely a `CollectionPage` or `ItemList` schema listing the 6 stories) for consistency with the rest of the site and for SEO, but that's a content/schema choice for Saumitra rather than something to guess at mechanically.
+
+**Still outstanding from prior passes (different rotation categories, untouched today):**
+1. Mislabeled `ambients` inline-script comments in `book.html` (flagged 2026-09-09, code-comment-only, no functional effect).
+2. Orphan `closing-note` CSS class in `book.html` (flagged 2026-09-09, reconfirmed today).
+3. `book.html` has no semantic heading elements (flagged 2026-09-09/2026-09-15) — structural/accessibility item, bigger than a mechanical fix.
+4. No favicon anywhere on the site (flagged 2026-09-15) — needs a new binary asset.
+5. Poem 108's possible leaked Instagram caption line ("Full poem: today's generation") inside the verse itself (flagged 2026-09-20) — creative-content question for Saumitra, not touched.
+6. The 4 Instagram "Source archive" links in `book.html` poems 105–108 remain unverifiable by automated fetch (flagged 2026-09-24).
+7. `book.html` is missing `og:image` (unlike `index.html` and all story pages) — flagged 2026-09-25, cosmetic, one-line fix left for Saumitra.
+8. `README.md`'s author bio ("physicist, writer, Mumbaikar") is terser than `curious96.com`'s current bio — flagged 2026-09-26 as a soft suggestion only, not a factual error.
+
+`git status` was clean of any content-file changes when this pass started and stayed that way throughout (read-only structural re-verification, no edits made), so nothing was skipped for being mid-edit.
+
+**Next pass should pick:** (a) broken/dead links — least-recently checked now (last done 2026-09-24), ahead of (e) technical hygiene (2026-09-25) and (d) stale content (2026-09-26); (b) typos was just re-checked 2026-09-27.
+
+## 2026-09-29 — (a) Broken/dead links (re-check)
+
+Rotation pick per prior pass's note (least-recently checked; last done 2026-09-24). `GIT_OPTIONAL_LOCKS=0 git status` at the start showed only `docs/audit-log.md` as locally modified (this task's own carried-forward uncommitted entries — no content file was mid-edit), so nothing was skipped. `.git/index.lock` does not exist (the old stranded lock from 2026-09-09 remains safely parked in `_to_delete/`, untouched — deletion is still not permitted in this sandbox, so it was left as-is).
+
+Checked, programmatically (Python script parsing every `href`/`src` in `index.html`, `book.html`, `stories/index.html`, and all 6 story pages):
+- **All internal relative links** (css, js, `book.html`, `index.html`, story pages, PDFs under `assets/` and `stories/pdfs/`) — every one resolves to a file that exists on disk.
+- **All in-page and cross-page anchors** — every `#poem-N` reference (from `book.html`'s own chapter nav and from all 6 story pages linking into specific poems) resolves to an existing `id="poem-N"` in `book.html`; `index.html`'s `#archive`/`#featured`/`#moods`/`#paths` and `book.html`'s `#index`/`#part-1`…`#part-7`/`#top` anchors all resolve too. No dangling anchors found.
+- **`sitemap.xml`** — still lists exactly the 8 real URLs (home, book, stories index, 6 story pages), all matching real files; no orphaned or missing entries. **`robots.txt`** — sitemap URL correct.
+- **External links, spot-checked live via fetch:** the live GitHub Pages site (loads, title/content as expected), `https://www.curious96.com` (loads; noting only for context, not action, that its bio copy now says Saumitra "successfully defended his Ph.D. at Purdue University in July 2026" — a stale-content/bio comparison question, out of scope for today's link-focused pass, not touched), `https://github.com/saumitraphatak/siyahi-poetry` (loads, legitimate repo page), and `https://utteranc.es/client.js` (the Utterances comments-widget script `js/app.js` depends on — loads, valid JS). All green.
+- **The 4 Instagram "Source archive" links** in `book.html` poems 105–108 — attempted fetch again; still blocked by Instagram's own `robots.txt` (`ROBOTS_DISALLOWED`), same as every prior check since 2026-09-24. Still unverifiable by automated means, not newly broken.
+- Reconfirmed no `http://` (non-HTTPS) links or empty `href=""`/`src=""` anywhere in the checked files.
+
+**Fixed:** Nothing — no broken or dead links found this pass. No changes made to any file.
+
+**Still outstanding from prior passes (different rotation categories, untouched today):**
+1. Mislabeled `ambients` inline-script comments in `book.html` (flagged 2026-09-09, code-comment-only, no functional effect).
+2. Orphan `closing-note` CSS class in `book.html` (flagged 2026-09-09).
+3. `book.html` has no semantic heading elements (flagged 2026-09-09/2026-09-15) — structural/accessibility item, bigger than a mechanical fix.
+4. No favicon anywhere on the site (flagged 2026-09-15) — needs a new binary asset.
+5. Poem 108's possible leaked Instagram caption line ("Full poem: today's generation") inside the verse itself (flagged 2026-09-20) — creative-content question for Saumitra, not touched.
+6. The 4 Instagram "Source archive" links in `book.html` poems 105–108 remain unverifiable by automated fetch (flagged 2026-09-24, reconfirmed today).
+7. `book.html` is missing `og:image` (unlike `index.html` and all story pages) — flagged 2026-09-25, cosmetic, one-line fix left for Saumitra.
+8. `README.md`'s author bio ("physicist, writer, Mumbaikar") is terser than `curious96.com`'s current bio — flagged 2026-09-26 as a soft suggestion only, not a factual error.
+9. `stories/index.html` is the only page with no JSON-LD structured-data block — flagged 2026-09-28, a schema/content choice for Saumitra rather than a mechanical fix.
+
+**New (informational only) note for Saumitra:** `curious96.com` now describes the Ph.D. defense as completed ("July 2026") rather than pending/recent. Not a Siyahi-repo issue and not acted on here — just flagging in case it's useful context next time the (d) stale-content rotation touches the cross-site bio comparison.
+
+`git status` was clean of any content-file changes when this pass started and stayed that way throughout (read-only link/anchor verification, no edits made), so nothing was skipped for being mid-edit.
+
+**Next pass should pick:** (e) technical hygiene (console errors, alt text, CSS/JS refs) — least-recently checked now (last done 2026-09-25), ahead of (d) stale content (2026-09-26), (b) typos (2026-09-27), and (c) formatting (2026-09-28).
